@@ -1,0 +1,233 @@
+<?php
+
+namespace app\controllers;
+
+use Yii;
+use yii\web\View;
+use app\models\Registros;
+use app\models\RegistrosSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+
+/**
+ * RegistrosController implements the CRUD actions for Registros model.
+ */
+class RegistrosController extends Controller
+{
+    /**
+     * @inheritdoc
+     */
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Lists all Registros models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+       $this->layout = 'homePage';
+        $searchModel = new RegistrosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single Registros model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+         $this->layout = 'principal2';
+        return $this->render('_agregado', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Registros model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $this->layout = 'principal2';
+        $model = new Registros();
+/*
+
+
+[['carrera', 'distancia', 'tipo_usuario', 'id_empleado', 'id_invitado', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'edad', 'sexo', 'ciudad', 'telefono', 'talla', 'status', 'paypal', 'sindicalizado', 'dorsal'], 'required'],
+            [['carrera', 'distancia', 'tipo_usuario', 'edad', 'sexo', 'talla', 'status', 'sindicalizado', 'dorsal', 'parent'], 'integer'],
+            [['fecha', 'fecha_reg'], 'safe'],
+            [['id_empleado', 'id_invitado', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'ciudad', 'telefono', 'paypal'], 'string', 'max' => 100],
+            */
+$carrera = $_GET['car'];
+$session = Yii::$app->session;
+$session['emp'];
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->tipo_usuario =1;
+            $model->id_empleado =$session['emp'];
+            $model->id_invitado =0; 
+            $model->status =1;
+            $model->paypal =0;
+            $model->parent =0;
+            $model->carrera =$carrera;
+            $model->fecha_reg = new \yii\db\Expression('NOW()');
+            $model->dorsal = $this->ultimoFolio($carrera);   
+            $model->edad = $this->edad($model->fecha);     
+            $model->save();
+           // return $this->render('_agregado');
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'car' => $carrera
+            ]);
+        }
+    }
+
+    function edad($fecha){
+    $fecha = str_replace("/","-",$fecha);
+    $fecha = date('Y/m/d',strtotime($fecha));
+    $hoy = date('Y/m/d');
+    $edad = $hoy - $fecha;
+    return $edad;
+    }
+
+     public function actionInvitados()
+    {
+        $this->layout = 'principal2';
+        $model = new Registros();
+/*
+
+
+[['carrera', 'distancia', 'tipo_usuario', 'id_empleado', 'id_invitado', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'edad', 'sexo', 'ciudad', 'telefono', 'talla', 'status', 'paypal', 'sindicalizado', 'dorsal'], 'required'],
+            [['carrera', 'distancia', 'tipo_usuario', 'edad', 'sexo', 'talla', 'status', 'sindicalizado', 'dorsal', 'parent'], 'integer'],
+            [['fecha', 'fecha_reg'], 'safe'],
+            [['id_empleado', 'id_invitado', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'ciudad', 'telefono', 'paypal'], 'string', 'max' => 100],
+            */
+$carrera = $_GET['car'];
+$session = Yii::$app->session;
+$session['emp'];
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->tipo_usuario =2;
+            $model->id_empleado =$session['emp'];
+            $model->id_invitado =$session['emp'];
+            $model->status =1;
+            $model->paypal =0;
+            $model->parent =0;
+            $model->carrera =$carrera;
+            $model->fecha_reg = new \yii\db\Expression('NOW()');
+            $model->dorsal = $this->ultimoFolio($carrera);   
+            $model->edad = $this->edad($model->fecha);     
+            $model->save();
+           // return $this->render('_agregado');
+        } else {
+            return $this->render('invitado', [
+                'model' => $model,
+                'car' => $carrera
+            ]);
+        }
+    }
+
+    function edad($fecha){
+    $fecha = str_replace("/","-",$fecha);
+    $fecha = date('Y/m/d',strtotime($fecha));
+    $hoy = date('Y/m/d');
+    $edad = $hoy - $fecha;
+    return $edad;
+    }
+
+
+    function ultimoFolio($carrera){
+
+        //$carrera = $_GET['car'];
+
+
+
+        $folio = \Yii::$app->db ->createCommand("SELECT 
+          max(registros.dorsal) as dorsal 
+        FROM 
+          registros 
+        WHERE 
+          carrera=$carrera and status=1 and tipo_usuario IN(1,2)")->queryOne();
+
+        
+                
+                                        
+                if( $folio['dorsal'] !=0 ){
+                        return $folio['dorsal']+1; 
+                }else{
+                        return 0+1; 
+                }
+
+        }
+
+
+    /**
+     * Updates an existing Registros model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing Registros model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Registros model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Registros the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Registros::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+}

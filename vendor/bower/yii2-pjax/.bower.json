@@ -1,0 +1,29 @@
+{
+  "name": "yii2-pjax",
+  "version": "2.0.6",
+  "main": "./jquery.pjax.js",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": ">=1.8"
+  },
+  "ignore": [
+    ".travis.yml",
+    "Gemfile",
+    "Gemfile.lock",
+    "CONTRIBUTING.md",
+    "vendor/",
+    "script/",
+    "test/"
+  ],
+  "homepage": "https://github.com/yiisoft/jquery-pjax",
+  "_release": "2.0.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.6",
+    "commit": "60728da6ade5879e807a49ce59ef9a72039b8978"
+  },
+  "_source": "https://github.com/yiisoft/jquery-pjax.git",
+  "_target": "~2.0.6",
+  "_originalSource": "yii2-pjax",
+  "_direct": true
+}
