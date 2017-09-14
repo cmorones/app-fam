@@ -21,22 +21,8 @@ if (Yii::$app->controller->action->id === 'login') {
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
 
-       <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.css" rel="stylesheet">
-<style>
-            #full-calendar .popover {
-                max-width:400px;
-                width:400px;
-            }
-            #full-calendar .popover-content {
-                padding: 0px;
-            }
-        </style>
-<style>
-    #bd-list .product-img img {
-        height: 44px;
-        width: 45px;
-    }
-</style> 
+        <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/rudrasoftech_favicon.png" type="image/x-icon" />
+
         <!-- Render this(ar-layout-css) file for supporting Arabic Language -->
        
         <?= Html::csrfMetaTags() ?>
@@ -44,8 +30,7 @@ if (Yii::$app->controller->action->id === 'login') {
         <?php $this->head() ?>
     </head>
     
-       <body class="layout-top-nav skin-blue-light">
-    <div class="wrapper">
+    <body>
     <?php $this->beginBody() ?>
 
     <?= $this->render(
@@ -53,33 +38,33 @@ if (Yii::$app->controller->action->id === 'login') {
         ['directoryAsset' => $directoryAsset]
     ) ?>
 
- 
+    <div class="wrapper">
+            <div class="container">
+
               <?= $this->render(
                     'content.php',
                     ['content' => $content, 'directoryAsset' => $directoryAsset]
                 ) ?>
-        
+            <!-- Footer -->
+                <footer class="footer text-right">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                2017 © APP-SISMA.
+                            </div>
+                            <div class="col-xs-6">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End Footer -->
          </div>
 
-
+    </div>
 
       
     <?php $this->endBody() ?>
-
-    <!-- Start of oct8ne code --> 
-  <script type="text/javascript"> 
-   var oct8ne = document.createElement("script"); 
-   oct8ne.type = "text/javascript"; 
-   oct8ne.async = true; 
-   oct8ne.license ="EACD5AB40E8480DF3BE9FE8B51777CED"; 
-   oct8ne.src = (document.location.protocol == "https:" ? "https://" : "http://") + "static.oct8ne.com/api/v2/oct8ne-api-2.3.js?" + (Math.round(new Date().getTime() / 86400000)); 
-   oct8ne.locale = "es-ES"; 
-   oct8ne.baseUrl ="//app.iems.edu.mx/app-sigiems"; 
-   var s = document.getElementsByTagName("script")[0]; 
-   s.parentNode.insertBefore(oct8ne, s); 
-  </script> 
-<!--End of oct8ne code -->
-
     </body>
       <script type="text/javascript">
             jQuery(document).ready(function($) {
@@ -92,3 +77,4 @@ if (Yii::$app->controller->action->id === 'login') {
     </html>
     <?php $this->endPage() ?>
 <?php } ?>
+

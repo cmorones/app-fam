@@ -10,489 +10,76 @@ use yii\web\NotFoundHttpException;
 
 AppAsset::register($this);
 
-Yii::$app->name = "APP-SIGIEMS";
+Yii::$app->name = "APP";
 
 
 ?>
-<header class="main-header">
-    <nav class="navbar navbar-fixed-top">
-        <div class="container-fluid">
-                                               
-<!--Start Mega menu block-->
-<div class="es-megamenu esmenu pull-left">
-    <div id="navbar-collapse" role="navigation" class="navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li class="dropdown esmenu-full">
-                <a href="javascript:void(0)" data-target = "#megamenu-items" data-toggle="collapse" class="navbar-toggle">
-                    <span class="fa fa-th-large fa-lg menu-icon"></span>
-                </a>
-                <ul class="dropdown-menu" id="megamenu-items">
-                    <li>
-                        <div class="esmenu-content">
-                            <div class="tabbable row">
-                                <div class="col-md-3">
-                                    <ul class="nav nav-pills nav-stacked">
+<!-- Navigation Bar-->
+        <header id="topnav">
+            <div class="topbar-main">
+                <div class="container">
 
+                    <!-- LOGO -->
+                    <div class="topbar-left">
 
-
-                                           <li>
-                                            <a href="#dit"><i class="fa fa-calendar-o"></i> Direccion de Informática</a>
-                                        </li>
-
-                                         <?php  
-                                     if(Yii::$app->user->can('menuAdmin')) {
-                                          ?>
-
-                                           <li>
-                                            <a href="#academics"><i class="fa fa-calendar-o"></i> Direccion Academica</a>
-                                        </li>
-                                      <?php 
-                                  }
-                                  ?>
-                                  
-                                      
-                                    </ul>
-                                </div><!-- end col -->
-                                <div class="col-md-9 menu-sub-items">
-                                    <div class="tab-content">
-
- <div id="academics" class="tab-pane">
-        <div class="visible-sm visible-xs menu-box-header">
-            <button aria-label="Close" class="close" type="button">
-            <span aria-hidden="true">×</span>
-            </button>
-            <h4><i class="fa fa-calendar-o"></i> Academics</h4>
-        </div>
-
-         <div class="row">
-
-              <?php  
-              if(Yii::$app->user->can('menuAdmin')) {
-            ?>
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Catalogos</a></li>
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Calendario',['/dashboard'])?>
-                        </li>
-
-                          <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
-                        </li>
-                    </ul>
-            </div>
-         </div>
-
-           <?php 
-                                  }
-                                  ?>
-         </div>
-
-</div>
-
-
-   <div id="dit" class="tab-pane">
-        <div class="visible-sm visible-xs menu-box-header">
-            <button aria-label="Close" class="close" type="button">
-            <span aria-hidden="true">×</span>
-            </button>
-            <h4><i class="fa fa-calendar-o"></i> Academics</h4>
-        </div>
-        <div class="row">
-            <!-- Menu Dirección de Informática y Telecomunicaciones --> 
-            <?php  
-              if(Yii::$app->user->can('menuAdmin')) {
-            ?>
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
-                        
-  <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Calendario',['/dashboard'])?>
-                        </li>
-
-                          <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
-                        </li>
-
-                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['ext'])?>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Notificaciones',['/site/avisos'])?>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias',['/soporte/inv-baterias/informe2']) ?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Información de Telefonia IEMS',['/telefonia/telefonia/telefonos']) ?>
-                        </li>
-                                                <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Información de Desechos IEMS',['/soporte/inv-desechos/desechos']) ?>
-                        </li>
-                        
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Información de Bajas No Autorizadas IEMS',['/soporte/inv-bajas/porconfirmar']) ?>
-                        </li>
-
-                     
-                    </ul>
-                </div>
-            </div>
-
-               <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Seguimiento DIT</a></li>
-                          <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Registro 2017',['/site/registro'])?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Equipos IEMS',['/soporte/inv-equipos/equipos'])?>
-                        </li>
-
-                         <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Impresoras IEMS',['/soporte/inv-impresoras/impresoras'])?>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Np-breaks IEMS',['/soporte/inv-nobreak/nobreak'])?>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Información de Bajas IEMS',['/soporte/inv-bajas/bajas'])?>
-                        </li>
-                           <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i>Autorizar Dictaminación de Bajas',['/soporte/inv-bajas/autorizar']) ?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Reporte de Baterias de Desecho',['/soporte/inv-baterias/informe']) ?>
-                        </li>
-
-
-                      
-                      
-                    </ul>
-                </div>
-            </div> 
-            <?php
-                }
-            ?>
-
-               <!-- Menu Soporte Técnico --> 
-             <?php  
-              if(Yii::$app->user->can('menuSoporte')) {
-            ?> 
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> DIT</a></li>
-                        <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos IEMS',['/site'])?>
-                        </li>
-
-                             <li>
-                            <?= Html::a('<i class="glyphicon glyphicon-calendar"></i> Dashboard Equipos Externos',['ext'])?>
-                        </li>
-
-                      
-                      
-                    </ul>
-                </div>
-            </div>                                   
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario IEMS</a>
-                        </li>
-                         <?php  
-                        if(Yii::$app->user->can('mesaAyuda')) {
-                         ?>
-                        
-                        <?php
-                       
-                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
-                        ?>
-
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
-                        </li>
-
+                        <a href="index.html" class="logo"><img src="<?php echo Yii::$app->request->baseUrl; ?>/images/logo.png" style="padding:5;width: 50px; height: 50px;"><span>APP-Sistema Integral Facultad de Musica UNAM </span></a>
+                    </div>
                     
 
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de No-breaks',['/soporte/inv-nobreak/index']) ?>
-                        </li>
-
-                       
-
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras',['/soporte/inv-impresoras/index']) ?>
-                        </li>
-
-                      
-
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Bajas',['/soporte/inv-bajas/index']) ?>
-                        </li>
-
-                          <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Validacion de Bajas vs Almacen',['/soporte/inv-bajas/validacion']) ?>
-                        </li>
-
-                          <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Baterias de Desecho',['/soporte/inv-baterias/index']) ?>
-                        </li>
-
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Desechos',['/soporte/inv-desechos/index']) ?>
-                        </li>
-
-                          <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i>Prestamo de Equipos',['/soporte/solicitud-presta/index']) ?>
-                        </li>
-                         <?php
-                            }
-
-
-
-                        }
-                         
-                        ?>
-
-
-                    </ul>
                 </div>
             </div>
 
-             <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario Externo</a>
-                        </li>
-                         <?php  
-                        if(Yii::$app->user->can('mesaAyuda')) {
-                         ?>
-                        
-                        <?php
-                       
-                        if(Yii::$app->user->can('/soporte/inv-equipos/index')) {
-                        ?>
-
-                  
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos Externos',['/soporte/inv-equipos-ex/index']) ?>
-                        </li>
-
-
+            <div class="navbar-custom">
+                <div class="container">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
                             <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de No-breaks Externos',['/soporte/inv-nobreak-ex/index']) ?>
-                        </li>
+                               
+                                <?= Html::a('<i class="md md-home"></i>Tablero',['/personal'])  ?>
+                            </li>
 
-                     
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Impresoras Externos',['/soporte/inv-impresoras-ex/index']) ?>
-                        </li>
-
-
-                          <?php
-                            }
-
-
-
-                        }
-                         
-                        ?>
-
-
-                    </ul>
-                </div>
-            </div>
-              <?php
-                }
-            ?>
-
-             <!-- Menu Soporte Técnico --> 
-             <?php  
-              if(Yii::$app->user->can('menuSoporte')) {
-            ?>                                    
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                   
-                         <?php  
-                        if(Yii::$app->user->can('mesaAyuda')) {
-                                                    
-                         if(Yii::$app->user->can('/soporte/inv-telecom/index')) {
-                        ?>
-
-                          <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Telecomunicaciones</a>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom',['/soporte/inv-telecom/index']) ?>
-                        </li>
-
-
-                        <?php
-                    }
-                      if(Yii::$app->user->can('/soporte/inv-telecom/index')) {
-                        ?>
-
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telefonia',['/telefonia/telefonia']) ?>
-                        </li>
-                        <?php
-                    }
-                }
-                        ?>
-
-                    </ul>
-                </div>
-            </div>
-              <?php
-                }
-            ?>
-
-            <?php  
-              if(Yii::$app->user->can('modTelecom')) {
-            ?>
-
-              <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                     <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Inventario</a>
-                        </li>
-
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos',['/soporte/inv-equipos/index']) ?>
-                        </li>
-
-                           <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Equipos Externos',['/soporte/inv-equipos-ex/index']) ?>
-                        </li>
-
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom Area Central',['/soporte/inv-telecom/index']) ?>
-                        </li>
-
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario de Telecom IEMS',['/soporte/inv-telecom/externos']) ?>
-                        </li>
-
-
-                    
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-list"></i> Telecomunicaciones</a>
-                        </li>
-                      
-
-                           
-
-
-                          <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario Telefonia Area Central',['/telefonia/telefonia/internos']) ?>
-                        </li>
-
-                         <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Inventario Telefonia IEMS',['/telefonia/telefonia/index']) ?>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-
-             <?php
-                }
-            ?>
-
-                 <!-- Menu Soporte Técnico --> 
-             <?php  
-              if(Yii::$app->user->can('menuReportes')) {
-            ?>                                    
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-graduation-cap"></i> Reportes</a>
-                        </li>
-
-                       <?php 
-                    //  if(Yii::$app->user->can('informeEquipos')) {
-                        ?>
-
-                        <li>
-
-                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos IEMS-PDF',['/soporte/inf-pdf/'],['id' => 'export-pdf', 'target' => 'blank']) ?>
-              
-                        </li>
-                        <li>
-
-                           <?= Html::a('<i class="fa fa-file-pdf-o"></i> Informe Equipos Externos-PDF',['/soporte/inf-pdf/index2'],['id' => 'export-pdf', 'target' => 'blank']) ?>
-              
-                        </li>
-                        <?php
-                   // }
-
-                    ?>
                         
-                    </ul>
-                </div>
-            </div>
-              <?php
-                }
-            ?>
-            <?php  
-              if(Yii::$app->user->can('menuSistemas')) {
-            ?>
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="/timetable/default/index"><i class="fa fa-calendar-o"></i>Administración de Sistemas</a>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-share-alt"></i> Catalogos',['/soporte/default/cat']) ?>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md ion-plus-circled"></i> <span>Punto de Venta</span> </a>
+                                  <ul class="submenu">
+                                     <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Registrar Ventas',['/ventas/default']) ?>
                         </li>
 
-                    </ul>
-                </div>
-            </div>
-            <?php
-                }
-            ?>
-            <?php  
-             if(Yii::$app->user->can('MenuSuper')) {
-            ?>
-
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="menu-box">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-user-secret"></i> Administración del Sistema</a>
+                               <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Listado Ventas',['/ventas/list']) ?>
                         </li>
-                        <li>
+                                    
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md  md-exit-to-app"></i> <span> Almacen </span> </a>
+                                  <ul class="submenu">
+                                      <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Agregar Inventario',['/ventas/list']) ?>
+                        </li>
+                            <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Inventario',['/ventas/list']) ?>
+                        </li>
+                                </ul>
+                            </li>
+
+                               <li class="has-submenu">
+                                <a href="#"><i class="md  md-event-note"></i> <span> Informes </span> </a>
+                                  <ul class="submenu">
+                                    <li><?= Html::a('Ventas',['/admin/ventas'])?></li>
+                                 
+                                    
+                                </ul>
+                            </li>
+
+                                <li class="has-submenu">
+                                <a href="#"><i class="md md-palette "></i><span> Administración </span> </a>
+                                <ul class="submenu">
+                                       <li>
                             <?= Html::a('<i class="fa fa-male"></i>Assignment',['/rights/assignment/index']) ?>
                         </li>
                         <li>
@@ -509,94 +96,92 @@ Yii::$app->name = "APP-SIGIEMS";
                             <?= Html::a('<i class="fa fa-male"></i> Usuarios',['/admin/users']) ?>
                         </li>
 
-                         <li>
-                            <?= Html::a('<i class="fa fa-male"></i> Catalogos',['/catalogos']) ?>
-                        </li>
+                              
+                                    
+                                </ul>
+                            </li>
 
-                         <li>
-                            <?= Html::a('<i class="fa fa-male"></i> Sistemas',['/admin/inv-sistemas']) ?>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <?php
-               }
-            ?>
+                            <!--<li class="has-submenu">
+                                <a href="#"><i class="md md-content-paste"></i> <span> Administración </span> </a>
+                                <ul class="submenu">
+                                    <li class="has-submenu">
+                                        <a href="#">Icons</a>
+                                        <ul class="submenu">
+                                            <li><a href="material-icon.html">Material Design</a></li>
+                                            <li><a href="ion-icons.html">Ion Icons</a></li>
+                                            <li><a href="font-awesome.html">Font awesome</a></li>
+                                        </ul>
+                                    </li>
 
-            
+                                    <li class="has-submenu">
+                                        <a href="#">Forms</a>
+                                        <ul class="submenu">
+                                            <li><a href="form-elements.html">General Elements</a></li>
+                                            <li><a href="form-validation.html">Form Validation</a></li>
+                                            <li><a href="form-advanced.html">Advanced Form</a></li>
+                                            <li><a href="form-wizard.html">Form Wizard</a></li>
+                                            <li><a href="form-editor.html">WYSIWYG Editor</a></li>
+                                            <li><a href="code-editor.html">Code Editors</a></li>
+                                            <li><a href="form-uploads.html">Multiple File Upload</a></li>
+                                            <li><a href="form-xeditable.html">X-editable</a></li>
+                                        </ul>
+                                    </li>
 
-        
-        <?php  
-              if(Yii::$app->user->can('MenuSuper')) {
-            ?>
-        <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="menu-box">
-                <ul>
-                    <li>
-                        <a href="#"><i class="fa fa-cog"></i> Procesos Adicionales</a>
-                    </li>
-                    <li>
-                        <a href="/configuration/system-setting"><i class="fa fa-cogs"></i> Cierre de módulos</a>
-                    </li>
-                    <li>
-                        <a href="/notification/setting/conf"><i class="fa fa-bell-o"></i> Notificaciones</a>
-                    </li>
-                    <li>
-                        <a href="/backup/default/index"><i class="fa fa-database"></i> Backup</a>
-                    </li>
-                    <li>
-                        <a href="/login-details/index"><i class="fa fa-history"></i>Bitacora</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-          <?php
-            }
-            ?>
-                                                </div>
-                                            </div><!--./tab-pane-->
-                                                                        </div><!-- end col -->
-                            </div><!-- /.tabbable -->
-                        </div><!-- end esmenu-content -->
-                    </li>
-                </ul><!-- dropdown-menu -->
-            </li><!-- end mega menu -->
-        </ul><!--./navbar-nav-->
-    </div><!--./navbar-collapse-->
-</div><!--./esmenu-->
-                            
-            <div class="navbar-header pull-left">
-                <a class="navbar-brand text-bold hidden-xs" href="/">Instituto de Eduación MediaSuperior del DF</a>                <a class="navbar-brand text-bold visible-xs" href="/">IEMS</a>            </div>
+                                    <li class="has-submenu">
+                                        <a href="#">Tables</a>
+                                        <ul class="submenu">
+                                            <li><a href="tables.html">Basic Tables</a></li>
+                                            <li><a href="table-datatable.html">Data Table</a></li>
+                                            <li><a href="tables-editable.html">Editable Table</a></li>
+                                            <li><a href="responsive-table.html">Responsive Table</a></li>
+                                        </ul>
+                                    </li>
 
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">          
+                                    <li class="has-submenu">
+                                        <a href="#">Charts</a>
+                                        <ul class="submenu">
+                                            <li><a href="morris-chart.html">Morris Chart</a></li>
+                                            <li><a href="chartjs.html">Chartjs</a></li>
+                                            <li><a href="flot-chart.html">Flot Chart</a></li>
+                                            <li><a href="peity-chart.html">Peity Charts</a></li>
+                                            <li><a href="charts-sparkline.html">Sparkline Charts</a></li>
+                                            <li><a href="chart-radial.html">Radial charts</a></li>
+                                            <li><a href="other-chart.html">Other Chart</a></li>
+                                        </ul>
+                                    </li>
 
-                   
-                    <li class="dropdown user user-menu">
+                                    <li class="has-submenu">
+                                        <a href="#">Maps</a>
+                                        <ul class="submenu">
+                                            <li><a href="gmap.html"> Google Map</a></li>
+                                            <li><a href="vector-map.html"> Vector Map</a></li>
+                                        </ul>
+                                    </li>
 
-                                 <?= Html::a(
-                            Yii::t('app', '<i class="md md-pages">('.@Yii::$app->user->identity->user_login_id.')</i>SALIR2'),
+                                    <li class="has-submenu">
+                                        <a href="#">Mail</a>
+                                        <ul class="submenu">
+                                            <li><a href="inbox.html">Inbox</a></li>
+                                            <li><a href="email-compose.html">Compose Mail</a></li>
+                                            <li><a href="email-read.html">View Mail</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>-->
+
+                            <li class="has-submenu active">
+                              
+                                <?= Html::a(
+                            Yii::t('app', '<i class="md md-pages"></i>SALIR'),
                             ['/site/logout']
                         ) ?>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li>
-                                                        
-                                    <?= Html::a('<i class="fa fa-user"></i>SALIR',['/site/logout']) ?>
+                                
                             </li>
 
-                                                        <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                            <a class="btn btn-default btn-flat" href="/user/change" style="font-size:12px">Change Password</a>                              </div>
-                                <div class="pull-right">
-                                    <a class="btn btn-default btn-flat" href="/site/logout" data-method="post" style="font-size:12px">Sign out</a>                              </div>
-                            </li>
                         </ul>
-                    </li>
-                                    </ul>
-            </div><!--./navbar-custom-menu-->
-        </div>
-    </nav>
-</header>
-
+                        <!-- End navigation menu  -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Navigation Bar-->

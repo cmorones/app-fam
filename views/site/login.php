@@ -12,10 +12,11 @@ $this->title = Yii::t('app', 'APP | SOPORTE');
     &nbsp;
       </div><!-- /.login-logo -->
       <div class="login-box-body login-header">
- 
+    <h1><?= Html::img(Yii::$app->request->baseUrl.'/images/logo.png', ['width'=>'100px;']) ?></h1>
+      </div>
       <div class="login-box-body">
     
-        <p class="login-box-msg"><?php echo Yii::t('app', 'Sistema Integral de Gestión IEMS') ?></p>
+        <p class="login-box-msg"><?php echo Yii::t('app', 'Sistema Integral de gestión IEMS') ?></p>
   <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
           <div class="form-group has-feedback">
        <?= $form->field($model, 'username')->textInput(['placeholder'=>Yii::t('app', 'Usuario'), 'class'=>'form-control'])->label(false) ?>
@@ -36,25 +37,12 @@ $this->title = Yii::t('app', 'APP | SOPORTE');
        <?php ActiveForm::end(); ?>
 
         <!--a href="#">I forgot my password</a--><br>
-
-
-                     <p>- Ingresar por <?= yii\authclient\widgets\AuthChoice::widget([
-     'baseAuthUrl' => ['site/auth']
-]) ?> </p>
-
- 
- 
-                                                                                          
+      </div><!-- /.login-box-body -->
       <?php if(\Yii::$app->session->hasFlash('loginError')) : ?>
       <div class="alert alert-danger alert-dismissible" style="margin-top: 5%;">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span></button>
     <?php echo \Yii::$app->session->getFlash('loginError'); ?>
-
- 
-
-
-
       </div>
        <?php endif; ?>
     </div><!-- /.login-box -->

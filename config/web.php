@@ -133,6 +133,9 @@ $config = [
         // 'downloadAction' => 'gridview/export/download',
         // 'i18n' => []
         ],
+         'ventas' => [
+            'class' => 'app\modules\ventas\VentasModule',
+        ],
         'catalogos' => [
             'class' => 'app\modules\catalogos\CatalgosModule',
         ],

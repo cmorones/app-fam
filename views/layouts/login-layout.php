@@ -3,13 +3,13 @@ use \app\assets_b\AppAssetA;
 use yii\helpers\Html;
 $this->off(\yii\web\View::EVENT_END_BODY, [\yii\debug\Module::getInstance(), 'renderToolbar']);
 
-\app\assets_b\AppAsset::register($this);
-$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/rudra-lte';
+\app\assets_b\AppAssetA::register($this);
+$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/admin-lte';
 ?>
-<?php //$this->registerJsFile(Yii::$app->request->baseUrl.'/js/icheck.min.js',['depends' => ['yii\web\YiiAsset', 'yii\bootstrap\BootstrapAsset', 'yii\bootstrap\BootstrapPluginAsset'], 'position' => \yii\web\View::POS_HEAD]); ?>
+<?php $this->registerJsFile(Yii::$app->request->baseUrl.'/js/icheck.min.js',['depends' => ['yii\web\YiiAsset', 'yii\bootstrap\BootstrapAsset', 'yii\bootstrap\BootstrapPluginAsset'], 'position' => \yii\web\View::POS_HEAD]); ?>
 
-<?php //$this->registerCssFile(Yii::$app->request->baseUrl.'/css/edusec-login.css', [
- //   'depends' => ['yii\web\YiiAsset', 'yii\bootstrap\BootstrapAsset', 'yii\bootstrap\BootstrapPluginAsset']], 'edusec-login-css'); ?>
+<?php $this->registerCssFile(Yii::$app->request->baseUrl.'/css/edusec-login.css', [
+    'depends' => ['yii\web\YiiAsset', 'yii\bootstrap\BootstrapAsset', 'yii\bootstrap\BootstrapPluginAsset']], 'edusec-login-css'); ?>
 <style>
 body {
     background:url(../images/bg.png);
@@ -84,9 +84,9 @@ body {
     
 
 
-	<link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/rudrasoftech_favicon.png" type="image/x-icon" />
-		<!-- Render this(ar-layout-css) file for supporting Arabic Language -->
-		<?//= $this->render('mx-layout-css'); ?>
+    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/images/rudrasoftech_favicon.png" type="image/x-icon" />
+        <!-- Render this(ar-layout-css) file for supporting Arabic Language -->
+        <?//= $this->render('mx-layout-css'); ?>
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -104,12 +104,12 @@ body {
 </body>
 </html>
 <script>
-	$(function () {
-	$('input').iCheck({
-	  checkboxClass: 'icheckbox_square-blue',
-	  radioClass: 'iradio_square-blue',
-	  increaseArea: '20%' // optional
-	});
-	});
+    $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+    });
 </script>
 <?php $this->endPage() ?>
