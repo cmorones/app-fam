@@ -16,7 +16,7 @@ $this->title = Yii::t('app', 'APP | SOPORTE');
       </div>
       <div class="login-box-body">
     
-        <p class="login-box-msg"><?php echo Yii::t('app', 'Sistema Integral de gestión IEMS') ?></p>
+        <p class="login-box-msg"><?php echo Yii::t('app', 'Sistema Integral de gestión FaM') ?></p>
   <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
           <div class="form-group has-feedback">
        <?= $form->field($model, 'username')->textInput(['placeholder'=>Yii::t('app', 'Usuario'), 'class'=>'form-control'])->label(false) ?>
