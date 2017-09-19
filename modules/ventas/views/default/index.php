@@ -1,66 +1,56 @@
  <!-- SECTION FILTER
                 ================================================== -->
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="portfolioFilter">
-                            <a href="#" data-filter="*" class="current">Todos</a>
-                            <a href="#" data-filter=".webdesign">Libros</a>
-                            <a href="#" data-filter=".graphicdesign">Cuadernos</a>
-                            <a href="#" data-filter=".illustrator">Partituras</a>
-                            <a href="#" data-filter=".photography">CDs</a>
-                        </div>
+
+
+
+
+<div class="row">
+                    <div class="col-sm-12">
+                       
+                        <h4 class="page-title">Punto de Venta</h4>
                     </div>
                 </div>
+
+
+
 
                 <div class="row port">
 
 
-                <div class="col-md-3 webdesign graphicdesign">
+<div class="row">
+                    <div class="col-lg-12">
+                        <ul class="nav nav-tabs navtab-bg">
+                            <li class="active">
+                                <a href="#home" data-toggle="tab" aria-expanded="true">
+                                    <span class="visible-xs"><i class="fa fa-home"></i></span>
+                                    <span class="hidden-xs">Home</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#profile" data-toggle="tab" aria-expanded="false">
+                                    <span class="visible-xs"><i class="fa fa-user"></i></span>
+                                    <span class="hidden-xs">Profile</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#messages" data-toggle="tab" aria-expanded="false">
+                                    <span class="visible-xs"><i class="fa fa-envelope-o"></i></span>
+                                    <span class="hidden-xs">Messages</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#settings" data-toggle="tab" aria-expanded="false">
+                                    <span class="visible-xs"><i class="fa fa-cog"></i></span>
+                                    <span class="hidden-xs">Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">
+                                   <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                         <div class="card-block">
-                            <h3 class="card-title">iPhone</h3>
-                            <h6 class="card-subtitle text-muted">$500.00</h6>
-                            <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Agregar</a> </div>
-                        </div>
-                    </div>
-                </div>
-                </div> 
-
-
-                <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h3 class="card-title">iPhone</h3>
-                            <h6 class="card-subtitle text-muted">$500.00</h6>
-                            <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
-                        </div>
-                    </div>
-                </div>
-                </div> 
-
-
-                <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h3 class="card-title">iPhone</h3>
-                            <h6 class="card-subtitle text-muted">$500.00</h6>
-                            <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
-                        </div>
-                    </div>
-                </div>
-                </div> 
-
-
-                <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h3 class="card-title">iPhone</h3>
+                            <h3 class="card-title">iPhone1</h3>
                             <h6 class="card-subtitle text-muted">$500.00</h6>
                             <img src="" alt="">
                         <div class="card-block">
@@ -69,6 +59,58 @@
                     </div>
                 </div>
                 </div> 
+
+                            </div>
+                            <div class="tab-pane" id="profile">
+                               <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h3 class="card-title">iPhone2</h3>
+                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+                            </div>
+                            <div class="tab-pane" id="messages">
+                                <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h3 class="card-title">iPhone3</h3>
+                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+                            </div>
+                            <div class="tab-pane" id="settings">
+                             <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h3 class="card-title">iPhone4</h3>
+                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+             
+                </div>
+
+
+
 
                      
                 </div> <!-- End row -->

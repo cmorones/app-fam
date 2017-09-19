@@ -79,6 +79,29 @@ Yii::$app->name = "APP";
                                 <li class="has-submenu">
                                 <a href="#"><i class="md md-palette "></i><span> Administración </span> </a>
                                 <ul class="submenu">
+
+                                  <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Categorias',['/admin/categorias']) ?>
+                        </li>
+
+                              <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Autores',['/admin/autores']) ?>
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Productos',['/admin/productos']) ?>
+                        </li>
+
+
+                              
+                                    
+                                </ul>
+                            </li>
+
+                            <!--
+
+
+
                                        <li>
                             <?= Html::a('<i class="fa fa-male"></i>Assignment',['/rights/assignment/index']) ?>
                         </li>
@@ -96,12 +119,8 @@ Yii::$app->name = "APP";
                             <?= Html::a('<i class="fa fa-male"></i> Usuarios',['/admin/users']) ?>
                         </li>
 
-                              
-                                    
-                                </ul>
-                            </li>
 
-                            <!--<li class="has-submenu">
+                            <li class="has-submenu">
                                 <a href="#"><i class="md md-content-paste"></i> <span> Administración </span> </a>
                                 <ul class="submenu">
                                     <li class="has-submenu">
