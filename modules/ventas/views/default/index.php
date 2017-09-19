@@ -13,118 +13,64 @@
                 </div>
 
                 <div class="row port">
-                    <div class="portfolioContainer">
-                        <div class="col-sm-6 col-lg-3 col-md-4 webdesign illustrator">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/1.jpg" class="image-popup" title="Screenshot-1">
-                                    <img src="assets/images/gallery/1.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
+
+
+                <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h3 class="card-title">iPhone</h3>
+                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Agregar</a> </div>
                         </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 graphicdesign illustrator photography">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/2.jpg" class="image-popup" title="Screenshot-2">
-                                    <img src="assets/images/gallery/2.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 webdesign graphicdesign">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/3.jpg" class="image-popup" title="Screenshot-3">
-                                    <img src="assets/images/gallery/3.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 illustrator photography">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/4.jpg" class="image-popup" title="Screenshot-4">
-                                    <img src="assets/images/gallery/4.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 graphicdesign photography">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/5.jpg" class="image-popup" title="Screenshot-5">
-                                    <img src="assets/images/gallery/5.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 webdesign photography">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/6.jpg" class="image-popup" title="Screenshot-6">
-                                    <img src="assets/images/gallery/6.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 illustrator photography graphicdesign">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/7.jpg" class="image-popup" title="Screenshot-7">
-                                    <img src="assets/images/gallery/7.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 graphicdesign photography webdesign">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/8.jpg" class="image-popup" title="Screenshot-8">
-                                    <img src="assets/images/gallery/8.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 webdesign illustrator">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/9.jpg" class="image-popup" title="Screenshot-9">
-                                    <img src="assets/images/gallery/9.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 photography graphicdesign">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/10.jpg" class="image-popup" title="Screenshot-10">
-                                    <img src="assets/images/gallery/10.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 graphicdesign photography">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/11.jpg" class="image-popup" title="Screenshot-11">
-                                    <img src="assets/images/gallery/11.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3 col-md-4 webdesign graphicdesign illustrator">
-                            <div class="gal-detail thumb">
-                                <a href="assets/images/gallery/12.jpg" class="image-popup" title="Screenshot-12">
-                                    <img src="assets/images/gallery/12.jpg" class="thumb-img" alt="work-thumbnail">
-                                </a>
-                                <h4>Gallary Image</h4>
-                            </div>
-                        </div>
-
-
-
                     </div>
+                </div>
+                </div> 
+
+
+                <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h3 class="card-title">iPhone</h3>
+                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+
+
+                <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h3 class="card-title">iPhone</h3>
+                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+
+
+                <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h3 class="card-title">iPhone</h3>
+                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+
+                     
                 </div> <!-- End row -->
 
 
