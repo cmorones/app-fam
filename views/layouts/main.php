@@ -41,10 +41,13 @@ if (Yii::$app->controller->action->id === 'login') {
     <div class="wrapper">
             <div class="container">
 
+            <div id="content">
+
               <?= $this->render(
                     'content.php',
                     ['content' => $content, 'directoryAsset' => $directoryAsset]
                 ) ?>
+               </div>
             <!-- Footer -->
                 <footer class="footer text-right">
                     <div class="container">
@@ -73,6 +76,44 @@ if (Yii::$app->controller->action->id === 'login') {
                     time: 1200
                 });
             });
+
+
+            function itemDown(id){
+                quantity = parseInt($("#quantity_"+id).val())-1;
+                $("#quantity_"+id).val(quantity);
+                updateCart(id,quantity);
+                swal("Producto!", "Producto Eliminado del carrito!", "error");
+            }
+
+             function itemUp(id){
+                 quantity = parseInt($("#quantity_"+id).val())+1;
+                $("#quantity_"+id).val(quantity);
+                updateCart(id,quantity);
+                swal("Producto!", "Producto Agregado al carrito!", "success");
+            }
+
+            function updateCart(id,quantity){
+
+                 $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/add2', {'id': id, 'quantity': quantity}, function(data){
+
+                    $("#content").html(data);
+
+          
+          });
+
+            }
+
+            function addCart(id){
+               
+    //    swal("Producto Agregado al carrito!");
+      //    swal("Producto!", "Producto Agregado al carrito!", "success")
+           $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/add', {'id': id}, function(data){
+            swal("Producto!", "Producto Agregado al carrito!", "success");
+          });
+
+    
+            }
+
         </script>
     </html>
     <?php $this->endPage() ?>

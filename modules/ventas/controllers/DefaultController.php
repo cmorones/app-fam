@@ -3,6 +3,7 @@
 namespace app\modules\ventas\controllers;
 
 use yii\web\Controller;
+use app\modules\admin\models\Productos;
 
 /**
  * Default controller for the `ventas` module
@@ -15,6 +16,12 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        
+       $data = Productos::find()->where(['status'=>1])->orderBy('id')->all();
+
+
+        return $this->render('index', [
+        	'data' => $data,
+        	]);
     }
 }

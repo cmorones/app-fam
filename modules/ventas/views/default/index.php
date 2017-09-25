@@ -1,13 +1,17 @@
- <!-- SECTION FILTER
-                ================================================== -->
+<?php
 
+use yii\helpers\Html;
 
+?>
 
 
 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-10">
                        
                         <h4 class="page-title">Punto de Venta</h4>
+                        </div>
+                        <div class="col-sm-2">
+                           <?= Html::a('<i class="fa fa-shopping-cart"></i> Carrito', ['shopping-cart/cart'], ['class' => 'btn btn-block btn-success']) ?>
                     </div>
                 </div>
 
@@ -23,7 +27,7 @@
                             <li class="active">
                                 <a href="#home" data-toggle="tab" aria-expanded="true">
                                     <span class="visible-xs"><i class="fa fa-home"></i></span>
-                                    <span class="hidden-xs">Home</span>
+                                    <span class="hidden-xs">Todos</span>
                                 </a>
                             </li>
                             <li class="">
@@ -45,20 +49,28 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="tab-content">
+              <div class="tab-content">
                             <div class="tab-pane active" id="home">
-                                   <div class="col-md-3 webdesign graphicdesign">
+        
+        <?php
+        foreach ($data as $value) {
+
+            ?>
+        <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                         <div class="card-block">
-                            <h3 class="card-title">iPhone1</h3>
-                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <h3 class="card-title"><?=$value->nombre?></h3>
+                            <h6 class="card-subtitle text-muted">$<?=number_format($value->precio,2)?></h6>
                             <img src="" alt="">
                         <div class="card-block">
-                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                            <div class="card-text"><?=$value->autor->nombre?><br> 
+                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value->id?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
+                          
                         </div>
                     </div>
                 </div>
                 </div> 
+                <?php } ?>
 
                             </div>
                             <div class="tab-pane" id="profile">

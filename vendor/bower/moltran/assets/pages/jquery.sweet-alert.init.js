@@ -15,9 +15,7 @@
     SweetAlert.prototype.init = function() {
         
     //Basic
-    $('#sa-basic').click(function(){
-        swal("Here's a message!");
-    });
+   
 
     //A title with a text under
     $('#sa-title').click(function(){

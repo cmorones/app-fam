@@ -17,6 +17,9 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'JDqkJaMgIITAKcsJY6yvLQdM9jf7WghX',
         ],
+        'cart'=>[
+            'class'=>'app\components\Carts',
+        ],
         'pdf'=>[
             'class'=>'app\components\ExportToPdf',
         ],

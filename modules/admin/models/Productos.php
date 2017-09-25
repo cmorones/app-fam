@@ -103,4 +103,9 @@ class Productos extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CatEstado::className(),['id'=>'status']);
     }
+
+    function getInfoProductBy($id){
+        $data = Productos::find()->asArray()->where(['id'=>$id])->one();
+        return $data;
+    }
 }
