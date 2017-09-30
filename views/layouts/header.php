@@ -49,7 +49,7 @@ Yii::$app->name = "APP";
                         </li>
 
                                <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Listado Ventas',['/ventas/list']) ?>
+                            <?= Html::a('<i class="fa  md-add"></i> Listado Ventas',['/ventas/ordenes']) ?>
                         </li>
                                     
                                 </ul>

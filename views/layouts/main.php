@@ -92,6 +92,48 @@ if (Yii::$app->controller->action->id === 'login') {
                 swal("Producto!", "Producto Agregado al carrito!", "success");
             }
 
+             function descuento(tipo){
+                
+                updateDescuento(tipo);
+                if(tipo==1){
+                    des = "Pubico en General";
+                }
+                 if(tipo==2){
+                    des = "Comunidad UNAM 50%";
+                }
+                  if(tipo==3){
+                    des = "Proveedorees 70%";
+                }
+                  if(tipo==4){
+                    des = "Donativo  100%";
+                }
+                  if(tipo==5){
+                    des = "Producto Dañado 100%";
+                }
+
+                
+
+                swal("Producto!", "Descuento Aplicado "+des , "success");
+            }
+
+            function deleteItem(id){
+
+
+                updateCart(id,0);
+                swal("Producto!", "Producto Eliminado del carrito!", "error");
+            }
+
+             function updateDescuento(tipo){
+
+                 $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/descuento', {'tipo': tipo}, function(data){
+
+                    $("#content").html(data);
+
+          
+          });
+
+            }
+
             function updateCart(id,quantity){
 
                  $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/add2', {'id': id, 'quantity': quantity}, function(data){
@@ -103,10 +145,11 @@ if (Yii::$app->controller->action->id === 'login') {
 
             }
 
+
+
             function addCart(id){
                
-    //    swal("Producto Agregado al carrito!");
-      //    swal("Producto!", "Producto Agregado al carrito!", "success")
+  
            $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/add', {'id': id}, function(data){
             swal("Producto!", "Producto Agregado al carrito!", "success");
           });

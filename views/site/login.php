@@ -12,7 +12,7 @@ $this->title = Yii::t('app', 'APP | SOPORTE');
     &nbsp;
       </div><!-- /.login-logo -->
       <div class="login-box-body login-header">
-    <h1><?= Html::img(Yii::$app->request->baseUrl.'/images/logo.png', ['width'=>'100px;']) ?></h1>
+    <h1><?= Html::img(Yii::$app->request->baseUrl.'/images/logo.jpg', ['width'=>'100px;']) ?></h1>
       </div>
       <div class="login-box-body">
     

@@ -4,6 +4,7 @@ namespace app\modules\ventas\controllers;
 use Yii;
 use Yii\web\Session;
 use app\modules\admin\models\Productos;
+use app\modules\ventas\models\Ordenes;
 
 class ShoppingCartController extends \yii\web\Controller
 {
@@ -52,6 +53,8 @@ class ShoppingCartController extends \yii\web\Controller
 
          public function actionAdd2($id, $quantity)
     {
+        
+
         // $data = new Productos();
           //      $dataProduct = $data->getInfoProductBy($id);
 
@@ -80,6 +83,21 @@ class ShoppingCartController extends \yii\web\Controller
              Yii::$app->session['cart'] = $cart;
             
             return $this->renderAjax('cart',['cart'=>$cart]);
+
+     
+    }
+
+      public function actionDescuento($tipo)
+    {
+          
+            
+                 $cart = Yii::$app->session['cart'];
+                  $model = new Ordenes();
+
+
+        
+            
+            return $this->renderAjax('cart',['cart'=>$cart, 'tipo'=>$tipo]);
 
      
     }
