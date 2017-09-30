@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+$subtotal = 0;
 ?>
 
 <div class="panel panel-color panel-primary">
