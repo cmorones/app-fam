@@ -3,19 +3,18 @@
 namespace app\modules\ventas\controllers;
 
 use Yii;
-use app\modules\ventas\models\Ordenes;
-use app\modules\ventas\models\OrdenesDetalle;
-use app\modules\ventas\models\OrdenesSearch;
+use app\modules\ventas\models\InvEntradas;
 use app\modules\ventas\models\InvProductos;
+use app\modules\ventas\models\InvEntradasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
 
 /**
- * OrdenesController implements the CRUD actions for Ordenes model.
+ * InvEntradasController implements the CRUD actions for InvEntradas model.
  */
-class OrdenesController extends Controller
+class InvEntradasController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +32,12 @@ class OrdenesController extends Controller
     }
 
     /**
-     * Lists all Ordenes models.
+     * Lists all InvEntradas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OrdenesSearch();
+        $searchModel = new InvEntradasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,17 +47,10 @@ class OrdenesController extends Controller
     }
 
     /**
-     * Displays a single Ordenes model.
+     * Displays a single InvEntradas model.
      * @param integer $id
      * @return mixed
      */
-
-     public function actionPago($id)
-    {
-        return $this->render('orden_pago', [
-            'id' => $id,
-        ]);
-    }
     public function actionView($id)
     {
         return $this->render('view', [
@@ -67,104 +59,70 @@ class OrdenesController extends Controller
     }
 
     /**
-     * Creates a new Ordenes model.
+     * Creates a new InvEntradas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($subtotal,$descuento,$total,$tipo)
+    public function actionCreate()
     {
-        $model = new Ordenes();
+        $model = new InvEntradas();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
-            $model->status=1;
+
+
              if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
             }
-            $orden_id = $model->id;
-            $cart = Yii::$app->session['cart'];
-            foreach ($cart as $key => $value) {
-                $ordenDetalle = new OrdenesDetalle();
-                $ordenDetalle->id_orden = $orden_id;
-                $ordenDetalle->id_producto = $key;
-                $ordenDetalle->precio = $value['precio'];
-                $ordenDetalle->cantidad = $value['cantidad'];
-                $ordenDetalle->status = 1;
-                $ordenDetalle->created_by=Yii::$app->user->identity->user_id;
-                $ordenDetalle->created_at = new Expression('NOW()');
-                $ordenDetalle->save();
-                $cantidad = intval($value['cantidad']);
 
-                $this->calculaexistencia($key,$cantidad );
+             $idproducto = InvProductos::find()->where(['id_producto'=>$model->id_producto])->count(); 
 
+            $intprod = intval($idproducto);
 
+            if ($intprod == 0) {
+                $entrada = new InvProductos();
+                $entrada->id_producto = $model->id_producto;
+                $entrada->id_ubicacion = 1;
+                $entrada->existencia = $model->cantidad;
+                $entrada->created_by=Yii::$app->user->identity->user_id;
+                $entrada->created_at = new Expression('NOW()');
+                $entrada->save();
 
-              /*  $idproducto = InvProductos::find()->where(['id_producto'=>$key])->count(); 
-
-                 $intprod = intval($idproducto);
-
-            if ($intprod > 0) {
+            }elseif ($intprod > 0) {
                 
                 $existencia = \Yii::$app->db ->createCommand("SELECT 
-        existencia
+          sum(inv_productos.existencia) as suma 
         FROM 
           inv_productos 
         WHERE 
-          id_producto=1")->queryOne();
+          id_producto=$model->id_producto")->queryOne();
 
-                $result = intval($existencia['existencia']);
+
                 
-                 $table = InvProductos::findOne(1);
-                 $table->existencia = $result - $value['cantidad'];
+                 $table = InvProductos::findOne($model->id_producto);
+                 $table->existencia = $existencia['suma'] + $model->cantidad;
                  $table->save();
                          
                 
-            }+*/
-
-
             }
-            
 
 
-           // Yii::$app->session['cart'];
-            unset(Yii::$app->session['cart']);
+           
+
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'subtotal'=>$subtotal,
-                'descuento'=>$descuento,
-                'total'=>$total,
-                'tipo'=>$tipo,
             ]);
         }
     }
 
-function calculaexistencia($id_producto, $cantidad){
-
-  
-                
-                $existencia = \Yii::$app->db ->createCommand("SELECT 
-        existencia
-        FROM 
-          inv_productos 
-        WHERE 
-          id_producto=$id_producto")->queryOne();
-
-                $result = intval($existencia['existencia']);
-      
-    $total  = $result - $cantidad;
-    $sql="Update inv_productos set existencia =". $total . " where id_producto =".$id_producto. "";
-    
-    \Yii::$app->db->createCommand($sql)->execute();
-
-}
-
     /**
-     * Updates an existing Ordenes model.
+     * Updates an existing InvEntradas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -183,7 +141,7 @@ function calculaexistencia($id_producto, $cantidad){
     }
 
     /**
-     * Deletes an existing Ordenes model.
+     * Deletes an existing InvEntradas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -196,15 +154,15 @@ function calculaexistencia($id_producto, $cantidad){
     }
 
     /**
-     * Finds the Ordenes model based on its primary key value.
+     * Finds the InvEntradas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Ordenes the loaded model
+     * @return InvEntradas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Ordenes::findOne($id)) !== null) {
+        if (($model = InvEntradas::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

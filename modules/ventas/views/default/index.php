@@ -59,12 +59,13 @@ use yii\helpers\Html;
         <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                         <div class="card-block">
-                            <h3 class="card-title"><?=$value->nombre?></h3>
-                            <h6 class="card-subtitle text-muted">$<?=number_format($value->precio,2)?></h6>
+                            <h3 class="card-title"><?=$value->datos->nombre?></h3>
+                            <h6 class="card-subtitle text-muted">$<?=number_format($value->datos->precio,2)?></h6>
+                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value->existencia?></button></h6>
                             <img src="" alt="">
                         <div class="card-block">
-                            <div class="card-text"><?=$value->autor->nombre?><br> 
-                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value->id?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
+                            <div class="card-text"><?//=$value->autor->nombre?><br> 
+                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
                           
                         </div>
                     </div>
