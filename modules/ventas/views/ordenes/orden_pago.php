@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use app\modules\ventas\models\OrdenesDetalle;
+
 
 ?>
 <div class="col-md-12">
@@ -59,46 +61,24 @@ use yii\helpers\Html;
                                                     <th>Total</th>
                                                 </tr></thead>
                                                 <tbody>
+
+                                                <?php
+                                                    $resultado = OrdenesDetalle::find()->where(['id_orden'=> $id])->all();
+                                                    $i=1;
+                                                    foreach ($resultado as $value) {
+                                                ?>
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td>LCD</td>
+                                                        <td><?=$i?></td>
+                                                        <td>Producto</td>
                                                         <td>Lorem ipsum dolor sit amet.</td>
-                                                        <td>1</td>
-                                                        <td>$380</td>
-                                                        <td>$380</td>
+                                                        <td><?=number_format($value->cantidad,2)?></td>
+                                                        <td><?=number_format($value->precio,2)?></td>
+                                                        <td><?=number_format($value->cantidad*$value->precio,2)?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Mobile</td>
-                                                        <td>Lorem ipsum dolor sit amet.</td>
-                                                        <td>5</td>
-                                                        <td>$50</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>LED</td>
-                                                        <td>Lorem ipsum dolor sit amet.</td>
-                                                        <td>2</td>
-                                                        <td>$500</td>
-                                                        <td>$1000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>LCD</td>
-                                                        <td>Lorem ipsum dolor sit amet.</td>
-                                                        <td>3</td>
-                                                        <td>$300</td>
-                                                        <td>$900</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>Mobile</td>
-                                                        <td>Lorem ipsum dolor sit amet.</td>
-                                                        <td>5</td>
-                                                        <td>$80</td>
-                                                        <td>$400</td>
-                                                    </tr>
+                                                  <?php
+                                                  $i++;
+                                              }
+                                              ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -107,7 +87,7 @@ use yii\helpers\Html;
                                 <div class="row" style="border-radius: 0px">
                                     <div class="col-md-3 col-md-offset-9">
                                         <p class="text-right"><b>Sub-total:</b> 2930.00</p>
-                                        <p class="text-right">Descuento: 12.9%</p>
+                                        <p class="text-right">Descuento: 50%</p>
                                        
                                         <hr>
                                         <h3 class="text-right">Total $2930.00</h3>

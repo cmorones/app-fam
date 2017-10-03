@@ -53,8 +53,8 @@ public $salidas;
     {
         return [
             'id' => 'ID',
-            'id_producto' => 'Id Producto',
-            'id_ubicacion' => 'Id Ubicacion',
+            'id_producto' => 'Producto',
+            'id_ubicacion' => 'Ubicacion',
             'existencia' => 'Existencia',
             'created_at' => 'Created At',
             'created_by' => 'Created By',

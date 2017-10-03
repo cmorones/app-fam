@@ -26,7 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
            // 'id',
-            'id_producto',
+             [
+              'attribute'=>'id_producto',
+              'value' => 'datos.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\ventas\models\Productos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             'id_ubicacion',
             [
               'attribute'=>'entradas',

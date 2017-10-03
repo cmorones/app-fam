@@ -70,7 +70,6 @@ class InvEntradasController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
-            $model->status=1;
 
 
              if (!$model->save()) {
