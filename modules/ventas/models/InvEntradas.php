@@ -79,4 +79,16 @@ class InvEntradas extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
+
+
+    public function getDatos()
+    {
+        return $this->hasOne(Productos::className(),['id'=>'id_producto']);
+    }
+
+     public function getEntrada()
+    {
+        return $this->hasOne(TipoEntrada::className(),['id'=>'tipo']);
+    }
+
 }

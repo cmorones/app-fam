@@ -33,19 +33,19 @@ use yii\helpers\Html;
                             <li class="">
                                 <a href="#profile" data-toggle="tab" aria-expanded="false">
                                     <span class="visible-xs"><i class="fa fa-user"></i></span>
-                                    <span class="hidden-xs">Profile</span>
+                                    <span class="hidden-xs">Libros</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="#messages" data-toggle="tab" aria-expanded="false">
                                     <span class="visible-xs"><i class="fa fa-envelope-o"></i></span>
-                                    <span class="hidden-xs">Messages</span>
+                                    <span class="hidden-xs">Partituras</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="#settings" data-toggle="tab" aria-expanded="false">
                                     <span class="visible-xs"><i class="fa fa-cog"></i></span>
-                                    <span class="hidden-xs">Settings</span>
+                                    <span class="hidden-xs">CDS</span>
                                 </a>
                             </li>
                         </ul>
@@ -75,46 +75,76 @@ use yii\helpers\Html;
 
                             </div>
                             <div class="tab-pane" id="profile">
-                               <div class="col-md-3 webdesign graphicdesign">
+                             
+                            <?php
+        foreach ($data2 as $value2) {
+
+            ?>
+  <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                         <div class="card-block">
-                            <h3 class="card-title">iPhone2</h3>
-                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                            <h3 class="card-title"><?=$value2->datos->nombre?></h3>
+                            <h6 class="card-subtitle text-muted">$<?=number_format($value2->datos->precio,2)?></h6>
+                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value2->existencia?></button></h6>
                             <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                         <div class="card-block">
+                            <div class="card-text"><?//=$value->autor->nombre?><br> 
+                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value2->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
+                          
                         </div>
                     </div>
                 </div>
-                </div> 
+              </div> 
+                    <?php } ?>
+              
                             </div>
                             <div class="tab-pane" id="messages">
+
+                                         <?php
+        foreach ($data3 as $value3) {
+
+            ?>
                                 <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h3 class="card-title">iPhone3</h3>
-                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                         <div class="card-block">
+                            <h3 class="card-title"><?=$value3->datos->nombre?></h3>
+                            <h6 class="card-subtitle text-muted">$<?=number_format($value3->datos->precio,2)?></h6>
+                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value3->existencia?></button></h6>
                             <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                         <div class="card-block">
+                            <div class="card-text"><?//=$value->autor->nombre?><br> 
+                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value3->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
+                          
                         </div>
                     </div>
                 </div>
                 </div> 
+                 <?php } ?>
                             </div>
                             <div class="tab-pane" id="settings">
+
+
+                                         <?php
+        foreach ($data4 as $value4) {
+
+            ?>
                              <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h3 class="card-title">iPhone4</h3>
-                            <h6 class="card-subtitle text-muted">$500.00</h6>
+                       <div class="card-block">
+                            <h3 class="card-title"><?=$value4->datos->nombre?></h3>
+                            <h6 class="card-subtitle text-muted">$<?=number_format($value4->datos->precio,2)?></h6>
+                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value4->existencia?></button></h6>
                             <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text">Product information description why its the best product ever blah blah <br> <a href="#" class="card-link productItem btn btn-primary" data-name="iPhone" data-s="black" data-price="50000" data-id="1">Add to Cart</a> </div>
+                         <div class="card-block">
+                            <div class="card-text"><?//=$value->autor->nombre?><br> 
+                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value4->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
+                          
                         </div>
                     </div>
                 </div>
                 </div> 
+
+                      <?php } ?>
                             </div>
                         </div>
                     </div>

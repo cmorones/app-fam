@@ -10,7 +10,11 @@ use yii\widgets\Pjax;
 $this->title = 'Categorias';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="categorias-index">
+<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Ventas</h3>
+                            </div>
+                            <div class="panel-body">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+        //    'id',
             'nombre',
             'status',
 
@@ -32,3 +36,4 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
+</div>

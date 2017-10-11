@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use app\modules\ventas\models\Ordenes;
 use app\modules\ventas\models\OrdenesDetalle;
 
 
@@ -63,14 +64,50 @@ use app\modules\ventas\models\OrdenesDetalle;
                                                 <tbody>
 
                                                 <?php
-                                                    $resultado = OrdenesDetalle::find()->where(['id_orden'=> $id])->all();
+
+                                                $model = Ordenes::findOne($id);
+                                                   // $resultado = OrdenesDetalle::find()->where(['id_orden'=> $id])->all();
+
+                                                     $resultado =  OrdenesDetalle::find()
+                                                        ->joinWith('datos')
+                                                       // ->onCondition(['>', 'existencia', 0])
+                                                        ->where(['=', 'id_orden', $id])
+                                                        ->all();
+
+
                                                     $i=1;
+                                                    $grantotal=0;
                                                     foreach ($resultado as $value) {
+
+
+                                                    if ($model->tipo_descuento==1) {
+                                                      $tipo ="Publico en general";
+                                                    }
+
+                                                     if ($model->tipo_descuento==2) {
+                                                      $tipo ="UNAM 50%";
+                                                    }
+
+                                                    if ($model->tipo_descuento==3) {
+                                                      $tipo ="Proveedores 70%";
+                                                    }
+
+                                                    if ($model->tipo_descuento==4) {
+                                                      $tipo ="Donativo 100%";
+                                                    }
+
+                                                    if ($model->tipo_descuento==5) {
+                                                      $tipo ="Daño 100%";
+                                                    }
+
+
+                                                            $total = $value->cantidad*$value->precio;
+                                                            $grantotal = $grantotal + $total;
                                                 ?>
                                                     <tr>
                                                         <td><?=$i?></td>
-                                                        <td>Producto</td>
-                                                        <td>Lorem ipsum dolor sit amet.</td>
+                                                        <td><?=$value->datos->nombre?></td>
+                                                        <td><?=$value->datos->detalle?></td>
                                                         <td><?=number_format($value->cantidad,2)?></td>
                                                         <td><?=number_format($value->precio,2)?></td>
                                                         <td><?=number_format($value->cantidad*$value->precio,2)?></td>
@@ -86,11 +123,11 @@ use app\modules\ventas\models\OrdenesDetalle;
                                 </div>
                                 <div class="row" style="border-radius: 0px">
                                     <div class="col-md-3 col-md-offset-9">
-                                        <p class="text-right"><b>Sub-total:</b> 2930.00</p>
-                                        <p class="text-right">Descuento: 50%</p>
+                                        <p class="text-right"><b>Sub-total:</b> <?=number_format($grantotal,2)?></p>
+                                        <p class="text-right">Descuento: <?=$tipo?></p>
                                        
                                         <hr>
-                                        <h3 class="text-right">Total $2930.00</h3>
+                                        <h3 class="text-right">Total <?=number_format($model->total,2)?></h3>
                                     </div>
                                 </div>
                                 <hr>

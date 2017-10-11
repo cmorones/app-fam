@@ -36,7 +36,7 @@ Yii::$app->name = "APP";
                         <ul class="navigation-menu">
                             <li>
                                
-                                <?= Html::a('<i class="md md-home"></i>Tablero',['/personal'])  ?>
+                                <?= Html::a('<i class="md md-home"></i>Tablero',['/site'])  ?>
                             </li>
 
                         
@@ -70,7 +70,7 @@ Yii::$app->name = "APP";
                                <li class="has-submenu">
                                 <a href="#"><i class="md  md-event-note"></i> <span> Informes </span> </a>
                                   <ul class="submenu">
-                                    <li><?= Html::a('Ventas',['/admin/ventas'])?></li>
+                                    <li><?= Html::a('Ventas',['/ventas/informes'])?></li>
                                  
                                     
                                 </ul>

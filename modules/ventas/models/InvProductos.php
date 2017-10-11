@@ -85,4 +85,6 @@ public $salidas;
     {
         return $this->hasOne(Productos::className(),['id'=>'id_producto']);
     }
+
+   
 }

@@ -27,10 +27,18 @@ use yii\widgets\Pjax;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'id_producto',
+          //  'id',
+             [
+              'attribute'=>'id_producto',
+              'value' => 'datos.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\ventas\models\Productos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             'cantidad',
-            'tipo',
+             [
+              'attribute'=>'tipo',
+              'value' => 'entrada.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\ventas\models\TipoEntrada::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             'fecha_reg',
             // 'status',
             // 'created_at',
@@ -38,7 +46,9 @@ use yii\widgets\Pjax;
             // 'updated_at',
             // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+'template' => '{update}',
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

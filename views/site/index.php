@@ -31,13 +31,11 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bx-shadow bg-info">
                             <span class="mini-stat-icon"><i class="ion-social-usd"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter">15852</span>
+                                <span class="counter"><?=number_format(app\modules\ventas\models\Ordenes::find()->sum('total'),2);?></span>
                                 Total Ventas
                             </div>
                             <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase text-white m-0">Last week's Sales <span class="pull-right">235</span></h5>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -45,13 +43,11 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bg-purple bx-shadow">
                             <span class="mini-stat-icon"><i class="ion-ios7-cart"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter">956</span>
-                                Total Ordenes
+                                <span class="counter"><?=app\modules\ventas\models\Ordenes::find()->where(['status'=>1])->count(); ?></span>
+                               Ordenes pendietes
                             </div>
                             <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase text-white m-0">Last week's Orders <span class="pull-right">59</span></h5>
-                                </div>
+                              
                             </div>
                         </div>
                     </div>
@@ -60,13 +56,11 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bg-primary bx-shadow">
                             <span class="mini-stat-icon"><i class="ion-android-contacts"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter">5210</span>
-                                Total 
+                                <span class="counter"><?=app\modules\ventas\models\Ordenes::find()->where(['status'=>2])->count(); ?></span>
+                                Ordenes Pagadas 
                             </div>
                             <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase text-white m-0">Last month's Users <span class="pull-right">136</span></h5>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -75,13 +69,11 @@ use app\modules\soporte\models\InvNobreak;
                         <div class="mini-stat clearfix bg-success bx-shadow">
                             <span class="mini-stat-icon"><i class="ion-eye"></i></span>
                             <div class="mini-stat-info text-right">
-                                <span class="counter">20544</span>
+                                <span class="counter"><?=app\modules\ventas\models\InvProductos::find()->sum('existencia');?></span>
                                 Total Existencias
                             </div>
                             <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase text-white m-0">Last month's Visitors <span class="pull-right">1026</span></h5>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

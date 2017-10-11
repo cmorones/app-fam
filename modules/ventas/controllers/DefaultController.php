@@ -18,10 +18,32 @@ class DefaultController extends Controller
     {
         
        $data = InvProductos::find()->where(['>', 'existencia', 0])->all();
+     //  $data2 = InvProductos::find()->->with('productos')->where(['>', 'existencia', 0])->andWhere(['productos.id_categoria'=>1])->all();
+
+   $data2 =  InvProductos::find()
+            ->joinWith('datos')
+            ->onCondition(['>', 'existencia', 0])
+            ->where(['=', 'productos.id_categoria', 1])
+            ->all();
+
+     $data3 =  InvProductos::find()
+            ->joinWith('datos')
+            ->onCondition(['>', 'existencia', 0])
+            ->where(['=', 'productos.id_categoria', 2])
+            ->all();
+
+        $data4 =  InvProductos::find()
+            ->joinWith('datos')
+            ->onCondition(['>', 'existencia', 0])
+            ->where(['=', 'productos.id_categoria', 3])
+            ->all();
 
 
         return $this->render('index', [
         	'data' => $data,
+            'data2' => $data2,
+            'data3' => $data3,
+            'data4' => $data4,
         	]);
     }
 }
