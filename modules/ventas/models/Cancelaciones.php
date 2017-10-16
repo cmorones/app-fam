@@ -5,13 +5,12 @@ namespace app\modules\ventas\models;
 use Yii;
 
 /**
- * This is the model class for table "ordenes".
+ * This is the model class for table "cancelaciones".
  *
  * @property integer $id
- * @property string $cliente
- * @property integer $tipo_descuento
- * @property double $total
- * @property integer $status
+ * @property integer $id_orden
+ * @property string $fecha_reg
+ * @property string $motivo
  * @property string $created_at
  * @property integer $created_by
  * @property string $updated_at
@@ -20,14 +19,14 @@ use Yii;
  * @property Users $createdBy
  * @property Users $updatedBy
  */
-class Ordenes extends \yii\db\ActiveRecord
+class Cancelaciones extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'ordenes';
+        return 'cancelaciones';
     }
 
     /**
@@ -36,12 +35,10 @@ class Ordenes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cliente'], 'string'],
-            [['cliente'], 'required'],
-            [['tipo_descuento', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['total'], 'number'],
-            [['fecha_reg','created_at', 'created_by'], 'required'],
-            [['docto','created_at', 'updated_at'], 'safe'],
+            [['id_orden', 'created_by', 'updated_by'], 'integer'],
+            [['fecha_reg', 'created_at', 'updated_at'], 'safe'],
+            [['motivo'], 'string'],
+            [['created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
@@ -54,12 +51,11 @@ class Ordenes extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'cliente' => 'Cliente',
-            'tipo_descuento' => 'Tipo Descuento',
-            'total' => 'Total',
-            'status' => 'Status',
+            'id_orden' => 'Num Orden',
+            'fecha_reg' => 'Fecha',
+            'motivo' => 'Motivo de cancelacion',
             'created_at' => 'Created At',
-            'created_by' => 'Created By',
+            'created_by' => 'Cancelado por',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
         ];
@@ -80,16 +76,4 @@ class Ordenes extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
-
-    public function getCatDescuento()
-    {
-        return $this->hasOne(CatDescuento::className(),['id'=>'tipo_descuento']);
-    }
-
-
-    public function getCatEstado()
-    {
-        return $this->hasOne(CatEstadoVenta::className(),['id'=>'status']);
-    }
-
 }

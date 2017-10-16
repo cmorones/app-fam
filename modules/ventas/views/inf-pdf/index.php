@@ -4,22 +4,40 @@ use yii\helpers\Html;
 use app\modules\ventas\models\Ordenes;
 use app\modules\ventas\models\OrdenesDetalle;
 
+
  $model = Ordenes::findOne($id);
 
+ $date = new DateTime($model->created_at);
+
 ?>
-<div class="col-md-12">
-                        <div class="panel panel-default">
-                            <!-- <div class="panel-heading">
-                                <h4>Invoice</h4>
-                            </div> -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/core.css" rel="stylesheet">
+<link href="css/icons.css" rel="stylesheet">
+<link href="css/components.css" rel="stylesheet">
+<link href="css/pages.css" rel="stylesheet">
+<link href="css/menu.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+<style type="text/css">
+  strong, b {
+    font-weight: bold;
+}
+
+</style>
+
+
+                    
                             <div class="panel-body">
-                                <div class="clearfix">
+                               <div class="juntos">
                                   <div class="pull-left">
-                                        <h4 class="text-right"><?= Html::img(Yii::$app->request->baseUrl.'/images/unam.jpg', ['width'=>'150px;', 'height'=>'100px;']) ?></h4>
+                                       <img src="/app-fam/images/unam.jpg" width="150px;" height="100px;" alt=""> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                                       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                                       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; 
+                                         <img src="/app-fam/images/logo.jpg" width="80px;" height="100px;" alt="">
 
                                     </div>
                                     <div class="pull-right">
-                                        <h4 class="text-right"><?= Html::img(Yii::$app->request->baseUrl.'/images/logo.jpg', ['width'=>'80px;', 'height'=>'100px;']) ?></h4>
+                                 
 
                                     </div>
                                    
@@ -28,7 +46,7 @@ use app\modules\ventas\models\OrdenesDetalle;
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                        <div class="pull-left m-t-10">
+                                        <div class="pull-left m-t-30">
                                             <address>
                                               <strong>Departamento de Publicaciones
 </strong><br>
@@ -42,7 +60,7 @@ use app\modules\ventas\models\OrdenesDetalle;
                                               </address>
                                         </div>
                                         <div class="pull-right m-t-30">
-                                            <p><strong>Fecha: </strong> <?=$model->created_at?></p>
+                                            <p><strong>Fecha: </strong><?=$date->format('Y-m-d H:i:s');?></p>
                                             <p class="m-t-10"><strong>Orden estado: </strong> <span class="label label-pink">En Proceso</span></p>
                                             <p class="m-t-10"><strong>Orden ID: </strong> # <?=$id?></p>
                                         </div>
@@ -57,15 +75,15 @@ use app\modules\ventas\models\OrdenesDetalle;
                                                 <thead>
                                                     <tr><th>#</th>
                                                     <th>Producto</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Precio</th>
-                                                    <th>Total</th>
+                                                   
+                                                    <th align="right">Cantidad</th>
+                                                    <th align="right">Precio</th>
+                                                    <th align="right">Total</th>
                                                 </tr></thead>
                                                 <tbody>
+                                                    <?php
 
-                                                <?php
-
-                                               
+                                                $model = Ordenes::findOne($id);
                                                    // $resultado = OrdenesDetalle::find()->where(['id_orden'=> $id])->all();
 
                                                      $resultado =  OrdenesDetalle::find()
@@ -104,39 +122,36 @@ use app\modules\ventas\models\OrdenesDetalle;
                                                             $total = $value->cantidad*$value->precio;
                                                             $grantotal = $grantotal + $total;
                                                 ?>
-                                                    <tr>
+
+                                                        <tr>
                                                         <td><?=$i?></td>
                                                         <td><?=$value->datos->nombre?></td>
                                                         <td align="right"><?=$value->cantidad?></td>
                                                         <td align="right"><?=number_format($value->precio,2)?></td>
                                                         <td align="right"><?=number_format($value->cantidad*$value->precio,2)?></td>
                                                     </tr>
-                                                  <?php
+                                                       <?php
                                                   $i++;
                                               }
                                               ?>
-                                                </tbody>
+
+                                                                                                  </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="border-radius: 0px">
                                     <div class="col-md-3 col-md-offset-9">
-                                        <p class="text-right"><b>Sub-total:</b> <?=number_format($grantotal,2)?></p>
-                                        <p class="text-right">Descuento: <?=$tipo?></p>
+                                        <p class="text-right"><b>Sub-total:</b> 210.00</p>
+                                        <p class="text-right">Descuento: Publico en general</p>
                                        
                                         <hr>
-                                        <h3 class="text-right">Total <?=number_format($model->total,2)?></h3>
+                                        <h3 class="text-right">Total 210.00</h3>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="hidden-print">
-                                    <div class="pull-right">
-                                        <a href="javascript:window.print()" class="btn btn-inverse waves-effect waves-light"><i class="fa fa-print"></i></a>
-                                       
-                                    </div>
-                                </div>
+                             
+                             
                             </div>
-                        </div>
 
-                    </div>
+
+         

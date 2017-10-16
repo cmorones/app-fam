@@ -33,6 +33,10 @@ Yii::$app->name = "APP";
                 <div class="container">
                     <div id="navigation">
                         <!-- Navigation Menu-->
+
+                                             <?php  
+             if(Yii::$app->user->can('menuAdmin')) {
+            ?>
                         <ul class="navigation-menu">
                             <li>
                                
@@ -51,6 +55,11 @@ Yii::$app->name = "APP";
                                <li>
                             <?= Html::a('<i class="fa  md-add"></i> Listado Ventas',['/ventas/ordenes']) ?>
                         </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Listado de Cancelaciones',['/ventas/cancelaciones']) ?>
+                        </li>
+                             
                                     
                                 </ul>
                             </li>
@@ -76,6 +85,10 @@ Yii::$app->name = "APP";
                                 </ul>
                             </li>
 
+
+
+
+
                                 <li class="has-submenu">
                                 <a href="#"><i class="md md-palette "></i><span> Administración </span> </a>
                                 <ul class="submenu">
@@ -92,11 +105,39 @@ Yii::$app->name = "APP";
                             <?= Html::a('<i class="fa fa-male"></i> Productos',['/admin/productos']) ?>
                         </li>
 
+                                                       <?php 
+                                             } 
+             if(Yii::$app->user->can('MenuSuper')) {
+            ?>
+
+                          <li>
+                            <?= Html::a('<i class="fa fa-male"></i>Assignment',['/rights/assignment/index']) ?>
+                        </li>
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Roles',['/rights/role/index']) ?>
+                        </li>
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Permisos',['/rights/permission']) ?>
+                        </li>
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Rutas',['/rights/route']) ?>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Usuarios',['/admin/users']) ?>
+                        </li>
+    <?php
+               }
+            ?>
 
                               
                                     
                                 </ul>
                             </li>
+
+
+        
+
 
                             <!--
 

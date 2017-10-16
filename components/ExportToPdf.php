@@ -77,7 +77,7 @@ class ExportToPdf extends Component
   	}else{
   		$nombre='JUD DE APOYO TECNICO';
   	}
-		$mpdf = new mPDF('utf-8', 'A4',0,'',15,15,25,16,4,9,'P');
+		$mpdf = new mPDF('utf-8', 'A4',0,'',10,10,15,16,4,9,'P');
 		$mpdf->autoScriptToLang = true;
 		$mpdf->autoLangToFont = true;
 		//$org = Organization::find()->asArray()->one();
@@ -88,7 +88,9 @@ class ExportToPdf extends Component
 		$org_namef=$orgf['org_namef'];
 		$org_add="Instituto de Eduación Media Superior";
 		$org_p=" ";
-		$mpdf->SetHTMLHeader('<table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr style="border:hidden"></td><td style="border:hidden;text-align: left;color:#555555;"><b style="font-size:22px;">'.$org_add.'</b><br/><span style="font-size:11px">'.$org_p.'</td><td vertical-align="right" style="width:35px;border:hidden"position:absolute;>'.$org_image.'</tr></table>');
+		$img1 = Html::img(Yii::$app->request->baseUrl.'/images/unam.jpg', ['width'=>'150px;', 'height'=>'100px;']);
+		$img2 = Html::img(Yii::$app->request->baseUrl.'/images/logo.jpg', ['width'=>'80px;', 'height'=>'100px;']) ;
+		$mpdf->SetHTMLHeader('');
 		$stylesheet = file_get_contents('css/pdf.css'); // external css
 		$mpdf->WriteHTML($stylesheet,0);
 		//$mpdf->WriteHTML('<watermarkimage src='.$src.' alpha="0.33" size="50,30"/>');
@@ -98,10 +100,8 @@ class ExportToPdf extends Component
 		    
 		   
 		    'R' => [ 
-		      'content' => '<div><img ALIGN="rigth" HEIGHT="50" WIDTH="50" src="images/IEMS.jpg"></div>'.'<small><small><small>Instituto de Educación Media Superior del Distrito Federal <br>'
-.$area. '<br>'.$nombre.'<br>'.$domicilio.' <br>'.$domicilio2.' <br>'.$telefono.' <br>'.$email.'
-</small></small></small></small>',
-		      'font-size' => 10,
+		      'content' => '',
+		      'font-size' => 11,
 		      'font-style' => 'B',
 		      'font-family' => 'serif',
 		      'color'=>'#27292b'
