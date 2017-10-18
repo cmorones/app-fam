@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 //use dosamigos\datepicker\DatePicker;
- $a= ['0' => 'Todos', '1' => 'En Proceso', '2' => 'Terminado'];
+ $a= ['0' => 'Todos', '1' => 'En Proceso', '2' => 'Terminado','3' => 'Cancelado'];
    
 ?>
 
@@ -50,7 +50,7 @@ if(isset($_GET['fecha1'],$_GET['fecha2'],$_GET['estado']) && $_GET['fecha1'] != 
   $estado =$_GET['estado'];
 
  if ($estado==0) {
-  $resultado = app\modules\ventas\models\Ordenes::find()->where(['between', 'fecha_reg', "$fecha1", "$fecha2" ])->all();
+  $resultado = app\modules\ventas\models\Ordenes::find()->where(['between', 'fecha_reg', "$fecha1", "$fecha2" ])->andWhere(['<>', 'status', 3])->all();
 
  }else {
   $resultado = app\modules\ventas\models\Ordenes::find()->where(['between', 'fecha_reg', "$fecha1", "$fecha2" ])->andWhere(['status'=>$estado])->all();
@@ -61,7 +61,7 @@ if(isset($_GET['fecha1'],$_GET['fecha2'],$_GET['estado']) && $_GET['fecha1'] != 
  $fecha1 ='';
  $fecha2 ='';
  $tit1 ='';
- $resultado = app\modules\ventas\models\Ordenes::find()->all();
+ $resultado = app\modules\ventas\models\Ordenes::find()->where(['<>', 'status', 3])->all();
 
   $tit1 = "Informe de total de ventas<br>";
 }
@@ -134,6 +134,10 @@ if(isset($_GET['fecha1'],$_GET['fecha2'],$_GET['estado']) && $_GET['fecha1'] != 
 
                 if ($value->status==2) {
                   $estado ="Terminado";
+                }
+
+                 if ($value->status==3) {
+                  $estado ="Cancelado";
                 }
 
               	?>

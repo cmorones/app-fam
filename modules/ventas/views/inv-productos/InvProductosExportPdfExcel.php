@@ -1,44 +1,24 @@
 <?php
-
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\ventas\models\InvProductosSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Inv Productos';
-$this->params['breadcrumbs'][] = $this->title;
+use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 ?>
-
-<div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Inventario de Productos</h3>
-                            </div>
-
-                                <div class="row">
- <div class="col-lg-4 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
-
-  <div class="col-lg-4 right-padding">
- 
-      <?= Html::a(Yii::t('app', 'PDF'), ['/export-data/export-to-pdf', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-info', 'target'=>'_blank']) ?>
-
-  </div>
-  <div class="col-lg-4 right-padding">
- 
-      <?= Html::a(Yii::t('app', 'EXCEL'), ['/export-data/export-excel', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-primary', 'target'=>'_blank']) ?>
-
-  </div>
-  </div>
-  </div>
-                            <div class="panel-body">
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
- 
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+<h3>Inventario de Productos <? echo "con fecha " . date("d") . "/" . date("m") . "/" . date("Y") . " " . date("H:i:s",  time()); ?></h3>
+<div class="emp-master-index">
+    <?php
+//	$org = app\models\Organization::find()->asArray()->one();
+	//$model->sort = false;
+//	$dispColumn = false;
+	if($type == 'Excel') {
+		echo "<meta http-equiv=\"Content-type\" content=\"text/html;charset=utf-8\" />";
+	//	echo "<table><tr><th colspan='12'><h3>Excel</h3> </th> </tr> </table>";
+		$dispColumn = true;
+	}
+    ?>
+ <?= GridView::widget([
+        'dataProvider' => $model,
+         'layout' => '{items}',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -101,5 +81,5 @@ $inventario = \Yii::$app->db->createCommand($sql)->queryOne();
          //   ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+
 </div>

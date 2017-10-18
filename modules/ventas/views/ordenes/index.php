@@ -10,11 +10,30 @@ use yii\widgets\Pjax;
 $this->title = 'Ordenes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Listado de ventas</h3>
+
                             </div>
+                            <div class="row">
+ <div class="col-lg-4 col-sm-4 col-xs-12 no-padding" style="padding-top: 20px !important;">
+
+  <div class="col-lg-4 right-padding">
+ 
+      <?= Html::a(Yii::t('app', 'PDF'), ['/export-data/export-to-pdf', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-info', 'target'=>'_blank']) ?>
+
+  </div>
+  <div class="col-lg-4 right-padding">
+ 
+      <?= Html::a(Yii::t('app', 'EXCEL'), ['/export-data/export-excel', 'model'=>get_class($searchModel)], ['class' => 'btn btn-block btn-primary', 'target'=>'_blank']) ?>
+
+  </div>
+  </div>
+  </div>
                             <div class="panel-body">
+
+
              <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -88,6 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'btn btn-danger btn-sm',
                            // 'target' => '_blank',
                         ]));*/
+                        if ($data->status==1) {
 
                          return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Cancelar</center>', [
                             '/ventas/cancelaciones/create',
@@ -95,18 +115,50 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id' => $data->id,
                                
                         ], 
-                        ['class' => 'btn btn-danger btn-sm', 'title' => 'Cancelar venta', 'data' => ['confirm' => Yii::t('app', 'Estas seguro de cancelar esta venta?'),'method' => 'post'],]));
+                        ['class' => 'btn btn-warning btn-sm', 'title' => 'Cancelar venta', 'data' => ['confirm' => Yii::t('app', 'Estas seguro de cancelar esta venta?'),'method' => 'post'],]));
+
+                       }elseif ($data->status==2) {
+                         # code...
+                     
+                          return (Html::a('<center><span class="glyphicon glyphicon-download"></span> RECIBO DE PAGO</center>', [
+                            '/ventas/ordenes/pdf',
+                            'id' => $data->id,
+                        ], [
+                            'class' => 'btn btn-success btn-sm',
+                            'target' => '_blank',
+                        ]));
+                       }else{
+                         $var = "<button class='btn btn-danger waves-effect waves-light btn-sm m-b-5'>Cancelado</button>";
+                         return $var;
+                       }
 
             }else {
-           
+              if ($data->status==1) {
                   return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Cerrar</center>', [
-                            '/ventas/ordenes/cerrar',
+                            '/ventas/ordenes/docto',
                             'id' => $data->id,
                         ], [
                             'class' => 'btn btn-info btn-sm',
                            // 'target' => '_blank',
                         ]));
-                }
+              }elseif ($data->status==2) {
+              
+
+                  return (Html::a('<center><span class="glyphicon glyphicon-download"></span> RECIBO DE PAGO</center>', [
+                            '/ventas/ordenes/pdf',
+                            'id' => $data->id,
+                        ], [
+                            'class' => 'btn btn-success btn-sm',
+                            'target' => '_blank',
+                        ]));
+              }else{
+                         $var = "<button class='btn btn-danger waves-effect waves-light btn-sm m-b-5'>Cancelado</button>";
+                         return $var;
+                       }
+              }
+           
+                
+                
               
             }
               ],

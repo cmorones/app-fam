@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\ventas\models\Ordenes;
+use  yii\web\Session;
 
 /**
  * OrdenesSearch represents the model behind the search form about `app\modules\ventas\models\Ordenes`.
@@ -72,6 +73,24 @@ class OrdenesSearch extends Ordenes
 
         $query->andFilterWhere(['like', 'cliente', $this->cliente]);
 
+    $session = Yii::$app->session;
+    $session->set('exportData', $dataProvider);
+
+
         return $dataProvider;
+    }
+
+      public static function getExportData() 
+    {
+        $session = Yii::$app->session;
+        $data = [
+            'data'=>$session->get('exportData'),
+            'fileName'=>'Ordenes--List', 
+            'title'=>'Listado de Ordenes',
+            'exportFile'=>'@app/modules/ventas/views/ordenes/OrdenesExportPdfExcel',
+        ];
+        //print_r($data);exit;
+
+    return $data;
     }
 }

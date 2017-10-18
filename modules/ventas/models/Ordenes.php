@@ -25,6 +25,7 @@ class Ordenes extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+     public $file;
     public static function tableName()
     {
         return 'ordenes';
@@ -38,6 +39,7 @@ class Ordenes extends \yii\db\ActiveRecord
         return [
             [['cliente'], 'string'],
             [['cliente'], 'required'],
+            [['file'], 'file', 'on'=>'updoc'],
             [['tipo_descuento', 'status', 'created_by', 'updated_by'], 'integer'],
             [['total'], 'number'],
             [['fecha_reg','created_at', 'created_by'], 'required'],
@@ -62,6 +64,7 @@ class Ordenes extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'file' => 'Recibo',
         ];
     }
 
