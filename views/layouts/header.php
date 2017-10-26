@@ -33,8 +33,79 @@ Yii::$app->name = "APP";
                 <div class="container">
                     <div id="navigation">
                         <!-- Navigation Menu-->
+                                                               <?php  
+             if(Yii::$app->user->can('menuPlantac')) {
+            ?>
+                        <ul class="navigation-menu">
+                            <li>
+                               
+                                <?= Html::a('<i class="md md-home"></i>Tablero',['/site'])  ?>
+                            </li>
 
-                                             <?php  
+                        
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md ion-plus-circled"></i> <span>Plantac</span> </a>
+                                  <ul class="submenu">
+                                     <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Registrar',['/academica/plantac']) ?>
+                        </li>
+
+                          
+                                    
+                                </ul>
+                            </li>
+
+                          
+
+                             
+
+
+
+
+
+                                <li class="has-submenu">
+                                <a href="#"><i class="md md-palette "></i><span> Administración </span> </a>
+                                <ul class="submenu">
+
+                                  <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Grados',['/academica/cat-grado']) ?>
+                        </li>
+
+                            <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Categorias',['/academica/categorias-pl']) ?>
+                        </li>
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Situacion Contractual',['/academica/situacion-pl']) ?>
+                        </li>
+
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Nivel Academico',['/academica/nivel-pl']) ?>
+                        </li>
+
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Asignaturas',['/academica/asignatura-pl']) ?>
+                        </li>
+
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Justificaciones',['/academica/justifica-pl']) ?>
+                        </li>
+
+
+                        <li>
+                            <?= Html::a('<i class="fa fa-male"></i> Movimientos',['/academica/movimiento-pl']) ?>
+                        </li>
+
+
+                          
+
+                                                       <?php 
+                                             } 
+
              if(Yii::$app->user->can('menuAdmin')) {
             ?>
                         <ul class="navigation-menu">
