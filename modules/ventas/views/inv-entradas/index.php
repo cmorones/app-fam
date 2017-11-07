@@ -46,9 +46,9 @@ use yii\widgets\Pjax;
             // 'updated_at',
             // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn',
+       /*     ['class' => 'yii\grid\ActionColumn',
 'template' => '{update}',
-            ],
+            ],*/
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-lg-12">
                         <div class="panel panel-border panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Responsive Table</h3>
+                                <h3 class="panel-title">Movimientos</h3>
                             </div>
                             <div class="panel-body table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">

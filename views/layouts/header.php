@@ -138,12 +138,18 @@ Yii::$app->name = "APP";
                             <li class="has-submenu">
                                 <a href="#"><i class="md  md-exit-to-app"></i> <span> Almacen </span> </a>
                                   <ul class="submenu">
+
+                                   <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Inventario',['/ventas/inv-productos']) ?>
+                        </li>
                                       <li>
                             <?= Html::a('<i class="fa  md-add"></i> Agregar Inventario',['/ventas/inv-entradas']) ?>
                         </li>
+
                             <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Inventario',['/ventas/inv-productos']) ?>
+                            <?= Html::a('<i class="fa  md-add"></i> Bajas Inventario',['/ventas/inv-bajaspv']) ?>
                         </li>
+                           
                                 </ul>
                             </li>
 

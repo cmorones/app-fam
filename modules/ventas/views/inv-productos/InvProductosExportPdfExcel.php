@@ -28,7 +28,50 @@ use yii\helpers\ArrayHelper;
               'value' => 'datos.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\ventas\models\Productos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-            'id_ubicacion',
+           // 'id_ubicacion',
+            [
+              'attribute'=>'Inicial',
+              'format' => 'raw',
+              'value' => function ($data)
+    {
+ 
+ $sql = "SELECT 
+  sum(cantidad) as cant 
+FROM 
+  inv_entradas
+WHERE
+  tipo=1 and id_producto=".$data->id_producto."";
+
+
+
+$inventario = \Yii::$app->db->createCommand($sql)->queryOne();
+
+    return intval($inventario['cant']);
+    },
+              //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
+
+            [
+              'attribute'=>'Bajas',
+              'format' => 'raw',
+              'value' => function ($data)
+    {
+ 
+ $sql = "SELECT 
+  sum(cantidad) as cant 
+FROM 
+  inv_bajaspv
+WHERE
+  id_producto=".$data->id_producto."";
+
+
+
+$inventario = \Yii::$app->db->createCommand($sql)->queryOne();
+
+    return intval($inventario['cant']);
+    },
+              //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
+            ],
             [
               'attribute'=>'entradas',
               'format' => 'raw',
@@ -40,18 +83,18 @@ use yii\helpers\ArrayHelper;
 FROM 
   inv_entradas
 WHERE
-  id_producto=".$data->id_producto."";
+  tipo=2 and id_producto=".$data->id_producto."";
 
 
 
 $inventario = \Yii::$app->db->createCommand($sql)->queryOne();
 
-    return $inventario['cant'];
+    return intval($inventario['cant']);
     },
               //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
             ],
                          [
-              'attribute'=>'salidas',
+              'attribute'=>'ventas',
               'format' => 'raw',
               'value' => function ($data)
     {
@@ -67,7 +110,7 @@ WHERE
 
 $inventario = \Yii::$app->db->createCommand($sql)->queryOne();
 
-    return $inventario['cant'];
+    return intval($inventario['cant']);
     },
               //'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatAreas::find()->where(['id_plantel'=>Yii::$app->user->identity->id_plantel])->orderBy('nombre')->asArray()->all(),'id_area','nombre')
             ],

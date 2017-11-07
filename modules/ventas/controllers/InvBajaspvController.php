@@ -3,18 +3,18 @@
 namespace app\modules\ventas\controllers;
 
 use Yii;
-use app\modules\ventas\models\InvEntradas;
+use app\modules\ventas\models\InvBajaspv;
+use app\modules\ventas\models\InvBajaspvSearch;
 use app\modules\ventas\models\InvProductos;
-use app\modules\ventas\models\InvEntradasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
 
 /**
- * InvEntradasController implements the CRUD actions for InvEntradas model.
+ * InvBajaspvController implements the CRUD actions for InvBajaspv model.
  */
-class InvEntradasController extends Controller
+class InvBajaspvController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +32,12 @@ class InvEntradasController extends Controller
     }
 
     /**
-     * Lists all InvEntradas models.
+     * Lists all InvBajaspv models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new InvEntradasSearch();
+        $searchModel = new InvBajaspvSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +47,7 @@ class InvEntradasController extends Controller
     }
 
     /**
-     * Displays a single InvEntradas model.
+     * Displays a single InvBajaspv model.
      * @param integer $id
      * @return mixed
      */
@@ -59,40 +59,34 @@ class InvEntradasController extends Controller
     }
 
     /**
-     * Creates a new InvEntradas model.
+     * Creates a new InvBajaspv model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new InvEntradas();
+        $model = new InvBajaspv();
 
-        if ($model->load(Yii::$app->request->post())) {
+         if ($model->load(Yii::$app->request->post())) {
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
             $model->status=1;
+            $model->tipo=1;
 
+            
 
-             if (!$model->save()) {
-                echo "<pre>";
-                print_r($model->getErrors());
-                exit;
-            }
-            //$model->id_producto;
              $idproducto = InvProductos::find()->where(['id_producto'=>$model->id_producto])->count(); 
 
             $intprod = intval($idproducto);
 
-            if ($intprod == 0) {
-                $entrada = new InvProductos();
-                $entrada->id_producto = $model->id_producto;
-                $entrada->id_ubicacion = 1;
-                $entrada->existencia = $model->cantidad;
-                $entrada->created_by=Yii::$app->user->identity->user_id;
-                $entrada->created_at = new Expression('NOW()');
-                $entrada->save();
+            if ($intprod > 0) {
 
-            }elseif ($intprod > 0) {
+                 if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+                }
+
                 
                 $existencia = \Yii::$app->db ->createCommand("SELECT 
           sum(inv_productos.existencia) as suma 
@@ -101,18 +95,14 @@ class InvEntradasController extends Controller
         WHERE 
           id_producto=$model->id_producto")->queryOne();
 
-                $addsum = intval($existencia['suma']);
-                
-                $table = InvProductos::find()->where(['id_producto'=>$model->id_producto])->one();
-                 $table->existencia = $addsum + $model->cantidad;
+
+                               
+                 $table = InvProductos::find()->where(['id_producto'=>$model->id_producto])->one();
+                 $table->existencia = $existencia['suma'] - $model->cantidad;
                  $table->save();
                          
                 
             }
-
-
-           
-
 
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
@@ -123,7 +113,7 @@ class InvEntradasController extends Controller
     }
 
     /**
-     * Updates an existing InvEntradas model.
+     * Updates an existing InvBajaspv model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -142,7 +132,7 @@ class InvEntradasController extends Controller
     }
 
     /**
-     * Deletes an existing InvEntradas model.
+     * Deletes an existing InvBajaspv model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -155,15 +145,15 @@ class InvEntradasController extends Controller
     }
 
     /**
-     * Finds the InvEntradas model based on its primary key value.
+     * Finds the InvBajaspv model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InvEntradas the loaded model
+     * @return InvBajaspv the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InvEntradas::findOne($id)) !== null) {
+        if (($model = InvBajaspv::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
