@@ -22,9 +22,11 @@ use app\modules\soporte\models\InvNobreak;
   
 	<div class="callout callout-info show msg-of-day" >
 	    <h4><i class="fa fa-bullhorn"></i> Mensaje del dia</h4>
-	    <marquee onmouseout="this.setAttribute('scrollamount', 6, 0);" onmouseover="this.setAttribute('scrollamount', 0, 0);" scrollamount="6" behavior="scroll" direction="left">Bienvenido al Sistema de Publicacion FaM </marquee>
+	    <marquee onmouseout="this.setAttribute('scrollamount', 6, 0);" onmouseover="this.setAttribute('scrollamount', 0, 0);" scrollamount="6" behavior="scroll" direction="left">Bienvenido al Sistema de Gestión FaM </marquee>
 	</div>
-
+    <?php
+ if(!Yii::$app->user->can('menuPlantac')) {
+    ?>
   <section class="content">
        <div class="row">
                     <div class="col-sm-6 col-lg-3">
@@ -81,4 +83,8 @@ use app\modules\soporte\models\InvNobreak;
                 </div> 
 
     </section><!-- right col -->
+    <?php
+}
+
+?>
 </div><!-- /.row (main row) -->
