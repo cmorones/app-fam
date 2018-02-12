@@ -172,6 +172,9 @@ $config = [
         'telefonia' => [
             'class' => 'app\modules\telefonia\TelefoniaModule',
         ],
+        'almacen' => [
+            'class' => 'app\modules\almacen\AlmacenModule',
+        ],
         'rights' => [
         'class' => 'mdm\admin\Module',
         'controllerMap' => [

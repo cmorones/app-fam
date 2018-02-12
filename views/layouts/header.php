@@ -205,13 +205,47 @@ Yii::$app->name = "APP";
                         </li>
     <?php
                }
-            ?>
 
-                              
-                                    
+if(Yii::$app->user->can('MenuAlmacen')) {
+            ?>
+                        <ul class="navigation-menu">
+                            <li>
+                               
+                                <?= Html::a('<i class="md md-home"></i>Tablero',['/site'])  ?>
+                            </li>
+
+                        
+
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md  md-exit-to-app"></i> <span> Almacen </span> </a>
+                                  <ul class="submenu">
+
+                                   <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Almacen',['/ventas/inv-productos']) ?> 
+                        </li>
+                                      <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Agregar Articulos',['/almacen/al-articulos']) ?>
+                        </li>
+
+                            <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Bajas Inventario',['/ventas/inv-bajaspv']) ?>
+                        </li>
+                           
                                 </ul>
                             </li>
 
+                               <li class="has-submenu">
+                                <a href="#"><i class="md  md-event-note"></i> <span> Informes </span> </a>
+                                  <ul class="submenu">
+                                    <li><?= Html::a('Ventas',['/ventas/informes'])?></li>
+                                 
+                                    
+                                </ul>
+                            </li>
+ <?php 
+        } 
+ ?>
 
         
 

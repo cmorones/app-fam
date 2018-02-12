@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use app\modules\ventas\models\InvProductos;
+use kartik\widgets\Select2;
 
 ?>
 
@@ -19,7 +21,65 @@ use yii\helpers\Html;
 
 
                 <div class="row port">
+<?= Html::beginForm(['index'], 'get'); ?>
+<?= Html::label('Busqueda', 'terms'); ?>
+<?= Html::textInput('terms'); ?>
+<?= Select2::widget([
+    'name' => 'terms',
+    'data' => $data,
+    'options' => [
+        'placeholder' => 'Selecciona Titulo ...',
+        'multiple' => true
+    ],
+]); 
+?>
+<?= Html::submitButton('Busqueda!'); ?>
+<?= Html::endForm(); ?>
+<br>
+<br>
 
+<?php
+
+if($_GET['terms']!=''){
+
+  $query = InvProductos::find()->joinWith('datos')->where(['>', 'existencia', 0])->orderBy(['productos.nombre' => SORT_ASC])->all();
+ ?>
+
+   <div class="tab-content">
+    <div class="tab-pane active" id="home">
+
+    <?php
+    foreach ($query as $value) {
+?>
+  <div class="col-md-3 webdesign graphicdesign">
+                    <div class="card gal-detail thumb">
+                        <div class="card-block">
+                            <h6 class="card-title"><?=$value->datos->nombre?></h6>
+                            <h6 class="card-subtitle text-muted">$<?=number_format($value->datos->precio,2)?></h6>
+                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value->existencia?></button></h6>
+                            <img src="" alt="">
+                        <div class="card-block">
+                            <div class="card-text"><?//=$value->autor->nombre?><br> 
+                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
+                          
+                        </div>
+                    </div>
+                </div>
+                </div> 
+
+                <?php 
+                    }
+                ?>
+</div>
+
+</div>
+
+
+<?php 
+
+}else{
+
+?>
 
 <div class="row">
                     <div class="col-lg-12">
@@ -59,7 +119,7 @@ use yii\helpers\Html;
         <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                         <div class="card-block">
-                            <h3 class="card-title"><?=$value->datos->nombre?></h3>
+                            <h6 class="card-title"><?=$value->datos->nombre?></h6>
                             <h6 class="card-subtitle text-muted">$<?=number_format($value->datos->precio,2)?></h6>
                             <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value->existencia?></button></h6>
                             <img src="" alt="">
@@ -83,7 +143,7 @@ use yii\helpers\Html;
   <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                         <div class="card-block">
-                            <h3 class="card-title"><?=$value2->datos->nombre?></h3>
+                            <h6 class="card-title"><?=$value2->datos->nombre?></h6>
                             <h6 class="card-subtitle text-muted">$<?=number_format($value2->datos->precio,2)?></h6>
                             <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value2->existencia?></button></h6>
                             <img src="" alt="">
@@ -107,7 +167,7 @@ use yii\helpers\Html;
                                 <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                          <div class="card-block">
-                            <h3 class="card-title"><?=$value3->datos->nombre?></h3>
+                            <h6 class="card-title"><?=$value3->datos->nombre?></h6>
                             <h6 class="card-subtitle text-muted">$<?=number_format($value3->datos->precio,2)?></h6>
                             <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value3->existencia?></button></h6>
                             <img src="" alt="">
@@ -131,7 +191,7 @@ use yii\helpers\Html;
                              <div class="col-md-3 webdesign graphicdesign">
                     <div class="card gal-detail thumb">
                        <div class="card-block">
-                            <h3 class="card-title"><?=$value4->datos->nombre?></h3>
+                            <h6 class="card-title"><?=$value4->datos->nombre?></h6>
                             <h6 class="card-subtitle text-muted">$<?=number_format($value4->datos->precio,2)?></h6>
                             <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value4->existencia?></button></h6>
                             <img src="" alt="">
@@ -157,6 +217,12 @@ use yii\helpers\Html;
 
                      
                 </div> <!-- End row -->
+
+                <?
+
+            }
+
+            ?>
 
 
         <!-- jQuery  -->

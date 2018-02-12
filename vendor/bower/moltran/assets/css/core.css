@@ -400,7 +400,6 @@ a:focus {
   top: 0;
 }
 .nav.nav-tabs + .tab-content {
-  background: #ffffff;
   margin-bottom: 30px;
   padding: 30px;
 }
