@@ -49,4 +49,12 @@ class DefaultController extends Controller
             'data4' => $data4,
         	]);
     }
+
+    public function actionMostrar($articulo){
+    
+    return $this->render('_mostrar', [
+            'articulo' => $articulo,
+          
+            ]);
+    }
 }

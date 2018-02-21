@@ -10,9 +10,10 @@ $this->title = 'Create Al Articulos';
 $this->params['breadcrumbs'][] = ['label' => 'Al Articulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="al-articulos-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Agregar Articulos</h3>
+                            </div>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -66,18 +66,17 @@ class AlArticulosController extends Controller
     {
         $model = new AlArticulos();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post()) ) {
 
-            $model->created_by = Yii::$app->user->identity->user_id;
+            $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
-
-            if (!$model->save() ) {
+            $model->estado=1;
+             if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
+                
             }
-                
-                
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [

@@ -10,16 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="al-articulos-form">
 
- 
-  <?php $form = ActiveForm::begin([
-    'id' => 'al-articulos-form',
-    'enableClientValidation' => true,
-   // 'enableAjaxValidation' => true,
-    'options' => [
-      //  'validateOnSubmit' => true,
-        'class' => 'form'
-    ],
-]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'clave')->textInput() ?>
 
@@ -29,9 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'observaciones')->textInput() ?>
 
-
-
-
+  
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

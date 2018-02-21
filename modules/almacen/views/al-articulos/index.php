@@ -10,9 +10,11 @@ use yii\widgets\Pjax;
 $this->title = 'Al Articulos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="al-articulos-index">
+<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Agregar Articulos</h3>
+                            </div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -24,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-           // 'id',
+            'id',
             'clave',
             'id_medida',
             'descripcion',
@@ -34,9 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'created_by',
             // 'updated_at',
             // 'updated_by',
-            // 'errAlmacen',
 
-            ['class' => 'yii\grid\ActionColumn'],
+              [
+             'class' => 'app\components\CustomActionColumn',
+      'template' => '{update}',
+      'buttons' => [
+       
+      ],
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

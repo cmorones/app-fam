@@ -3,6 +3,7 @@
 namespace app\modules\almacen\models;
 
 use Yii;
+use yii\db\Expression;
 
 //use yii\db\BaseActiveRecord;
 
@@ -58,7 +59,7 @@ class AlArticulos extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'clave' => 'Clave',
-            'id_medida' => 'Id Medida',
+            'id_medida' => 'Medida',
             'descripcion' => 'Descripcion',
             'observaciones' => 'Observaciones',
             'estado' => 'Estado',
@@ -71,7 +72,17 @@ class AlArticulos extends \yii\db\ActiveRecord
     }
 
    
+public function beforeSave($insert){
 
+     parent::beforeSave($insert);
+     if($insert){
+       $this->updated_at = new Expression('NOW()');
+       $this->updated_by = Yii::$app->user->identity->user_id;
+       
+   }
+     return true;
+
+}
 
     /**
      * @return \yii\db\ActiveQuery

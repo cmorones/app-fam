@@ -1,229 +1,175 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use app\modules\ventas\models\InvProductos;
-use kartik\widgets\Select2;
+use app\modules\ventas\models\Productos;
+use kartik\select2\Select2;
 
+$items = ArrayHelper::map(InvProductos::find()->joinWith('datos')->where(['>', 'existencia', 0])->all(),'datos.id','datos.nombre');
 ?>
-
 
 <div class="row">
-                    <div class="col-sm-10">
-                       
-                        <h4 class="page-title">Punto de Venta</h4>
-                        </div>
-                        <div class="col-sm-2">
-                           <?= Html::a('<i class="fa fa-shopping-cart"></i> Carrito', ['shopping-cart/cart'], ['class' => 'btn btn-block btn-success']) ?>
-                    </div>
-                </div>
-
-
-
-
-                <div class="row port">
-<?= Html::beginForm(['index'], 'get'); ?>
-<?= Html::label('Busqueda', 'terms'); ?>
-<?= Html::textInput('terms'); ?>
-<?= Select2::widget([
-    'name' => 'terms',
-    'data' => $data,
-    'options' => [
-        'placeholder' => 'Selecciona Titulo ...',
-        'multiple' => true
-    ],
-]); 
-?>
-<?= Html::submitButton('Busqueda!'); ?>
-<?= Html::endForm(); ?>
-<br>
-<br>
-
+     
 <?php
 
-if($_GET['terms']!=''){
-
-  $query = InvProductos::find()->joinWith('datos')->where(['>', 'existencia', 0])->orderBy(['productos.nombre' => SORT_ASC])->all();
- ?>
-
-   <div class="tab-content">
-    <div class="tab-pane active" id="home">
-
-    <?php
-    foreach ($query as $value) {
-?>
-  <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h6 class="card-title"><?=$value->datos->nombre?></h6>
-                            <h6 class="card-subtitle text-muted">$<?=number_format($value->datos->precio,2)?></h6>
-                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value->existencia?></button></h6>
-                            <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text"><?//=$value->autor->nombre?><br> 
-                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
-                          
-                        </div>
-                    </div>
-                </div>
-                </div> 
-
-                <?php 
-                    }
-                ?>
-</div>
-
-</div>
+/*echo $form->field($model, 'state_1')->widget(Select2::classname(), [
+    'data' => $data,
+    'options' => ['placeholder' => 'Select a state ...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+    'pluginEvents' => [
+       "select2:select" => "function() { // function to make ajax call here }",
+    ]
+]);*/
 
 
-<?php 
 
-}else{
 
 ?>
+
+
+    <div class="col-md-12">
+        <b>BUSCAR: </b>
+        <?php
+            echo Select2::widget([
+    'name' => 'articulo',
+    'value' => '',
+    'data' => $items,
+    'options' => ['id'=>'articulo','placeholder' => 'Selecciona Articulo ...'],
+     'pluginEvents' => [
+       "select2:select" => "function() { // function to make ajax call here
+            //alert(this.value);
+            $.get('".Url::toRoute("default/mostrar")."', { articulo : this.value})
+                .done(function(data)
+                {
+                    $('#mostrar').html(data);
+                });
+        }",
+    ],
+]);
+        ?>
+   </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div class="col-md-6">
+        <?php  echo Html::button('<i class="glyphicon glyphicon-ok"></i> Mostrar Todos',[
+            'class'=>'btn btn-primary','onclick'=>'
+            $.get("'.Url::toRoute('default/mostrar').'", { articulo : 0})
+                .done(function(data)
+                {
+                    $("#mostrar").html(data);
+                });
+            ']);
+
+            ?>
+    </div>
+</div>
 
 <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="nav nav-tabs navtab-bg">
-                            <li class="active">
-                                <a href="#home" data-toggle="tab" aria-expanded="true">
-                                    <span class="visible-xs"><i class="fa fa-home"></i></span>
-                                    <span class="hidden-xs">Todos</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#profile" data-toggle="tab" aria-expanded="false">
-                                    <span class="visible-xs"><i class="fa fa-user"></i></span>
-                                    <span class="hidden-xs">Libros</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#messages" data-toggle="tab" aria-expanded="false">
-                                    <span class="visible-xs"><i class="fa fa-envelope-o"></i></span>
-                                    <span class="hidden-xs">Partituras</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#settings" data-toggle="tab" aria-expanded="false">
-                                    <span class="visible-xs"><i class="fa fa-cog"></i></span>
-                                    <span class="hidden-xs">CDS</span>
-                                </a>
-                            </li>
-                        </ul>
-              <div class="tab-content">
-                            <div class="tab-pane active" id="home">
+    <div class="col-sm-10">
+    </div>
+                   
+   <div class="col-sm-2">
+                           <?= Html::a('<i class="fa fa-shopping-cart"></i> Carrito', ['shopping-cart/cart'], ['class' => 'btn btn-block btn-success']) ?>
+                 
+     </div>
+</div>
+
+
+
+
+<div class="row">
+
+       
+
+    
+
+
+     <div class="tab-content" id="mostrar">
+ 
+
+   
+
+           <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Articulos Disponibles</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Nombre</th>
+                                                        <th>Autor</th>
+                                                        <th>Precio</th>
+                                                        <th>Existencia</th>
+                                                        <th>Accion</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                             <tbody>
         
         <?php
+        $i =1;
         foreach ($data as $value) {
 
             ?>
-        <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h6 class="card-title"><?=$value->datos->nombre?></h6>
-                            <h6 class="card-subtitle text-muted">$<?=number_format($value->datos->precio,2)?></h6>
-                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value->existencia?></button></h6>
-                            <img src="" alt="">
-                        <div class="card-block">
-                            <div class="card-text"><?//=$value->autor->nombre?><br> 
-                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
-                          
-                        </div>
-                    </div>
-                </div>
-                </div> 
-                <?php } ?>
 
-                            </div>
-                            <div class="tab-pane" id="profile">
-                             
-                            <?php
-        foreach ($data2 as $value2) {
-
-            ?>
-  <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                        <div class="card-block">
-                            <h6 class="card-title"><?=$value2->datos->nombre?></h6>
-                            <h6 class="card-subtitle text-muted">$<?=number_format($value2->datos->precio,2)?></h6>
-                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value2->existencia?></button></h6>
-                            <img src="" alt="">
-                         <div class="card-block">
-                            <div class="card-text"><?//=$value->autor->nombre?><br> 
-                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value2->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
-                          
-                        </div>
-                    </div>
-                </div>
-              </div> 
-                    <?php } ?>
-              
-                            </div>
-                            <div class="tab-pane" id="messages">
-
-                                         <?php
-        foreach ($data3 as $value3) {
-
-            ?>
-                                <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                         <div class="card-block">
-                            <h6 class="card-title"><?=$value3->datos->nombre?></h6>
-                            <h6 class="card-subtitle text-muted">$<?=number_format($value3->datos->precio,2)?></h6>
-                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value3->existencia?></button></h6>
-                            <img src="" alt="">
-                         <div class="card-block">
-                            <div class="card-text"><?//=$value->autor->nombre?><br> 
-                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value3->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
-                          
-                        </div>
-                    </div>
-                </div>
-                </div> 
-                 <?php } ?>
-                            </div>
-                            <div class="tab-pane" id="settings">
+     
+                                               
+                                                    <tr>
+                                                        <td><?=$i?></td>
+                                                        <td><?=$value->datos->nombre?></td>
+                                                        <td><?//=$value->autor->nombre?></td>
+                                                        <td>$<?=number_format($value->datos->precio,2)?></td>
+                                                        <td><button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value->existencia?></button></td>
+                                                        <td>       <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a></td>
+                                                       
+                                                    </tr>
+                                                  
+                                               
 
 
-                                         <?php
-        foreach ($data4 as $value4) {
-
-            ?>
-                             <div class="col-md-3 webdesign graphicdesign">
-                    <div class="card gal-detail thumb">
-                       <div class="card-block">
-                            <h6 class="card-title"><?=$value4->datos->nombre?></h6>
-                            <h6 class="card-subtitle text-muted">$<?=number_format($value4->datos->precio,2)?></h6>
-                            <h6 class="card-subtitle text-muted">Existencia: <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"><?=$value4->existencia?></button></h6>
-                            <img src="" alt="">
-                         <div class="card-block">
-                            <div class="card-text"><?//=$value->autor->nombre?><br> 
-                            <a href="javascript:void(0)" class="btn btn-primary" id="sa-basic" onclick="addCart(<?=$value4->id_producto?>)"><i class="fa fa-shopping-cart"></i> Agregar</a> </div>
-                          
-                        </div>
-                    </div>
-                </div>
-                </div> 
-
-                      <?php } ?>
+      
+                <?php 
+$i++;
+            } ?>
+ </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-             
-                </div>
+                            </div>
 
 
 
+
+
+                          
+
+</div>
+                  
 
                      
-                </div> <!-- End row -->
-
-                <?
-
-            }
-
-            ?>
-
+           
 
         <!-- jQuery  -->
         <script src="assets/js/jquery.min.js"></script>
