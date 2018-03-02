@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\ventas\models\TipoEntrada;
 use app\modules\ventas\models\Productos;
-use kartik\datetime\DateTimePicker;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\ventas\models\InvBajaspv */
@@ -22,16 +22,15 @@ use kartik\datetime\DateTimePicker;
 
    
 
-      <?= $form->field($model, 'fecha_reg')->widget(DateTimePicker::classname(), [
-            'type' => DateTimePicker::TYPE_INPUT,
-            'options' => ['placeholder' => '', 'readOnly' => true],
-            'pluginOptions' => [
-                'autoclose' => true,
-                'format' => 'yyyy-mm-dd',
-            ], 
-        ]);
-    ?>
+        <?= $form-> field($model, 'fecha_reg')->widget(DatePicker::classname(), [
 
+                    'options' => ['placeholder' => 'Fecha de registro'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd', 
+                    ]
+                ]);
+    ?>
   
     <?= $form->field($model, 'motivo')->textInput() ?>
 

@@ -83,7 +83,7 @@ $items = ArrayHelper::map(InvProductos::find()->joinWith('datos')->where(['>', '
     </div>
                    
    <div class="col-sm-2">
-                           <?= Html::a('<i class="fa fa-shopping-cart"></i> Carrito', ['shopping-cart/cart'], ['class' => 'btn btn-block btn-success']) ?>
+                           <?= Html::a('<i class="fa fa-shopping-cart"></i> Carrito', ['shopping-cart/cart', 'tipo'=>1, 'descuento'=>0], ['class' => 'btn btn-block btn-success']) ?>
                  
      </div>
 </div>

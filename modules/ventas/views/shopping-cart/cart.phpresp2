@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 $subtotal = 0;
+
+
 ?>
 
 <div class="panel panel-color panel-primary">
@@ -26,16 +28,16 @@ $subtotal = 0;
 					<tbody>
 					<?php 
 					if ($cart) {
-					$cuenta =1;
+					
 					 foreach ($cart as $key => $value) {
 					 ?>
 						<tr>
 							<td class="cart_product">
-								<?=$cuenta?>
+								<a href=""><img src="images/cart/one.png" alt=""></a>
 							</td>
 							<td class="cart_description">
 								<h4><a href=""><?=$value['nombre']?></a></h4>
-								<p>Web ID: <?=$key?></p>
+								<p>Web ID: 1089772</p>
 							</td>
 							<td class="cart_price">
 								<p><?=number_format($value['precio'],2)?></p>
@@ -51,13 +53,11 @@ $subtotal = 0;
 								<p class="cart_total_price"><?=number_format($value['precio']*$value['cantidad'],2); $subtotal +=$value['precio']*$value['cantidad'] ?></p>
 							</td>
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href="javascript:void(0)" onclick="deleteItem(<?=$key ?>)"> <i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" href="javascript:void(0)" onclick="deleteItem(<?=$key ?>, <?=$value['cantidad']?>, <?=$descuento?>, <?=$tipo?> )"> <i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 
-						<?php
-$cuenta ++;
-						 }
+						<?php }
 							# code...
 					} ?>
 

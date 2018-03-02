@@ -224,9 +224,11 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                                    <li>
                             <?= Html::a('<i class="fa  md-add"></i> Mostrar Almacen',['/ventas/inv-productos']) ?> 
                         </li>
-                                      <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Agregar Articulos',['/almacen/al-articulos']) ?>
+
+                          <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Entradas de Almacen',['/almacen/al-entradas']) ?> 
                         </li>
+                                   
 
                             <li>
                             <?= Html::a('<i class="fa  md-add"></i> Bajas Inventario',['/ventas/inv-bajaspv']) ?>
@@ -239,6 +241,17 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                                 <a href="#"><i class="md  md-event-note"></i> <span> Informes </span> </a>
                                   <ul class="submenu">
                                     <li><?= Html::a('Ventas',['/ventas/informes'])?></li>
+                                 
+                                    
+                                </ul>
+                            </li>
+
+                             <li class="has-submenu">
+                                <a href="#"><i class="md  md-event-note"></i> <span> Administración </span> </a>
+                                  <ul class="submenu">
+                                       <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Agregar Articulos',['/almacen/al-articulos']) ?>
+                        </li>
                                  
                                     
                                 </ul>

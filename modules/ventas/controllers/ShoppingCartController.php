@@ -82,7 +82,7 @@ class ShoppingCartController extends \yii\web\Controller
 
              Yii::$app->session['cart'] = $cart;
             
-            return $this->renderAjax('cart',['cart'=>$cart]);
+            return $this->renderAjax('cart',['cart'=>$cart, 'descuento' =>0, 'tipo'=>1]);
 
      
     }
@@ -92,19 +92,19 @@ class ShoppingCartController extends \yii\web\Controller
           
             
                  $cart = Yii::$app->session['cart'];
-                  $model = new Ordenes();
+                 $model = new Ordenes();
 
 
         
             
-            return $this->renderAjax('cart',['cart'=>$cart, 'tipo'=>$tipo]);
+            return $this->renderAjax('cart',['cart'=>$cart, 'tipo'=>$tipo, 'descuento' =>$descuento = 0]);
 
      
     }
 
-    public function actionCart(){
+    public function actionCart($tipo,$descuento){
     	$cart =  Yii::$app->session['cart'];
-    	return $this->render('cart', ['cart'=>$cart]);
+    	return $this->render('cart', ['cart'=>$cart, 'tipo'=>$tipo, 'descuento' =>$descuento]);
     }
 
 }

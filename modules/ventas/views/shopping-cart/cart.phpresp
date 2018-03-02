@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 $subtotal = 0;
+//$descuento = 0;
+//$tipo =1;
 ?>
 
 <div class="panel panel-color panel-primary">
@@ -35,7 +37,7 @@ $subtotal = 0;
 							</td>
 							<td class="cart_description">
 								<h4><a href=""><?=$value['nombre']?></a></h4>
-								<p>Web ID: <?=$key?></p>
+								<p>Web ID: 1089772</p>
 							</td>
 							<td class="cart_price">
 								<p><?=number_format($value['precio'],2)?></p>
@@ -55,9 +57,10 @@ $subtotal = 0;
 							</td>
 						</tr>
 
-						<?php
-$cuenta ++;
-						 }
+						<?php 
+
+				$cuenta ++;
+					}
 							# code...
 					} ?>
 

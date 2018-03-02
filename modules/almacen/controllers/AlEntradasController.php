@@ -3,8 +3,8 @@
 namespace app\modules\almacen\controllers;
 
 use Yii;
-use app\modules\almacen\models\AlArticulos;
-use app\modules\almacen\models\AlArticulosSearch;
+use app\modules\almacen\models\AlEntradas;
+use app\modules\almacen\models\AlEntradasSearch;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -12,9 +12,9 @@ use yii\filters\VerbFilter;
 use yii\db\Expression;
 
 /**
- * AlArticulosController implements the CRUD actions for AlArticulos model.
+ * AlEntradasController implements the CRUD actions for AlEntradas model.
  */
-class AlArticulosController extends Controller
+class AlEntradasController extends Controller
 {
     /**
      * @inheritdoc
@@ -43,12 +43,12 @@ class AlArticulosController extends Controller
     }
 
     /**
-     * Lists all AlArticulos models.
+     * Lists all AlEntradas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AlArticulosSearch();
+        $searchModel = new AlEntradasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -58,7 +58,7 @@ class AlArticulosController extends Controller
     }
 
     /**
-     * Displays a single AlArticulos model.
+     * Displays a single AlEntradas model.
      * @param integer $id
      * @return mixed
      */
@@ -70,15 +70,15 @@ class AlArticulosController extends Controller
     }
 
     /**
-     * Creates a new AlArticulos model.
+     * Creates a new AlEntradas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new AlArticulos();
+        $model = new AlEntradas();
 
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
 
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
@@ -98,7 +98,7 @@ class AlArticulosController extends Controller
     }
 
     /**
-     * Updates an existing AlArticulos model.
+     * Updates an existing AlEntradas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,7 +117,7 @@ class AlArticulosController extends Controller
     }
 
     /**
-     * Deletes an existing AlArticulos model.
+     * Deletes an existing AlEntradas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -130,15 +130,15 @@ class AlArticulosController extends Controller
     }
 
     /**
-     * Finds the AlArticulos model based on its primary key value.
+     * Finds the AlEntradas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AlArticulos the loaded model
+     * @return AlEntradas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AlArticulos::findOne($id)) !== null) {
+        if (($model = AlEntradas::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

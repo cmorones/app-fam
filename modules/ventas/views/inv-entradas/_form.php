@@ -7,7 +7,11 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use app\modules\ventas\models\TipoEntrada;
 use app\modules\ventas\models\Productos;
-use kartik\datetime\DateTimePicker;
+use kartik\date\DatePicker;
+
+use kartik\select2\Select2;
+
+$items = ArrayHelper::map(Productos::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre');
 
 
 /* @var $this yii\web\View */
@@ -20,7 +24,16 @@ use kartik\datetime\DateTimePicker;
     <?php $form = ActiveForm::begin(); ?>
 
     <?//= $form->field($model, 'id_producto')->textInput() ?>Productos
-    <?= $form->field($model, 'id_producto', ['inputOptions'=>[ 'class'=>'form-control'] ] )->dropDownList(ArrayHelper::map(Productos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Tipo de Producto'])->label(false); ?>
+     <?
+        echo $form->field($model, 'id_producto')->widget(Select2::classname(), [
+    'data' => $items,
+    'language' => 'de',
+    'options' => ['placeholder' => 'Selecciona producto ...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+    ?>
 
 
     <?= $form->field($model, 'cantidad')->textInput() ?>
@@ -30,14 +43,14 @@ use kartik\datetime\DateTimePicker;
 
     <?//= $form->field($model, 'fecha_reg')->textInput() ?>
     <?//= $form->field($model,'fecha_reg')->widget(DatePicker::className(),['clientOptions' => ['defaultDate' => '2017-01-01']]) ?>
-    <?= $form->field($model, 'fecha_reg')->widget(DateTimePicker::classname(), [
-            'type' => DateTimePicker::TYPE_INPUT,
-            'options' => ['placeholder' => '', 'readOnly' => true],
-            'pluginOptions' => [
-                'autoclose' => true,
-                'format' => 'yyyy-mm-dd',
-            ], 
-        ]);
+    <?= $form-> field($model, 'fecha_reg')->widget(DatePicker::classname(), [
+
+                    'options' => ['placeholder' => 'Fecha de registro'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd', 
+                    ]
+                ]);
     ?>
 
     <?//= $form->field($model, 'status')->textInput() ?>
