@@ -205,7 +205,9 @@ Yii::$app->name = "APP";
                         </li>
     <?php
                }
-
+               ?>
+                        </ul>
+               <?
 if(Yii::$app->user->can('MenuAlmacen')) {
             ?>
                         <ul class="navigation-menu">
@@ -259,7 +261,18 @@ if(Yii::$app->user->can('MenuAlmacen')) {
  <?php 
         } 
  ?>
+                     
+                       <li class="has-submenu active">
+                              
+                                <?= Html::a(
+                            Yii::t('app', '<i class="md md-pages"></i>SALIR'),
+                            ['/site/logout']
+                        ) ?>
+                                
+                            </li>
 
+                        </ul>
+                        <!-- End navigation menu  --
         
 
 
@@ -280,11 +293,7 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                             <?= Html::a('<i class="fa fa-male"></i> Rutas',['/rights/route']) ?>
                         </li>
 
-                        <li>
-                            <?= Html::a('<i class="fa fa-male"></i> Usuarios',['/admin/users']) ?>
-                        </li>
-
-
+                     
                             <li class="has-submenu">
                                 <a href="#"><i class="md md-content-paste"></i> <span> Administración </span> </a>
                                 <ul class="submenu">
@@ -352,17 +361,7 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                                     </li>
                                 </ul>
                             </li>-->
-
-                            <li class="has-submenu active">
-                              
-                                <?= Html::a(
-                            Yii::t('app', '<i class="md md-pages"></i>SALIR'),
-                            ['/site/logout']
-                        ) ?>
-                                
-                            </li>
-
-                        </ul>
+   
                         <!-- End navigation menu  -->
                     </div>
                 </div>

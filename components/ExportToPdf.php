@@ -112,6 +112,68 @@ class ExportToPdf extends Component
 		];
 		$mpdf->SetFooter($arr);
 		$mpdf->WriteHTML('<sethtmlpageheader name="main" page="ALL" value="on" show-this-page="1">');
+	    $mpdf->WriteHTML($html);
+		$mpdf->Output($filename.'.pdf',"I");
+
+
+	}
+
+		public function exportData2($title='Listado',$filename='Informe Pdf',$html=NULL)
+	{
+
+	$plant = Yii::$app->user->identity->id_plantel;
+	$plantel = \app\modules\admin\models\CatPlanteles::find()->where(['id' => $plant])->one();
+  	$domicilio=$plantel->domicilio1;
+  	$domicilio2=$plantel->domicilio2;
+  	$telefono=$plantel->telefono;
+  	$email=$plantel->email;
+
+  	if($plant == 23){
+  		$area='Dirección de Informática y Telecomunicaciones';
+  	}else{
+  		$area=$plantel->nombre;
+  	}
+  	if($plant==23){
+  		$nombre='JUD DE SOPORTE TECNICO';
+  	}else{
+  		$nombre='JUD DE APOYO TECNICO';
+  	}
+		$mpdf = new mPDF('utf-8', 'A4',0,'',10,10,15,16,4,9,'P');
+		$mpdf->autoScriptToLang = true;
+		$mpdf->autoLangToFont = true;
+		//$org = Organization::find()->asArray()->one();
+		//$src = Yii::$app->urlManager->createAbsoluteUrl('site/loadimage');
+		$org_image=Html::img('images/logo.png',['alt'=>'No Image','width'=>220, 'height'=>70]); 
+		$org_name=$org['org_name'];
+		$org_imagef=Html::img('images/IEMS.jpg',['alt'=>'No Image','width'=>220, 'height'=>70]);
+		$org_namef=$orgf['org_namef'];
+		$org_add="Instituto de Eduación Media Superior";
+		$org_p=" ";
+		$img1 = Html::img(Yii::$app->request->baseUrl.'/images/unam.jpg', ['width'=>'150px;', 'height'=>'100px;']);
+		$img2 = Html::img(Yii::$app->request->baseUrl.'/images/logo.jpg', ['width'=>'80px;', 'height'=>'100px;']) ;
+		$mpdf->SetHTMLHeader('');
+		$stylesheet = file_get_contents('css/pdf.css'); // external css
+		$mpdf->WriteHTML($stylesheet,0);
+		//$mpdf->WriteHTML('<watermarkimage src='.$src.' alpha="0.33" size="50,30"/>');
+		$mpdf->showWatermarkImage = true;
+		$arr = [
+		  'odd' => [
+		    
+		   
+		    'R' => [ 
+		      'content' => '',
+		      'font-size' => 9,
+		     // 'font-style' => 'B',
+		      'font-family' => 'serif, arial',
+		      'color'=>'#ffffff'
+		    ],
+		    'line' => 2,
+		  ],
+		  'even' => []
+		];
+		$mpdf->SetFooter($arr);
+		$mpdf->autoPageBreak = true;
+		$mpdf->WriteHTML('<sethtmlpageheader name="main" page="ALL" value="on" show-this-page="1">');
 		$mpdf->WriteHTML($html);
 		$mpdf->Output($filename.'.pdf',"I");
 

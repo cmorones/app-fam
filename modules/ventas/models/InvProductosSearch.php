@@ -42,13 +42,26 @@ class InvProductosSearch extends InvProductos
      */
     public function search($params)
     {
-        $query = InvProductos::find();
+        $query = InvProductos::find()->joinWith(['datos']);
+
+
+       // $query->joinWith(['datos']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-        ]);
+            'pagination'=> ['pageSize'=>300],
+            'sort'=> ['defaultOrder' => ['id_producto'=>SORT_ASC]]
+                    ]);
+
+        /* $dataProvider->sort->attributes['datos'] = [
+        // The tables are the ones our relation are configured to
+        // in my case they are prefixed with "tbl_"
+        'asc' => ['datos.nombre' => SORT_ASC],
+      //  'desc' => ['tbl_city.name' => SORT_DESC],
+    ];*/
+    // 
 
         $this->load($params);
 
@@ -69,6 +82,7 @@ class InvProductosSearch extends InvProductos
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
         ]);
+
 
          $session = Yii::$app->session;
     $session->set('exportData', $dataProvider);

@@ -72,14 +72,24 @@ class OrdenesController extends Controller
                 print_r($model->getErrors());
                 exit;
             }
-            return $this->redirect(['/ventas/ordenes', 'idp' => $idp]);
+
+             $resultado =  OrdenesDetalle::find()
+                                                        ->joinWith('datos')
+                                                       // ->onCondition(['>', 'existencia', 0])
+                                                        ->where(['=', 'id_orden', $id])
+                                                        ->all();
+            foreach ($resultado as $value) {
+            $this->calculaexistencia($value['id_producto'],$value['cantidad'] );
+            }
+
+            return $this->redirect(['/ventas/ordenes']);
          
 
         } else {
             return $this->render('docto', [
                 'model' => $model,
-                'idb' => $idb,
-                'model2' => $model2,
+                'id' => $id,
+            
 
             ]);
         }
@@ -151,7 +161,7 @@ class OrdenesController extends Controller
                 $ordenDetalle->save();
                 $cantidad = intval($value['cantidad']);
 
-                $this->calculaexistencia($key,$cantidad );
+         //       $this->calculaexistencia($key,$cantidad );
 
 
 

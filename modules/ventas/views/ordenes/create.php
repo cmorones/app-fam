@@ -32,12 +32,12 @@ use yii\helpers\Html;
 					</thead>
 					<tbody>
 					<?php 
-
+						$i=1;
 					 foreach ($cart as $key => $value) {
 					 ?>
 						<tr>
 							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
+								<a href=""><img src="images/cart/one.png" alt=""><?=$i?></a>
 							</td>
 							<td class="cart_description">
 								<h4><a href=""><?=$value['nombre']?></a></h4>
@@ -58,7 +58,9 @@ use yii\helpers\Html;
 							
 						</tr>
 
-						<?php } ?>
+						<?php 
+$i++;
+					} ?>
 
 					
 						

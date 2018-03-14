@@ -21,8 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_docto', [
         'model' => $model,
-        'idb' => $idb,
-        'model2' => $model2,
+       
     ]) ?>
 
 </div>
