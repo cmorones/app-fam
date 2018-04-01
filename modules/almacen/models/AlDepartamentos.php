@@ -3,36 +3,30 @@
 namespace app\modules\almacen\models;
 
 use Yii;
-use yii\db\Expression;
-
-//use yii\db\BaseActiveRecord;
 
 /**
- * This is the model class for table "al_articulos".
+ * This is the model class for table "al_departamentos".
  *
  * @property integer $id
  * @property integer $clave
- * @property integer $id_medida
- * @property string $descripcion
- * @property string $observaciones
+ * @property string $nombre
  * @property integer $estado
  * @property string $created_at
  * @property integer $created_by
  * @property string $updated_at
  * @property integer $updated_by
- * @property integer $errAlmacen
  *
  * @property Users $createdBy
  * @property Users $updatedBy
  */
-class AlArticulos extends \yii\db\ActiveRecord
+class AlDepartamentos extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'al_articulos';
+        return 'al_departamentos';
     }
 
     /**
@@ -41,10 +35,9 @@ class AlArticulos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['clave', 'id_medida', 'estado', 'created_by', 'updated_by'], 'integer'],
-            [['descripcion', 'observaciones'], 'string'],
-            [['clave'], 'unique'],
-            [['clave', 'id_medida', 'estado', 'descripcion'], 'required'],
+            [['clave', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['nombre'], 'string'],
+            [['created_at', 'created_by'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
@@ -59,30 +52,14 @@ class AlArticulos extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'clave' => 'Clave',
-            'id_medida' => 'Medida',
-            'descripcion' => 'Descripcion',
-            'observaciones' => 'Observaciones',
+            'nombre' => 'Nombre',
             'estado' => 'Estado',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
-           
         ];
     }
-
-   
-public function beforeSave($insert){
-
-     parent::beforeSave($insert);
-     if($insert){
-       $this->updated_at = new Expression('NOW()');
-       $this->updated_by = Yii::$app->user->identity->user_id;
-       
-   }
-     return true;
-
-}
 
     /**
      * @return \yii\db\ActiveQuery
@@ -100,14 +77,8 @@ public function beforeSave($insert){
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
 
-     function getInfoProductBy($id){
-        $data = AlArticulos::find()->asArray()->where(['id'=>$id])->one();
-        return $data;
-    }
-
-    
-      public function getCatMedidas()
+    public function getCatEstado()
     {
-        return $this->hasOne(AlCatMedidas::className(),['id'=>'id_medida']);
+        return $this->hasOne(CatEstado::className(),['id'=>'estado']);
     }
 }

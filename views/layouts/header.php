@@ -224,12 +224,17 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                                   <ul class="submenu">
 
                                    <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Almacen',['/ventas/inv-productos']) ?> 
+                            <?= Html::a('<i class="fa  md-add"></i> Mostrar Almacen',['/almacen/al-inv-productos']) ?> 
                         </li>
 
                           <li>
                             <?= Html::a('<i class="fa  md-add"></i> Entradas de Almacen',['/almacen/al-entradas']) ?> 
                         </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Salidas de Almacen',['/almacen/al-salidas']) ?> 
+                        </li>
+                                
                                    
 
                             <li>
@@ -253,6 +258,14 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                                   <ul class="submenu">
                                        <li>
                             <?= Html::a('<i class="fa  md-add"></i> Agregar Articulos',['/almacen/al-articulos']) ?>
+                        </li>
+
+                                  <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Agregar Departamentos',['/almacen/al-departamentos']) ?>
+                        </li>
+
+                                  <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Agregar Empleados',['/almacen/al-empleados']) ?>
                         </li>
                                  
                                     

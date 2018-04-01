@@ -123,6 +123,13 @@ if (Yii::$app->controller->action->id === 'login') {
                 swal("Producto!", "Producto Eliminado del carrito!", "error");
             }
 
+            function deleteItemAl(id){
+
+
+                updateCartAl(id,0);
+                swal("Producto!", "Producto Eliminado del carrito!", "error");
+            }
+
              function updateDescuento(tipo){
 
                  $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/descuento', {'tipo': tipo}, function(data){
@@ -145,6 +152,18 @@ if (Yii::$app->controller->action->id === 'login') {
 
             }
 
+              function updateCartAl(id,quantity){
+
+                 $.get('<?= Yii::$app->homeUrl ?>/almacen/shopping-cart/add2', {'id': id, 'quantity': quantity}, function(data){
+
+                    $("#content").html(data);
+
+          
+          });
+
+            }
+
+
 
 
             function addCart(id){
@@ -156,6 +175,35 @@ if (Yii::$app->controller->action->id === 'login') {
 
     
             }
+
+
+            function addCartAl(id){
+               
+  
+           $.get('<?= Yii::$app->homeUrl ?>/almacen/shopping-cart/add', {'id': id}, function(data){
+            swal("Producto!", "Producto Agregado al carrito!", "success");
+          });
+
+    
+            }
+
+
+            $(function(){
+ $('#modalButton').click(function(){
+  $('#modal').modal('show')
+   .find('#modalContent')
+   .load($(this).attr('value'));
+ });
+});
+
+
+  $(document).ready(function () {
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {
+    if (console && console.log) {
+        console.log("patched");
+    }
+};
+});
 
         </script>
     </html>
