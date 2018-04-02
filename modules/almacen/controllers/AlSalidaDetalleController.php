@@ -6,9 +6,13 @@ use Yii;
 use app\modules\almacen\models\AlSalidaDetalle;
 use app\modules\almacen\models\AlSalidaDetalleSearch;
 use app\modules\almacen\models\AlArticulos;
+use app\modules\almacen\models\InvBitacora;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Expression;
+use yii\web\UploadedFile;
+use yii\helpers\Json;
 
 /**
  * AlSalidaDetalleController implements the CRUD actions for AlSalidaDetalle model.
@@ -62,14 +66,36 @@ class AlSalidaDetalleController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    
+
+        public function actionCreate($id)
     {
         $model = new AlSalidaDetalle();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+          if ($model->load(Yii::$app->request->post())) {
+            $model->id_salida = $id;
+            $model->estado = 1;
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = new Expression('NOW()');
+            $model->save();
+
+                $json = Json::encode($model);
+
+              $bitacora1 = new InvBitacora();
+                $bitacora1->id_accion =1;
+                $bitacora1->id_tabla =2;
+                $bitacora1->contenido =$json;
+                $bitacora1->id_area =Yii::$app->user->identity->perfil;
+                $bitacora1->created_by=Yii::$app->user->identity->user_id;
+                $bitacora1->created_at = new Expression('NOW()');
+                $bitacora1->save();
+
+           
+           //  $this->calculaexistencia($model->id_producto,$model->cantidad);
+
+            return $this->redirect(['al-salidas/items', 'id' => $id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
@@ -171,4 +197,56 @@ class AlSalidaDetalleController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+        public function actionBorrar($id,$id_salida,$cantidad)
+    {
+       // $eliminacion = $this->findModel($id);
+        $model2 = $this->findModel($id);
+        $this->findModel($id)->delete();
+
+        $existencia = \Yii::$app->db ->createCommand("SELECT 
+        existencia
+        FROM 
+          al_inv_productos 
+        WHERE 
+          id_producto=$model2->id_producto")->queryOne();
+
+                $result = intval($existencia['existencia']);
+      
+    $total  = $result + $cantidad;
+    $sql="Update al_inv_productos set existencia =". $total . " where id_producto =".$model2->id_producto. "";
+    
+    \Yii::$app->db->createCommand($sql)->execute();
+
+    $data = [
+       'existencia_anterior' => $result,
+       'existencia_nueva' => $total,
+    ];
+
+    $json = Json::encode($data);
+
+    $bitacora = new InvBitacora();
+    $bitacora->id_accion =3;
+    $bitacora->id_tabla =1;
+    $bitacora->contenido =$json;
+    $bitacora->id_area =Yii::$app->user->identity->perfil;
+    $bitacora->created_by=Yii::$app->user->identity->user_id;
+    $bitacora->created_at = new Expression('NOW()');
+    $bitacora->save();
+
+    $json2 = Json::encode($model2);
+
+    $bitacora1 = new InvBitacora();
+    $bitacora1->id_accion =2;
+    $bitacora1->id_tabla =2;
+    $bitacora1->contenido =$json2;
+    $bitacora1->id_area =Yii::$app->user->identity->perfil;
+    $bitacora1->created_by=Yii::$app->user->identity->user_id;
+    $bitacora1->created_at = new Expression('NOW()');
+    $bitacora1->save();
+
+
+        return $this->redirect(['al-salidas/items', 'id'=>$id_salida]);
+    }
+
 }

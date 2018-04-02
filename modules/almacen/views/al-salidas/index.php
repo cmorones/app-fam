@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
            
                   return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Modificar</center>', [
-                            '/almacen/cons-salidas/update',
+                            '/almacen/al-salidas/update',
                             'id' => $data->id,
                         ], [
                             'class' => 'btn btn-info btn-sm',
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
            
                   return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Modificar Items</center>', [
-                            '/almacen/cons-salidas/items',
+                            '/almacen/al-salidas/items',
                             'id' => $data->id,
                         ], [
                             'class' => 'btn btn-info btn-sm',

@@ -48,7 +48,7 @@ class AlSalidas extends \yii\db\ActiveRecord
             [['folio', 'area_destino', 'responsable', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['sfolio', 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto'], 'string'],
             [['fecha_solicitud', 'fecha_entrega', 'fecha_liberacion', 'created_at', 'updated_at'], 'safe'],
-            [['created_at', 'created_by'], 'required'],
+            [['condiciones','autoriza', 'entrega', 'recibe','fecha_solicitud', 'fecha_entrega', 'fecha_liberacion','area_destino', 'responsable','created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];

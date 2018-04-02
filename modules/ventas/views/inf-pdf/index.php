@@ -56,7 +56,7 @@ use app\modules\ventas\models\OrdenesDetalle;
 
                                               <abbr title="Phone">Tel:</abbr> 56 - 88 - 33 - 58
                                               <br>Ext. 123 
-<br>e-mail: liliafrancomx@hotmail.com
+<br>e-mail: cescudero@fam.unam.mx
                                               </address>
                                         </div>
                                         <div class="pull-right m-t-30">
@@ -66,7 +66,7 @@ use app\modules\ventas\models\OrdenesDetalle;
                                         </div>
                                     </div>
                                 </div>
-                                <div class="m-h-20">     <strong>Cliente: CESAR mORONES
+                                <div class="m-h-20">     <strong>Cliente: 
 </strong><br></div>
                                 <div class="row">
                                     <div class="col-md-12">

@@ -5,14 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\almacen\models\AlSalidas */
 
-$this->title = 'Update Al Salidas: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Al Salidas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
-?>
-<div class="al-salidas-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+?>
+
+ <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'tipo' => 1,  'descuento' => 0], ['class' => 'btn btn-info btn-sm']) ?>
+ <br>
+<br>
+<div class="al-salidas-update">
 
     <?= $this->render('_form', [
         'model' => $model,

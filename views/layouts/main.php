@@ -187,6 +187,24 @@ if (Yii::$app->controller->action->id === 'login') {
     
             }
 
+               function delItemAl(id,id_salida,cantidad){
+
+            if(confirm('Estas seguro de eliminar?')){
+
+            $.get('<?= Yii::$app->homeUrl ?>/almacen/al-salida-detalle/borrar', {'id': id, 'id_salida': id_salida, 'cantidad': cantidad}, function(data){
+            swal("Consumible!", "Consumible Eliminado!", "success");
+
+          });
+
+             }else{
+                return false;
+             }
+
+          
+      
+
+            }
+
 
             $(function(){
  $('#modalButton').click(function(){

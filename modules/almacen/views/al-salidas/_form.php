@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
+use yii\helpers\ArrayHelper;
+use app\modules\almacen\models\AlDepartamentos;
+use app\modules\almacen\models\AlEmpleados;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\almacen\models\AlSalidas */
@@ -27,7 +30,19 @@ use kartik\date\DatePicker;
       <div class="form-group">
                                             <label for="cname" class="control-label col-lg-2">Area Solicitante </label>
                                             <div class="col-lg-4">
-                                                 <?= $form->field($model, 'area_destino')->textInput()->label(false); ?>
+                                         
+
+                                                  <?= $form->field($model, 'area_destino', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'tipo'] ] )->dropDownList(ArrayHelper::map(app\modules\almacen\models\AlDepartamentos::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),
+                                                 [
+                                                    'prompt'=>Yii::t('app', '--- Selecciona Departamento ---'),
+                                                   'onchange'=>'
+                                                        $.post( "'.Yii::$app->urlManager->createUrl('almacen/al-salidas/empleados?id=').'"+$(this).val(), function( data ) {
+                                                          $( "select#alsalidas-responsable" ).html( data );
+                                                        });
+
+
+
+                                                    '])->label(false); ?>
  </div>
                                           
                                         </div>
@@ -35,7 +50,7 @@ use kartik\date\DatePicker;
  <div class="form-group">
                                             <label for="cname" class="control-label col-lg-2">Responsable del Area </label>
                                             <div class="col-lg-4">
-                                                 <?= $form->field($model, 'responsable')->textInput()->label(false); ?>
+                                                <?= $form->field($model, 'responsable', ['inputOptions'=>[ 'class'=>'form-control', 'placeholder' => 'responsable'] ] )->dropDownList(ArrayHelper::map(app\modules\almacen\models\AlEmpleados::find()->orderBy(['id'=>SORT_ASC])->all(),'id','nombre'),['prompt'=>Yii::t('app', '--- Selecciona Responsable ---')])->label(false); ?>
  </div>
                                           
                                         </div>
@@ -151,7 +166,7 @@ use kartik\date\DatePicker;
    
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Registrar Salida' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Registrar Salida' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
