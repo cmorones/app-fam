@@ -247,7 +247,7 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                                <li class="has-submenu">
                                 <a href="#"><i class="md  md-event-note"></i> <span> Informes </span> </a>
                                   <ul class="submenu">
-                                    <li><?= Html::a('Ventas',['/ventas/informes'])?></li>
+                                    <li><?= Html::a('Almacen',['/almacen/informes'])?></li>
                                  
                                     
                                 </ul>

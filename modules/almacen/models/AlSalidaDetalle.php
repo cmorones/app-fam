@@ -85,4 +85,11 @@ class AlSalidaDetalle extends \yii\db\ActiveRecord
     {
         return $this->hasOne(AlArticulos::className(),['id'=>'id_producto']);
     }
+
+     public function getDatos2()
+    {
+        return $this->hasOne(AlSalidas::className(),['id'=>'id_salida']);
+    }
+
+    
 }
