@@ -37,16 +37,11 @@ table {
     font-size: 9px;
     border-color: #ffffff;
     width: 100%;
-    border: 2px;
+    border: 1px;
 
 }
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 5px;
 
-}
 
 .fondo {
    background-color: #dddddd;
@@ -62,21 +57,43 @@ tr:nth-child(even) {
 
 </style>
 
-
+<br>
+<br>
+<br>
+<br>
 
 
                     
-                            <div class="panel-body">
+                         
                                
                                 <div class="row">
                                     <div class="col-md-12">
-                                      <table border="0">
-                                        <tr>
-                                          <td style="font-size: 14px;">     <address><b>Movimiento de Bienes Informaticos y Refacciones</b></address></td>
-                                          <td> <p><strong>Fecha: </strong><?=$date->format('d-m-Y');?></p>
-                                            <p class="m-t-20"><strong>Folio: </strong> <span style="color:red;font-size: 12px;"><?=$model->sfolio?></span></p></td>
-                                        </tr>
-                                      </table>
+
+                                     <table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;">
+                                        <tr style="border:hidden">
+                                            <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>AREA SOLICITANTE:</strong></td>
+                                            <td></td>
+                                            <td vertical-align="right" style="width:120px;border:hidden;position:absolute;"><strong>FOLIO:</strong></td>
+                                            <td><span style="color:red;font-size: 12px;"><?=$model->sfolio?></span></td>
+
+                                           </tr>
+                                        <tr style="border:hidden">
+                                            <td vertical-align="right" style="width:150px;border:hidden;position:absolute;"><strong>RESPONSABLE DEL ÁREA:</strong></td>
+                                            <td></td>
+                                            <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>FECHA:</strong></td>
+                                            <td><span style="color:black;font-size: 12px;"><?=$date->format('d-m-Y');?></span></td>
+
+                                           </tr>
+
+                                           <tr style="border:hidden">
+                                            <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>RFC DEL RESPONSABLE DEL ÁREA:</strong></td>
+                                            <td></td>
+                                            <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>CON CARGO A: </strong></td>
+                                            <td><span style="color:black;font-size: 12px;"></span></td>
+
+                                           </tr>
+                                         </table>
+
 
                                      
                                      
@@ -84,16 +101,7 @@ tr:nth-child(even) {
                                 </div>
                              
 
-                                <br>
-                                 <div class="box view-item col-xs-12 col-lg-12">
-            <table style="background-color:white;">
-               <tr >
-                <td class="fondo"><b>Plantel Origen:</b></td><td><?//=$model->catPlanteles->nombre?></td>
-               </tr>
-               <tr >
-          
-             </table>
- </div>
+              
  <br>
                               <div class="row">
 
@@ -115,11 +123,13 @@ tr:nth-child(even) {
                                         
                                             <table class="table m-t-10 fondo">
                                                 <thead>
-                                                    <tr>
-                                                  <td align="center">Num.</td> 
-                                                   <td align="center">Consumible</td>
-                                                    <td align="center">Medida</td>
-                                                    <td align="left">Cantidad</td>
+                                                    <tr >
+                                                  <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">Num.</td> 
+                                                  <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">CODIGO</td>
+                                                   <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">DESCRIPCION DEL INSUMO O MATERIAL</td>
+                                                    <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">UNIDAD DE MEDIDA </td>
+                                                    <td align="left" style="background-color: #dddddd;border: 1px solid #dddddd;">CANTIDAD</td>
+                                                    <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;width:250px;">OBSERVACIONES</td>
                                                     
                                                 </tr></thead>
                                                 <tbody>
@@ -148,10 +158,24 @@ tr:nth-child(even) {
                                                 ?>
 
                                                         <tr>
-                                                          <td><?=$i?></td>
-                                                          <td><?=$medida->catMedidas->nombre?></td>
-                                                          <td><?//=$value['nombre']?></td>
-                                                        <td align="center"><?=$value->cantidad?></td>
+                                                          <td style="  border: 1px solid #dddddd;
+    text-align: center;
+    padding: 5px;"><?=$i?></td>
+                                                          <td style="  border: 1px solid #dddddd;
+    text-align: center;
+    padding: 5px;"><?=$medida->clave?></td>
+                                                          <td style="  border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px;"><?=$medida->descripcion?></td>
+    <td style="  border: 1px solid #dddddd;
+    text-align: center;
+    padding: 5px;"><?=$medida->catMedidas->nombre?></td>
+                                                        <td style="  border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px;" align="center"><?=$value->cantidad?></td>
+    <td style="  border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px;" align="center"></td>
                                                        
                                                       
                                                     </tr>
@@ -166,8 +190,21 @@ tr:nth-child(even) {
                                       
                                     </div>
                                 </div>
+                                <br>
                                 
+<table style="border:0;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr>
+  <td style="width:140px;border:hidden;position:absolute;">FECHA COMPROMISO DE ENTREGA</td>
+  <td style="width:140px;border:hidden;position:absolute;">_______________________________</td>
+  <td style="width:140px;border:hidden;position:absolute;">FECHA DE LIBERACIÓN</td>
+  <td style="width:140px;border:hidden;position:absolute;">_______________________________</td>
+</tr>
 
+</table>
+<br>
+<table style="border:0;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;">
+<tr><td colspan="1" style="width:140px;border:hidden;position:absolute;">CONDICIONES:</td>
+<td colspan="3" style="width:140px;border:hidden;position:absolute;"><?=$model->condiciones?></td></tr>
+</table>
 
                                
 
@@ -176,23 +213,30 @@ tr:nth-child(even) {
                            
                         
                                 <tr>
-                                  <td align="center"><b>Autoriza</b></td>
-                                  <td align="center"><b>Entrega</b></td>
-                                   <td align="center"><b>Recibe Bienes</b></td>
+                                  <td align="center"><b>VO.BO. DE CONFIRMACIÓN DE REQUISITOS</b></td>
+                                  <td align="center"><b>ENTREGA DE LOS INSUMOS</b></td>
+                                   <td align="center"><b>CONFORMIDAD EN LA RECEPCIÓN DE LOS<BR> INSUMOS EN LA FECHA COMPROMISO</b></td>
                                 </tr>
                           
                               <tbody>
                                 <tr>
-                                  <td><br>_________________________________</td>
-                                  <td><br>_________________________________</td>
-                                  <td><br>_________________________________</td>
+                                  <td align="center"><br>__________________________________________________________</td>
+                                  <td align="center"><br>__________________________________________________________</td>
+                                  <td align="center"><br>__________________________________________________________</td>
 
                                 </tr>
 
                                  <tr>
-                                  <td>&nbsp; &nbsp;&nbsp; &nbsp;<?=$model->autoriza?>&nbsp; &nbsp;&nbsp; &nbsp;</td>
-                                  <td>&nbsp; &nbsp;&nbsp; &nbsp;<?=$model->entrega?>&nbsp; &nbsp;&nbsp; &nbsp;</td>
-                                  <td>&nbsp; &nbsp;&nbsp; &nbsp;<?=$model->recibe?>&nbsp; &nbsp;&nbsp; &nbsp;</td>
+                                  <td align="center"><strong><?=$model->autoriza?></strong></td>
+                                  <td align="center"><strong><?=$model->entrega?></strong></td>
+                                  <td align="center"><strong><?=$model->recibe?></strong></td>
+
+                                </tr>
+
+                                 <tr>
+                                  <td align="center">RESPONSABLE DE BIENES Y SUMINISTROS</td>
+                                  <td align="center">RESPONSABLE DEL ALMACEN</td>
+                                  <td align="center">NOMBRE Y FIRMA DEL USUARIO</td>
 
                                 </tr>
                               </tbody>
