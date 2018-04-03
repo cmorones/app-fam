@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\modules\almacen\models\AlCatMedidas;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\almacen\models\AlArticulos */
@@ -14,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'clave')->textInput() ?>
 
-    <?= $form->field($model, 'id_medida')->textInput() ?>
+     <?= $form->field($model, 'id_medida')->dropDownList(ArrayHelper::map(AlCatMedidas::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona Medida']); ?>
 
     <?= $form->field($model, 'descripcion')->textInput() ?>
 
