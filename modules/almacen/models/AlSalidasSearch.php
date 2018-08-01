@@ -18,7 +18,7 @@ class AlSalidasSearch extends AlSalidas
     public function rules()
     {
         return [
-            [['id', 'folio', 'area_destino', 'responsable', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id','area_destino', 'responsable', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['sfolio', 'fecha_solicitud', 'fecha_entrega', 'fecha_liberacion', 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -60,7 +60,6 @@ class AlSalidasSearch extends AlSalidas
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'folio' => $this->folio,
             'area_destino' => $this->area_destino,
             'responsable' => $this->responsable,
             'fecha_solicitud' => $this->fecha_solicitud,
@@ -73,8 +72,7 @@ class AlSalidasSearch extends AlSalidas
             'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'sfolio', $this->sfolio])
-            ->andFilterWhere(['like', 'condiciones', $this->condiciones])
+        $query->andFilterWhere(['like', 'condiciones', $this->condiciones])
             ->andFilterWhere(['like', 'autoriza', $this->autoriza])
             ->andFilterWhere(['like', 'entrega', $this->entrega])
             ->andFilterWhere(['like', 'recibe', $this->recibe])

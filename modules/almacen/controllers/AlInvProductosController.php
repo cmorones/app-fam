@@ -44,6 +44,17 @@ class AlInvProductosController extends Controller
         ]);
     }
 
+      public function actionExistencia()
+    {
+        $searchModel = new AlInvProductosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('existencia', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single AlInvProductos model.
      * @param integer $id

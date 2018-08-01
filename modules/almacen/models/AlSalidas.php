@@ -45,8 +45,8 @@ class AlSalidas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['folio', 'area_destino', 'responsable', 'estado', 'created_by', 'updated_by'], 'integer'],
-            [['sfolio', 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto'], 'string'],
+            [['area_destino', 'responsable', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [[ 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto'], 'string'],
             [['fecha_solicitud', 'fecha_entrega', 'fecha_liberacion', 'created_at', 'updated_at'], 'safe'],
             [['condiciones','autoriza', 'entrega', 'recibe','fecha_solicitud', 'fecha_entrega', 'fecha_liberacion','area_destino', 'responsable','created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -60,9 +60,7 @@ class AlSalidas extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'folio' => 'Folio',
-            'sfolio' => 'Sfolio',
+            'id' => 'Folio',
             'area_destino' => 'Area Solicitante',
             'responsable' => 'Responsable del Area',
             'fecha_solicitud' => 'Fecha Solicitud',
@@ -96,4 +94,14 @@ class AlSalidas extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
+
+      public function getEmp()
+    {
+        return $this->hasOne(AlEmpleados::className(),['id'=>'responsable']);
+    }
+  public function getDepto()
+    {
+        return $this->hasOne(AlDepartamentos::className(),['id'=>'area_destino']);
+    }
+    
 }

@@ -71,14 +71,14 @@ tr:nth-child(even) {
 
                                      <table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;">
                                         <tr style="border:hidden">
-                                            <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>AREA SOLICITANTE:</strong></td>
+                                            <td vertical-align="right" style="width:240px;border:hidden;position:absolute;"><strong>AREA SOLICITANTE:   <?=$model->depto->nombre?></strong></td>
                                             <td></td>
                                             <td vertical-align="right" style="width:120px;border:hidden;position:absolute;"><strong>FOLIO:</strong></td>
-                                            <td><span style="color:red;font-size: 12px;"><?=$model->sfolio?></span></td>
+                                            <td><span style="color:red;font-size: 12px;"><?=$model->id?></span></td>
 
                                            </tr>
                                         <tr style="border:hidden">
-                                            <td vertical-align="right" style="width:150px;border:hidden;position:absolute;"><strong>RESPONSABLE DEL ÁREA:</strong></td>
+                                            <td vertical-align="right" style="width:280;border:hidden;position:absolute;"><strong>RESPONSABLE DEL ÁREA:   <?=$model->emp->nombre?></strong></td>
                                             <td></td>
                                             <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>FECHA:</strong></td>
                                             <td><span style="color:black;font-size: 12px;"><?=$date->format('d-m-Y');?></span></td>
@@ -86,7 +86,7 @@ tr:nth-child(even) {
                                            </tr>
 
                                            <tr style="border:hidden">
-                                            <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>RFC DEL RESPONSABLE DEL ÁREA:</strong></td>
+                                            <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>RFC DEL RESPONSABLE DEL ÁREA:   <?=$model->emp->rfc?></strong></td>
                                             <td></td>
                                             <td vertical-align="right" style="width:140px;border:hidden;position:absolute;"><strong>CON CARGO A: </strong></td>
                                             <td><span style="color:black;font-size: 12px;"></span></td>
@@ -194,9 +194,9 @@ tr:nth-child(even) {
                                 
 <table style="border:0;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr>
   <td style="width:140px;border:hidden;position:absolute;">FECHA COMPROMISO DE ENTREGA</td>
-  <td style="width:140px;border:hidden;position:absolute;">_______________________________</td>
+  <td style="width:140px;border:hidden;position:absolute;"><?=$model->fecha_entrega?></td>
   <td style="width:140px;border:hidden;position:absolute;">FECHA DE LIBERACIÓN</td>
-  <td style="width:140px;border:hidden;position:absolute;">_______________________________</td>
+  <td style="width:140px;border:hidden;position:absolute;"><?=$model->fecha_liberacion?></td>
 </tr>
 
 </table>

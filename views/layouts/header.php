@@ -274,6 +274,44 @@ if(Yii::$app->user->can('MenuAlmacen')) {
  <?php 
         } 
  ?>
+
+ <?
+if(Yii::$app->user->can('AccesoAlmacen')) {
+            ?>
+                        <ul class="navigation-menu">
+                            <li>
+                               
+                                <?= Html::a('<i class="md md-home"></i>Tablero',['/site'])  ?>
+                            </li>
+
+                        
+
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md  md-exit-to-app"></i> <span> Almacen </span> </a>
+                                  <ul class="submenu">
+
+                                   <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Existencias Diponibles en Almacen',['/almacen/al-inv-productos/existencia']) ?> 
+                        </li>
+
+                       
+
+                         <li>
+                            <?= Html::a('<i class="fa  md-add"></i> Solicitud de MAterial',['/almacen/al-salidas']) ?> 
+                        </li>
+                                
+                                   
+
+                           
+                           
+                                </ul>
+                            
+
+                             
+ <?php 
+        } 
+ ?>
                      
                        <li class="has-submenu active">
                               

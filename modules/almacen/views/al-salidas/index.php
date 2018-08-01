@@ -30,15 +30,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+         //   ['class' => 'yii\grid\SerialColumn'],
 
-           // 'id',
-           // 'folio',
-            'sfolio',
+            'id',
+          
            // 'id_plantel_origen',
            // 'id_area_origen',
-             'area_destino',
-            'responsable',
+           //  'area_destino',
+             [
+              'attribute'=>'area_destino',
+              'value' => 'depto.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\almacen\models\AlDepartamentos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
+           // 'responsable',
+              [
+              'attribute'=>'responsable',
+              'value' => 'emp.nombre',
+              'filter' => yii\helpers\ArrayHelper::map(app\modules\almacen\models\AlEmpleados::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
+            ],
             // 'suministro',
             // 'prestamo',
             // 'salida',
