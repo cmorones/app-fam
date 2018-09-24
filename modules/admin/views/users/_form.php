@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\Users;
-use app\modules\admin\models\CatPlanteles;
+use app\modules\almacen\models\AlDepartamentos;
 use app\modules\admin\models\CatPerfiles;
 use app\modules\admin\models\CatAnos;
 use yii\web\View;
@@ -60,7 +60,7 @@ if($('#activa').prop('checked')) {
 
 <?= $form->field($model, 'cargo')->textInput() ?>
   
-    <?= $form->field($model, 'id_plantel')->dropDownList(ArrayHelper::map(CatPlanteles::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un plantel']) ?>
+    <?= $form->field($model, 'id_plantel')->dropDownList(ArrayHelper::map(AlDepartamentos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un departamento']) ?>
 
      <?= $form->field($model, 'id_periodo')->dropDownList(ArrayHelper::map(CatAnos::find()->all(), 'id', 'nombre'), ['prompt'=>'Selecciona un Periodo']) ?>
 

@@ -74,7 +74,7 @@ tr:nth-child(even) {
                                             <td vertical-align="right" style="width:240px;border:hidden;position:absolute;"><strong>AREA SOLICITANTE:   <?=$model->depto->nombre?></strong></td>
                                             <td></td>
                                             <td vertical-align="right" style="width:120px;border:hidden;position:absolute;"><strong>FOLIO:</strong></td>
-                                            <td><span style="color:red;font-size: 12px;"><?=$model->id?></span></td>
+                                            <td><span style="color:red;font-size: 12px;"><?=$model->folio?></span></td>
 
                                            </tr>
                                         <tr style="border:hidden">
@@ -123,13 +123,25 @@ tr:nth-child(even) {
                                         
                                             <table class="table m-t-10 fondo">
                                                 <thead>
+                                              <tr >
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                               
+                                                <td colspan="3" align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">CANTIDAD</td>
+                                                 <td></td>
+
+                                              </tr>
                                                     <tr >
                                                   <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">Num.</td> 
                                                   <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">CODIGO</td>
                                                    <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">DESCRIPCION DEL INSUMO O MATERIAL</td>
-                                                    <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">UNIDAD DE MEDIDA </td>
-                                                    <td align="left" style="background-color: #dddddd;border: 1px solid #dddddd;">CANTIDAD</td>
-                                                    <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;width:250px;">OBSERVACIONES</td>
+                                                    <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;">UNIDAD</td>
+                                                    <td align="left" style="background-color: #dddddd;border: 1px solid #dddddd;">SOLICITADA</td>
+                                                     <td align="left" style="background-color: #dddddd;border: 1px solid #dddddd;">AUTORIZADA</td>
+                                                      <td align="left" style="background-color: #dddddd;border: 1px solid #dddddd;">ENTREGADA</td>
+                                                    <td align="center" style="background-color: #dddddd;border: 1px solid #dddddd;width:100px;">OBSERVACIONES</td>
                                                     
                                                 </tr></thead>
                                                 <tbody>
@@ -172,6 +184,12 @@ tr:nth-child(even) {
     padding: 5px;"><?=$medida->catMedidas->nombre?></td>
                                                         <td style="  border: 1px solid #dddddd;
     text-align: left;
+    padding: 5px;" align="center"><?=$value->cantidad_sol?></td>
+     <td style="  border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px;" align="center"><?=$value->cantidad_aut?></td>
+     <td style="  border: 1px solid #dddddd;
+    text-align: left;
     padding: 5px;" align="center"><?=$value->cantidad?></td>
     <td style="  border: 1px solid #dddddd;
     text-align: left;
@@ -202,8 +220,7 @@ tr:nth-child(even) {
 </table>
 <br>
 <table style="border:0;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;">
-<tr><td colspan="1" style="width:140px;border:hidden;position:absolute;">CONDICIONES:</td>
-<td colspan="3" style="width:140px;border:hidden;position:absolute;"><?=$model->condiciones?></td></tr>
+
 </table>
 
                                

@@ -45,7 +45,7 @@ class AlSalidas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['area_destino', 'responsable', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['area_destino', 'responsable', 'estado', 'created_by', 'updated_by','id_periodo', 'folio'], 'integer'],
             [[ 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto'], 'string'],
             [['fecha_solicitud', 'fecha_entrega', 'fecha_liberacion', 'created_at', 'updated_at'], 'safe'],
             [['condiciones','autoriza', 'entrega', 'recibe','fecha_solicitud', 'fecha_entrega', 'fecha_liberacion','area_destino', 'responsable','created_at', 'created_by'], 'required'],
@@ -60,7 +60,8 @@ class AlSalidas extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'Folio',
+            'id' => 'id',
+            'folio' => 'Folio',
             'area_destino' => 'Area Solicitante',
             'responsable' => 'Responsable del Area',
             'fecha_solicitud' => 'Fecha Solicitud',
@@ -76,6 +77,7 @@ class AlSalidas extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'id_periodo' => 'Ejercicio',
         ];
     }
 
@@ -102,6 +104,11 @@ class AlSalidas extends \yii\db\ActiveRecord
   public function getDepto()
     {
         return $this->hasOne(AlDepartamentos::className(),['id'=>'area_destino']);
+    }
+
+     public function getCatEstado()
+    {
+        return $this->hasOne(CatEstado::className(),['id'=>'estado']);
     }
     
 }

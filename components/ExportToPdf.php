@@ -78,19 +78,22 @@ class ExportToPdf extends Component
   		$nombre='JUD DE APOYO TECNICO';
   	}
 		$mpdf = new mPDF('utf-8', 'A4',0,'',10,10,15,16,4,9,'P');
+		// Define a page using all default values except "L" for Landscape orientation
+//$mpdf=new mPDF('','', 0, '', 15, 15, 16, 16, 9, 9, 'L');
+	//	$mpdf = new mPDF('utf-8', 'A4',0,'A4-L',15,15,25,16,4,9,'A4-L');
 		$mpdf->autoScriptToLang = true;
 		$mpdf->autoLangToFont = true;
 		//$org = Organization::find()->asArray()->one();
 		//$src = Yii::$app->urlManager->createAbsoluteUrl('site/loadimage');
-		$org_image=Html::img('images/logo.png',['alt'=>'No Image','width'=>220, 'height'=>70]); 
+		$org_image=Html::img('/app-fam/images/logo.jpg',['alt'=>'No Image','width'=>70, 'height'=>60]); 
+		$org_image1=Html::img('/app-fam/images/unam.jpg',['alt'=>'No Image','width'=>90, 'height'=>60]); 
+		
 		$org_name=$org['org_name'];
-		$org_imagef=Html::img('images/IEMS.jpg',['alt'=>'No Image','width'=>220, 'height'=>70]);
+		$org_imagef=Html::img('/app-fam/images/logo.jpg',['alt'=>'No Image','width'=>220, 'height'=>70]);
 		$org_namef=$orgf['org_namef'];
-		$org_add="Instituto de Eduación Media Superior";
+		$org_add="UNIVERSIDAD NACIONAL AUTONOMA DE MEXICO";
 		$org_p=" ";
-		$img1 = Html::img(Yii::$app->request->baseUrl.'/images/unam.jpg', ['width'=>'150px;', 'height'=>'100px;']);
-		$img2 = Html::img(Yii::$app->request->baseUrl.'/images/logo.jpg', ['width'=>'80px;', 'height'=>'100px;']) ;
-		$mpdf->SetHTMLHeader('');
+		$mpdf->SetHTMLHeader('<table style="border-bottom:1.6px solid #999998;border-top:hidden;border-left:hidden;border-right:hidden;width:100%;"><tr style="border:hidden"><td vertical-align="right" style="width:35px;border:hidden"position:absolute;>'.$org_image1.'</td><<td style="border:hidden;text-align: center;color:#000000;"><b style="font-size:18px;">'.$org_add.'</b><br/>SECRETARIAS Y UNIDADES ADMINISTRATIVASBR<Br>BIENES Y SUMINISTROS<BR>VALE DE SALIDA DE ALMACÉN<span style="font-size:11px">'.$org_p.'</td><td vertical-align="right" style="width:35px;border:hidden"position:absolute;>'.$org_image.'</td></tr></table><Br>');
 		$stylesheet = file_get_contents('css/pdf.css'); // external css
 		$mpdf->WriteHTML($stylesheet,0);
 		//$mpdf->WriteHTML('<watermarkimage src='.$src.' alpha="0.33" size="50,30"/>');

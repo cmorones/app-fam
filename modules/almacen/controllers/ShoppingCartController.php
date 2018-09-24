@@ -94,4 +94,9 @@ class ShoppingCartController extends \yii\web\Controller
     	return $this->render('cart', ['cart'=>$cart]);
     }
 
+    public function actionCart2(){
+        $cart =  Yii::$app->session['al_cart'];
+        return $this->render('cart2', ['cart'=>$cart]);
+    }
+
 }

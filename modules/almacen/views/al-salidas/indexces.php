@@ -113,11 +113,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
            
-                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Autorizar Solicitud</center>', [
+                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Modificar Items</center>', [
                             '/almacen/al-salidas/items',
                             'id' => $data->id,
                         ], [
-                            'class' => 'btn btn-primary btn-sm',
+                            'class' => 'btn btn-info btn-sm',
                            // 'target' => '_blank',
                         ]));
              
@@ -167,7 +167,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             }else {
               if ($data->estado==1) {
-                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Subir Docto</center>', [
+                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Cerrar</center>', [
                             '/ventas/ordenes/docto',
                             'id' => $data->id,
                         ], [

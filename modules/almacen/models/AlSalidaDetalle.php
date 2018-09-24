@@ -37,7 +37,7 @@ class AlSalidaDetalle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_salida', 'id_producto', 'cantidad', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id_salida', 'id_producto', 'cantidad', 'cantidad_sol', 'cantidad_aut', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['precio'], 'number'],
             [['id_producto','cantidad','created_at', 'created_by'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
@@ -56,6 +56,8 @@ class AlSalidaDetalle extends \yii\db\ActiveRecord
             'id_salida' => 'Id Salida',
             'id_producto' => 'Producto',
             'cantidad' => 'Cantidad',
+            'cantidad_sol' => 'Solicitadas',
+            'cantidad_aut' => 'Autorizadas',
             'precio' => 'Precio',
             'estado' => 'Estado',
             'created_at' => 'Created At',

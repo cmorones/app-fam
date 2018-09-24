@@ -44,6 +44,18 @@ class AlInvProductosController extends Controller
         ]);
     }
 
+     public function actionCatalogo()
+    {
+        $searchModel = new AlInvProductosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('catalogo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
       public function actionExistencia()
     {
         $searchModel = new AlInvProductosSearch();

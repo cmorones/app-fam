@@ -275,6 +275,45 @@ if(Yii::$app->user->can('MenuAlmacen')) {
         } 
  ?>
 
+
+ <?
+if(Yii::$app->user->can('UsAlmacen')) {
+            ?>
+                        <ul class="navigation-menu">
+                            <li>
+                               
+                                <?= Html::a('<i class="md md-home"></i>Tablero',['/site'])  ?>
+                            </li>
+
+                        
+
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="md  md-exit-to-app"></i> <span> Almacen </span> </a>
+                                  <ul class="submenu">
+
+                                   <li>
+                            <?= Html::a('<i class="fa  md-add"></i>Catalogo 2018',['/almacen/al-inv-productos/catalogo']) ?> 
+                        </li>
+
+                          <li>
+                            <?= Html::a('<i class="fa  md-add"></i>Solicitudes Pendientes',['/almacen/al-salidas/pendientes']) ?> 
+                        </li>
+
+                         <li>
+                            <?= Html::a('<i class="fa  md-add"></i>Solicitudes Cerradas',['/almacen/al-salidas/terminadas']) ?> 
+                        </li>
+                                
+                                   
+
+                                 
+                                    
+                                </ul>
+                            </li>
+ <?php 
+        } 
+ ?>
+
  <?
 if(Yii::$app->user->can('AccesoAlmacen')) {
             ?>

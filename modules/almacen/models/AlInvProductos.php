@@ -24,6 +24,8 @@ class AlInvProductos extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+public $clave;
+
     public static function tableName()
     {
         return 'al_inv_productos';
@@ -35,7 +37,7 @@ class AlInvProductos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_producto', 'entradas', 'salidas', 'existencia', 'created_by', 'updated_by'], 'integer'],
+            [['id_producto', 'entradas', 'salidas', 'existencia', 'created_by', 'updated_by','clave'], 'integer'],
             [['created_at', 'created_by'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -50,6 +52,7 @@ class AlInvProductos extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'clave' => 'Clave',
             'id_producto' => 'Producto',
             'entradas' => 'Entradas',
             'salidas' => 'Salidas',

@@ -9,8 +9,11 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\modules\almacen\models\AlSalidaDetalle */
 /* @var $form yii\widgets\ActiveForm */
-$items = ArrayHelper::map(AlInvProductos::find()->joinWith('datos')->where(['>', 'existencia', 0])->all(),'datos.id','datos.descripcion');
 
+$items = ArrayHelper::map(AlInvProductos::find()->joinWith('datos')->where(['>', 'existencia', 0])->all(),'datos.id', 'datos.clave') ;
+
+
+//$var = ArrayHelper::map($datos, 'datos.id',$datos['datos.clave']);
 ?>
 
 <div class="al-salida-detalle-form">

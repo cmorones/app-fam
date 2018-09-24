@@ -49,6 +49,39 @@ class AlSalidasController extends Controller
         ]);
     }
 
+     public function actionPendientes()
+    {
+        $searchModel = new AlSalidasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('_pendientes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+      public function actionSolicitudes($idp,$tipo)
+    {
+        $searchModel = new AlSalidasSearch();
+        $dataProvider = $searchModel->search1(Yii::$app->request->queryParams,$idp,$tipo);
+
+        return $this->render('sol_pendientes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+     public function actionTerminadas()
+    {
+        $searchModel = new AlSalidasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('_terminadas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single AlSalidas model.
      * @param integer $id
@@ -75,9 +108,9 @@ class AlSalidasController extends Controller
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
             $model->estado=1;
+            $model->id_periodo = 4;
             $model->folio = $this->ultimoFolio();
-            $model->sfolio = "MBS-"."-".$this->ultimoFolio()."-2018";
-             if (!$model->save()) {
+            if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
@@ -89,6 +122,8 @@ class AlSalidasController extends Controller
                 $ordenDetalle->id_salida = $orden_id;
                 $ordenDetalle->id_producto = $key;
                 $ordenDetalle->cantidad = $value['cantidad'];
+                $ordenDetalle->cantidad_sol = $value['cantidad'];
+                $ordenDetalle->cantidad_aut = $value['cantidad'];
                 $ordenDetalle->estado = 1;
                 $ordenDetalle->created_by=Yii::$app->user->identity->user_id;
                 $ordenDetalle->created_at = new Expression('NOW()');
@@ -206,7 +241,7 @@ class AlSalidasController extends Controller
       public function ultimoFolio(){
 
             $folio = \Yii::$app->db->createCommand("SELECT max(al_salidas.folio) as lastfolio
-            FROM al_salidas   WHERE estado=1")->queryOne();
+            FROM al_salidas   WHERE id_periodo=4")->queryOne();
 
             if ($folio['lastfolio'] !=0 ){
                 return $folio['lastfolio']+1;
@@ -222,5 +257,51 @@ class AlSalidasController extends Controller
             'id' => $id,
           
             ]);
+    }
+
+
+          public function actionAutorizar()
+    {
+        //$actCourseData = \app\modules\dashboard\models\Events::find()->where(['is_status'=>0])->all();
+  //var_dump($_POST['cant1']); 
+       if(isset($_POST['update'])){
+
+        $sol = $_POST['solicitud'];
+
+           $sql="UPDATE al_salidas SET estado='2' WHERE id='$sol'"; 
+            \Yii::$app->db ->createCommand($sql)->execute();
+
+         //print_r($_POST['qty']);
+
+        /* 
+            pobacion_esperada
+            pobacion_atendida
+        */
+
+       
+
+         foreach ($_POST['qty'] as $idc){ 
+           
+
+            $cantidad = $_POST['cant1'][$idc];
+            $cantidad2 = $_POST['cant2'][$idc];
+            $cantidad3 = $_POST['cant3'][$idc];
+
+          // $sql="UPDATE inv_bajas SET cantidad='".$_POST['cant1'][$idc]. "' WHERE id='".$idc."'"; 
+            $sql="UPDATE al_salida_detalle SET cantidad='$cantidad', cantidad_sol='$cantidad2', cantidad_aut='$cantidad3' WHERE id='$idc'"; 
+            \Yii::$app->db ->createCommand($sql)->execute();
+            //var_dump($sql); 
+          }  
+
+       }
+
+
+        $searchModel = new AlSalidasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }
