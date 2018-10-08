@@ -51,7 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
+           [
+             'class' => 'app\components\CustomActionColumn',
+      'template' => '{update}',
+      'buttons' => [
+       
+      ],
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

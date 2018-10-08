@@ -10,9 +10,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Al Empleados', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="al-empleados-update">
+<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Modificar Entrada</h3>
+                            </div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+ 
 
     <?= $this->render('_form', [
         'model' => $model,

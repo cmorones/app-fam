@@ -12,13 +12,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Agregar Articulos</h3>
+                                <h3 class="panel-title"> <?= Html::a('Agregar Articulos', ['create'], ['class' => 'btn btn-success']) ?></h3>
                             </div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Al Articulos', ['create'], ['class' => 'btn btn-success']) ?>
+       
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,

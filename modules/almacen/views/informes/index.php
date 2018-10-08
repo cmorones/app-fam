@@ -23,7 +23,7 @@ use yii\helpers\ArrayHelper;
 <?= Html::label('Departamento', 'terms'); ?>
 
 
-<?= Html::dropDownList('depto', NULL, ArrayHelper::map(AlDepartamentos::find()->all(), 'id', 'nombre')) ?>
+<?= Html::dropDownList('depto', NULL, ArrayHelper::map(AlDepartamentos::find()->all(), 'id', 'nombre'),  ['prompt'=>'Choose...']) ?>
 
 <?= Html::label('Rango de Fechas', 'terms'); ?>
 
@@ -53,6 +53,24 @@ use yii\helpers\ArrayHelper;
 
 <?php 
 
+if (isset($_GET['depto'])) {
+
+  echo "Si esta definida" . $_GET['depto'];
+  # code...
+}else{
+  echo "No esta definida" . $_GET['depto'];
+}
+
+exit;
+/*if(isset($_GET['fecha1'],$_GET['fecha2'],$_GET['estado'],$_GET['depto']) && $_GET['fecha1'] != "" &&  $_GET['fecha2'] != "" )
+{
+  $fecha1 =$_GET['fecha1'];
+  $fecha2 =$_GET['fecha2'];
+  $estado =$_GET['estado'];
+  $depto =$_GET['depto'];
+
+
+
 /*if(isset($_GET['fecha1'],$_GET['fecha2'],$_GET['estado'],$_GET['depto']) && $_GET['fecha1'] != "" &&  $_GET['fecha2'] != "" )
 {
   $fecha1 =$_GET['fecha1'];
@@ -78,7 +96,7 @@ use yii\helpers\ArrayHelper;
 }*/
 
 
-$resultado = AlSalidaDetalle::find()->where(['al_salidas.area_destino'=>1])->joinWith('datos2')->all();
+//$resultado = AlSalidaDetalle::find()->where(['al_salidas.area_destino'=>1])->joinWith('datos2')->all();
 
 ?>
 
@@ -97,7 +115,8 @@ $resultado = AlSalidaDetalle::find()->where(['al_salidas.area_destino'=>1])->joi
       
       <table class="table table-striped">
           <tr>
-              <th colspan="7">INFORME SECRETARIA ACADEMICA</th>
+            <th>Departamento:</th>
+              <th colspan="6">INFORME SECRETARIA ACADEMICA</th>
           
           </tr>
 

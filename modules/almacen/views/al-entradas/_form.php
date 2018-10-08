@@ -13,7 +13,7 @@ use app\modules\ventas\models\TipoEntrada;
 /* @var $model app\modules\almacen\models\AlEntradas */
 /* @var $form yii\widgets\ActiveForm */
 
-$data = ArrayHelper::map(AlArticulos::find()->all(),'id', 'descripcion', 'clave');
+$data = ArrayHelper::map(AlArticulos::find()->all(),'id', 'clave');
 
 
 ?>
