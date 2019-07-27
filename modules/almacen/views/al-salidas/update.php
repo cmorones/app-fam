@@ -8,13 +8,14 @@ use yii\helpers\Html;
 
 ?>
 
- <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'tipo' => 1,  'descuento' => 0], ['class' => 'btn btn-info btn-sm']) ?>
+ <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'tipo' => 1,  'descuento' => 0 ,'idp'=>$idp], ['class' => 'btn btn-info btn-sm']) ?>
  <br>
 <br>
 <div class="al-salidas-update">
 
     <?= $this->render('_form', [
         'model' => $model,
+        'idp'=>$idp
     ]) ?>
 
 </div>

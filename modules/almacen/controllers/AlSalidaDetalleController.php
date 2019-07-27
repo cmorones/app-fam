@@ -68,7 +68,7 @@ class AlSalidaDetalleController extends Controller
      */
     
 
-        public function actionCreate($id)
+        public function actionCreate($id,$idp)
     {
         $model = new AlSalidaDetalle();
 
@@ -93,7 +93,7 @@ class AlSalidaDetalleController extends Controller
            
            //  $this->calculaexistencia($model->id_producto,$model->cantidad);
 
-            return $this->redirect(['al-salidas/items', 'id' => $id]);
+            return $this->redirect(['al-salidas/items', 'id' => $id, 'idp' => $idp]);
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -101,7 +101,7 @@ class AlSalidaDetalleController extends Controller
         }
     }
 
-     public function actionCreate2()
+     public function actionCreate2($idp)
     {
         $model = new AlSalidaDetalle();
 
@@ -142,10 +142,11 @@ class AlSalidaDetalleController extends Controller
              Yii::$app->session['al_cart'] = $cart;
 
 
-            return $this->redirect(['shopping-cart/cart']);
+            return $this->redirect(['shopping-cart/cart','idp'=>$idp]);
         } else {
             return $this->renderAjax('create2', [
                 'model' => $model,
+                'idp'=>$idp
             ]);
         }
     }
@@ -248,5 +249,57 @@ class AlSalidaDetalleController extends Controller
 
         return $this->redirect(['al-salidas/items', 'id'=>$id_salida]);
     }
+
+        public function actionBorrar2($id,$id_salida,$cantidad)
+    {
+       // $eliminacion = $this->findModel($id);
+        $model2 = $this->findModel($id);
+        $this->findModel($id)->delete();
+
+        $existencia = \Yii::$app->db ->createCommand("SELECT 
+        existencia
+        FROM 
+          al_inv_productos 
+        WHERE 
+          id_producto=$model2->id_producto")->queryOne();
+
+                $result = intval($existencia['existencia']);
+      
+    $total  = $result + $cantidad;
+    $sql="Update al_inv_productos set existencia =". $total . " where id_producto =".$model2->id_producto. "";
+    
+    \Yii::$app->db->createCommand($sql)->execute();
+
+    $data = [
+       'existencia_anterior' => $result,
+       'existencia_nueva' => $total,
+    ];
+
+    $json = Json::encode($data);
+
+    $bitacora = new InvBitacora();
+    $bitacora->id_accion =3;
+    $bitacora->id_tabla =1;
+    $bitacora->contenido =$json;
+    $bitacora->id_area =Yii::$app->user->identity->perfil;
+    $bitacora->created_by=Yii::$app->user->identity->user_id;
+    $bitacora->created_at = new Expression('NOW()');
+    $bitacora->save();
+
+    $json2 = Json::encode($model2);
+
+    $bitacora1 = new InvBitacora();
+    $bitacora1->id_accion =2;
+    $bitacora1->id_tabla =2;
+    $bitacora1->contenido =$json2;
+    $bitacora1->id_area =Yii::$app->user->identity->perfil;
+    $bitacora1->created_by=Yii::$app->user->identity->user_id;
+    $bitacora1->created_at = new Expression('NOW()');
+    $bitacora1->save();
+
+
+        return $this->redirect(['al-salidas/items2', 'id'=>$id_salida]);
+    }
+
 
 }

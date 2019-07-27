@@ -74,7 +74,7 @@ tr:nth-child(even) {
                                             <td vertical-align="right" style="width:240px;border:hidden;position:absolute;"><strong>AREA SOLICITANTE:   <?=$model->depto->nombre?></strong></td>
                                             <td></td>
                                             <td vertical-align="right" style="width:120px;border:hidden;position:absolute;"><strong>FOLIO:</strong></td>
-                                            <td><span style="color:red;font-size: 12px;"><?=$model->folio?></span></td>
+                                            <td><span style="color:red;font-size: 12px;"><?=$model->id?></span></td>
 
                                            </tr>
                                         <tr style="border:hidden">

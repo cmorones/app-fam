@@ -120,14 +120,21 @@ if (Yii::$app->controller->action->id === 'login') {
 
 
                 updateCart(id,0);
-                swal("Producto!", "Producto Eliminado del carrito!", "error");
+                swal("Producto!", "Producto Eliminado!", "error");
             }
 
-            function deleteItemAl(id){
+            function deleteItemAl(id,idp){
 
 
-                updateCartAl(id,0);
-                swal("Producto!", "Producto Eliminado del carrito!", "error");
+                updateCartAl(id,0,idp);
+                swal("Producto!", "Producto Eliminado!", "error");
+            }
+
+            function deleteItemEnt(id,idp){
+
+
+                updateCartEnt(id,0,idp);
+                swal("Producto!", "Producto Eliminado!", "error");
             }
 
              function updateDescuento(tipo){
@@ -141,9 +148,9 @@ if (Yii::$app->controller->action->id === 'login') {
 
             }
 
-            function updateCart(id,quantity){
+            function updateCart(id,quantity,idp){
 
-                 $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/add2', {'id': id, 'quantity': quantity}, function(data){
+                 $.get('<?= Yii::$app->homeUrl ?>/ventas/shopping-cart/add2', {'id': id, 'quantity': quantity, 'idp': idp,}, function(data){
 
                     $("#content").html(data);
 
@@ -152,9 +159,21 @@ if (Yii::$app->controller->action->id === 'login') {
 
             }
 
-              function updateCartAl(id,quantity){
+              function updateCartAl(id,quantity,idp){
 
-                 $.get('<?= Yii::$app->homeUrl ?>/almacen/shopping-cart/add2', {'id': id, 'quantity': quantity}, function(data){
+                 $.get('<?= Yii::$app->homeUrl ?>/almacen/shopping-cart/add2', {'id': id, 'quantity': quantity,'idp': idp}, function(data){
+
+                    $("#content").html(data);
+
+          
+          });
+
+            }
+
+
+                function updateCartEnt(id,quantity,idp){
+
+                 $.get('<?= Yii::$app->homeUrl ?>/almacen/shopping-cart/addent', {'id': id, 'quantity': quantity,'idp': idp}, function(data){
 
                     $("#content").html(data);
 

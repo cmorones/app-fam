@@ -4,6 +4,7 @@ namespace app\modules\almacen\controllers;
 
 use Yii;
 use app\modules\almacen\models\AlEntradas;
+use app\modules\almacen\models\AlEntradasDetalle;
 use app\modules\almacen\models\AlEntradasSearch;
 use app\modules\almacen\models\AlInvProductos;
 use app\modules\almacen\models\InvBitacora;
@@ -30,7 +31,7 @@ class AlEntradasController extends Controller
                // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','create', 'update'],
+                        'actions' => ['index','create', 'update','periodo','items'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -49,14 +50,27 @@ class AlEntradasController extends Controller
      * Lists all AlEntradas models.
      * @return mixed
      */
-    public function actionIndex()
+     public function actionPeriodo()
+    {
+       // $searchModel = new AlEntradasSearch();
+      //  $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('periodo', [
+          //  'searchModel' => $searchModel,
+         //   'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    public function actionIndex($idp)
     {
         $searchModel = new AlEntradasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'idp' => $idp,
         ]);
     }
 
@@ -100,7 +114,7 @@ class AlEntradasController extends Controller
         }
     }
 
-       public function actionCreate()
+       public function actionCreateResp($idp)
     {
         $model = new AlEntradas();
 
@@ -108,73 +122,20 @@ class AlEntradasController extends Controller
 
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
+            $model->id_periodo =2;
             $model->estado=1;
+
+         /*   if ($model->activa) {
+                $model->precio=$model->precio * 1.16;
+                $model->iva=1;
+
+            }  */
             
 
              if (!$model->save()) {
                 echo "<pre>";
                 print_r($model->getErrors());
                 exit;
-            }
-
-             $idproducto = AlInvProductos::find()->where(['id_producto'=>$model->id_articulo])->count(); 
-
-            $intprod = intval($idproducto);
-
-            if ($intprod == 0) {
-                $entrada = new AlInvProductos();
-                $entrada->id_producto = $model->id_articulo;
-                $entrada->entradas = $model->cantidad;
-                $entrada->salidas = 0;
-                $entrada->existencia = $model->cantidad;
-                $entrada->created_by=Yii::$app->user->identity->user_id;
-                $entrada->created_at = new Expression('NOW()');
-                $entrada->save();
-
-                $json = Json::encode($entrada);
-
-            $bitacora = new InvBitacora();
-            $bitacora->id_accion =1;
-            $bitacora->id_tabla =1;
-            $bitacora->contenido =$json;
-            $bitacora->id_area =Yii::$app->user->identity->perfil;
-            $bitacora->created_by=Yii::$app->user->identity->user_id;
-            $bitacora->created_at = new Expression('NOW()');
-            $bitacora->save();
-
-            }elseif ($intprod > 0) {
-                
-                $existencia = \Yii::$app->db ->createCommand("SELECT 
-          sum(al_inv_productos.existencia) as suma 
-        FROM 
-          al_inv_productos 
-        WHERE 
-          id_producto=$model->id_articulo")->queryOne();
-
-                $addsum = intval($existencia['suma']);
-                
-                $table = AlInvProductos::find()->where(['id_producto'=>$model->id_articulo])->one();
-                $table->existencia = $addsum + $model->cantidad;
-                $table->save();
-
-        $total = $addsum + $model->cantidad;
-              $data = [
-                   'existencia_anterior' => $addsum,
-                   'existencia_nueva' => $total,
-                ];
-
-             $json3 = Json::encode($data);
-
-            $bitacora2 = new InvBitacora();
-            $bitacora2->id_accion =3;
-            $bitacora2->id_tabla =1;
-            $bitacora2->contenido =$json3;
-            $bitacora2->id_area =Yii::$app->user->identity->perfil;
-            $bitacora2->created_by=Yii::$app->user->identity->user_id;
-            $bitacora2->created_at = new Expression('NOW()');
-            $bitacora2->save();
-                         
-                
             }
 
 
@@ -187,12 +148,82 @@ class AlEntradasController extends Controller
             $bitacora1->id_area =Yii::$app->user->identity->perfil;
             $bitacora1->created_by=Yii::$app->user->identity->user_id;
             $bitacora1->created_at = new Expression('NOW()');
-            $bitacora1->save();
+            $bitacora1->save(); 
 
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id,'idp'=>$idp,]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                 'idp'=>$idp,
+            ]);
+        }
+    
+    }
+
+     public function actionItems($id,$idp){
+    
+    return $this->render('_items', [
+            'id' => $id,
+            'idp'=>$idp
+          
+            ]);
+    }
+
+
+     public function actionCreate($idp)
+    {
+        $model = new AlEntradas();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->created_by=Yii::$app->user->identity->user_id;
+            $model->created_at = new Expression('NOW()');
+            $model->estado=1;
+            $model->id_periodo = 2;
+           // $model->folio = $this->ultimoFolio();
+            if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+            }
+            $orden_id = $model->id;
+            $cart = Yii::$app->session['al_ent'];
+            foreach ($cart as $key => $value) {
+                $ordenDetalle = new AlEntradasDetalle();
+                $ordenDetalle->id_entrada = $orden_id;
+                $ordenDetalle->id_articulo = $key;
+                $ordenDetalle->cantidad = $value['cantidad'];
+                $ordenDetalle->precio = $value['precio'];
+                $ordenDetalle->activa = $value['activa'];
+                $ordenDetalle->estado = 1;
+                $model->fecha = new Expression('NOW()');
+                $ordenDetalle->created_by=Yii::$app->user->identity->user_id;
+                $ordenDetalle->created_at = new Expression('NOW()');
+                $ordenDetalle->save();
+                $cantidad = intval($value['cantidad']);
+            }
+
+            
+
+
+           // Yii::$app->session['cart'];
+        //    Yii::$app->session['cart'] = array();
+            unset(Yii::$app->session['al_ent']);
+          // unset($_SESSION['cart']);
+        //   Yii::$app->session->remove('cart');
+ 
+          //  $session->close();  // close a session
+
+            //Yii::app()->session->destroy();
+
+
+
+
+            return $this->redirect(['index', 'id' => $model->id, 'idp'=>$idp]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                 'idp'=>$idp
             ]);
         }
     }
@@ -204,15 +235,16 @@ class AlEntradasController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$idp)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id, 'idp' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'idp'=>$idp,
             ]);
         }
     }

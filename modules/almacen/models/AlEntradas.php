@@ -13,7 +13,7 @@ use Yii;
  * @property string $fecha
  * @property double $precio
  * @property integer $cantidad
- * @property string $observaciones
+ * @property string $area_solicitante
  * @property integer $estado
  * @property string $created_at
  * @property integer $created_by
@@ -28,6 +28,8 @@ class AlEntradas extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public $activa;
     public static function tableName()
     {
         return 'al_entradas';
@@ -39,11 +41,11 @@ class AlEntradas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_articulo', 'tipo','cantidad', 'estado', 'created_by', 'updated_by'], 'integer'],
-            [['nota', 'observaciones'], 'string'],
-            [['fecha', 'created_at', 'updated_at'], 'safe'],
-            [['precio'], 'number'],
-            [['created_at', 'created_by'], 'required'],
+            [['id_periodo', 'folio', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['nota', 'area_solicitante', 'responsable'], 'string'],
+            [['fecha', 'created_at', 'updated_at','activa','iva'], 'safe'],
+           // [['precio'], 'number'],
+            [['folio','fecha','created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['updated_by' => 'user_id']],
         ];
@@ -56,14 +58,14 @@ class AlEntradas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_articulo' => 'Articulos',
+            'id_periodo' => 'id_periodo',
             'nota' => 'Nota',
-            'tipo' => 'Tipo',
+            'folio' => 'Folio',
             'fecha' => 'Fecha',
-            'precio' => 'Precio',
-            'cantidad' => 'Cantidad',
-            'observaciones' => 'Observaciones',
+            'area_solicitante' => 'AreaSolicitante',
+            'responsable' => 'Responsable',
             'estado' => 'Estado',
+             'activa' => 'IVA',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
@@ -87,11 +89,7 @@ class AlEntradas extends \yii\db\ActiveRecord
         return $this->hasOne(Users::className(), ['user_id' => 'updated_by']);
     }
 
-     public function getArticulos()
-    {
-        return $this->hasOne(AlArticulos::className(), ['id' => 'id_articulo']);
-    }
-
+   
       public function getEntrada()
     {
         return $this->hasOne(TipoEntrada::className(),['id'=>'tipo']);

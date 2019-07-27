@@ -37,7 +37,7 @@ public $clave;
     public function rules()
     {
         return [
-            [['id_producto', 'entradas', 'salidas', 'existencia', 'created_by', 'updated_by','clave'], 'integer'],
+            [['id_producto', 'entradas', 'salidas','precio','total', 'existencia_min','existencia_max', 'created_by', 'updated_by','clave'], 'integer'],
             [['created_at', 'created_by'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -56,7 +56,10 @@ public $clave;
             'id_producto' => 'Producto',
             'entradas' => 'Entradas',
             'salidas' => 'Salidas',
-            'existencia' => 'Existencia',
+            'precio' => 'Precio Unitario',
+            'total' => 'Total',
+            'existencia_min' => 'Existencia minima',
+            'existencia_max' => 'Existencia maxima',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
@@ -84,4 +87,22 @@ public $clave;
     {
         return $this->hasOne(AlArticulos::className(),['id'=>'id_producto']);
     }
+
+      public function getExistencia()
+    {
+        $total = $this->entradas - $this->salidas;
+        //$total = number_format($total,2); 
+        return $total;
+    }
+
+        protected function findModel($id)
+    {
+        if (($model = AlEntradas::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+     
 }

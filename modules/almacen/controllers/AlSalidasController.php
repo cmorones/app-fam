@@ -13,6 +13,8 @@ use yii\filters\VerbFilter;
 use yii\db\Expression;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
+use  yii\web\Session;
+
 
 /**
  * AlSalidasController implements the CRUD actions for AlSalidas model.
@@ -34,18 +36,32 @@ class AlSalidasController extends Controller
         ];
     }
 
+     public function actionPeriodo()
+    {
+       // $searchModel = new AlEntradasSearch();
+      //  $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('_periodo', [
+          //  'searchModel' => $searchModel,
+         //   'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+
     /**
      * Lists all AlSalidas models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($idp)
     {
         $searchModel = new AlSalidasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+              'idp' => $idp,
         ]);
     }
 
@@ -99,7 +115,7 @@ class AlSalidasController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($idp)
     {
         $model = new AlSalidas();
 
@@ -108,7 +124,7 @@ class AlSalidasController extends Controller
             $model->created_by=Yii::$app->user->identity->user_id;
             $model->created_at = new Expression('NOW()');
             $model->estado=1;
-            $model->id_periodo = 4;
+            $model->id_periodo = 2;
             $model->folio = $this->ultimoFolio();
             if (!$model->save()) {
                 echo "<pre>";
@@ -163,15 +179,23 @@ class AlSalidasController extends Controller
 
 
            // Yii::$app->session['cart'];
-            unset(Yii::$app->session['cart']);
+        //    Yii::$app->session['cart'] = array();
+            unset(Yii::$app->session['al_cart']);
+          // unset($_SESSION['cart']);
+        //   Yii::$app->session->remove('cart');
+ 
+          //  $session->close();  // close a session
+
+            //Yii::app()->session->destroy();
 
 
 
 
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id, 'idp'=>$idp]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                 'idp'=>$idp
             ]);
         }
     }
@@ -182,7 +206,7 @@ class AlSalidasController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$idp)
     {
         $model = $this->findModel($id);
 
@@ -191,6 +215,7 @@ class AlSalidasController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'idp'=>$idp
             ]);
         }
     }
@@ -241,7 +266,7 @@ class AlSalidasController extends Controller
       public function ultimoFolio(){
 
             $folio = \Yii::$app->db->createCommand("SELECT max(al_salidas.folio) as lastfolio
-            FROM al_salidas   WHERE id_periodo=4")->queryOne();
+            FROM al_salidas   WHERE id_periodo=2")->queryOne();
 
             if ($folio['lastfolio'] !=0 ){
                 return $folio['lastfolio']+1;
@@ -251,16 +276,25 @@ class AlSalidasController extends Controller
     }
 
     
-  public function actionItems($id){
+  public function actionItems($id,$idp){
     
     return $this->render('_items', [
+            'id' => $id,
+            'idp'=>$idp
+          
+            ]);
+    }
+
+     public function actionItems2($id){
+    
+    return $this->render('_items2', [
             'id' => $id,
           
             ]);
     }
 
 
-          public function actionAutorizar()
+          public function actionAutorizar($idp)
     {
         //$actCourseData = \app\modules\dashboard\models\Events::find()->where(['is_status'=>0])->all();
   //var_dump($_POST['cant1']); 
@@ -297,11 +331,141 @@ class AlSalidasController extends Controller
 
 
         $searchModel = new AlSalidasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+         
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+             'idp'=>$idp
         ]);
     }
+
+     public function actionModificar()
+    {
+        //$actCourseData = \app\modules\dashboard\models\Events::find()->where(['is_status'=>0])->all();
+  //var_dump($_POST['cant1']); 
+
+      $idp = 4;
+      $tipo=1;
+       if(isset($_POST['update'])){
+
+        $sol = $_POST['solicitud'];
+
+       /*    $sql="UPDATE al_salidas SET estado='2' WHERE id='$sol'"; 
+            \Yii::$app->db ->createCommand($sql)->execute();*/
+
+         //print_r($_POST['qty']);
+
+        /* 
+            pobacion_esperada
+            pobacion_atendida
+        */
+
+       
+
+         foreach ($_POST['qty'] as $idc){ 
+           
+
+            $cantidad = $_POST['cant1'][$idc];
+          
+
+          // $sql="UPDATE inv_bajas SET cantidad='".$_POST['cant1'][$idc]. "' WHERE id='".$idc."'"; 
+            $sql="UPDATE al_salida_detalle SET cantidad='$cantidad' WHERE id='$idc'"; 
+            \Yii::$app->db ->createCommand($sql)->execute();
+            //var_dump($sql); 
+          }  
+
+       }
+
+
+          $searchModel = new AlSalidasSearch();
+        $dataProvider = $searchModel->search1(Yii::$app->request->queryParams,$idp,$tipo);
+      //   $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$idp);
+
+
+        return $this->render('sol_pendientes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'idp'=>4,
+            'tipo'=>1
+        ]);
+    }
+
+          public function actionDocto($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = 'updoc';
+
+       
+       // $model2 = InvBajas::findOne($idb);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+        
+        $model->file = UploadedFile::getInstance($model,'file');
+        $model->file->saveAs('alsalidas/'.$model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension);
+       //  $model->file->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+        $model->docto = $model->file->baseName.'-'.date('Y-m-d h:m:s').'.'.$model->file->extension;
+        $model->estado=3;
+        $model->updated_by=@Yii::$app->user->identity->user_id;
+        $model->updated_at = new Expression('NOW()');    
+       if (!$model->save()) {
+                echo "<pre>";
+                print_r($model->getErrors());
+                exit;
+            }
+
+             $resultado =  AlSalidaDetalle::find()
+                                                        ->joinWith('datos')
+                                                       // ->onCondition(['>', 'existencia', 0])
+                                                        ->where(['=', 'id_salida', $id])
+                                                        ->all();
+         /*   foreach ($resultado as $value) {
+            $this->calculaexistencia($value['id_producto'],$value['cantidad'] );
+            } */
+
+            return $this->redirect(['/almacen/al-salidas']);
+         
+
+        } else {
+            return $this->render('docto', [
+                'model' => $model,
+                'id' => $id,
+            
+
+            ]);
+        }
+    }
+
+    function calculaexistencia($id_producto, $cantidad){
+
+  
+                
+                $existencia = \Yii::$app->db ->createCommand("SELECT 
+        existencia
+        FROM 
+          inv_productos 
+        WHERE 
+          id_producto=$id_producto")->queryOne();
+
+                $result = intval($existencia['existencia']);
+      
+    $total  = $result - $cantidad;
+    $sql="Update inv_productos set existencia =". $total . " where id_producto =".$id_producto. "";
+    
+    \Yii::$app->db->createCommand($sql)->execute();
+
+}
+
+
+     public function actionPdf($id) {
+    $model = $this->findModel($id);
+
+    // This will need to be the path relative to the root of your app.
+    $filePath = '/alsalidas';
+    // Might need to change '@app' for another alias
+    $completePath = Yii::getAlias('@webroot'.$filePath.'/'.$model->docto);
+
+    return Yii::$app->response->sendFile($completePath, $model->docto);
+}
 }

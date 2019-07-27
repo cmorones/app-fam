@@ -26,8 +26,8 @@ $data = AlSalidaDetalle::find()->joinWith('datos')->where(['id_salida'=>$id])->a
 <br>
 <br>
    <p>
-     <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'tipo' => 1,  'descuento' => 0], ['class' => 'btn btn-info ']) ?>
-        <?= Html::button('Agregar Entrada', ['value'=>Url::to(['/almacen/al-salida-detalle/create', 'id'=>$id]),'class' => 'btn btn-success','id'=>'modalButton']) ?>
+     <?= Html::a(Yii::t('app', 'Regresar'), ['index', 'tipo' => 1,  'descuento' => 0,'idp'=>$idp], ['class' => 'btn btn-info ']) ?>
+        <?= Html::button('Agregar Entrada', ['value'=>Url::to(['/almacen/al-salida-detalle/create', 'id'=>$id, 'idp'=>$idp]),'class' => 'btn btn-success','id'=>'modalButton']) ?>
     </p>
     <p>
         
@@ -39,7 +39,7 @@ $data = AlSalidaDetalle::find()->joinWith('datos')->where(['id_salida'=>$id])->a
                             </div>
                              <?php $form = ActiveForm::begin([
    // 'layout' => 'horizontal',
-    'action' => ['autorizar'],
+    'action' => ['autorizar','idp'=>$idp],
     'method' => 'post',
     'fieldConfig' => [
         'horizontalCssClasses' => [

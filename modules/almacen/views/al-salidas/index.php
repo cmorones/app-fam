@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Agregar Salida', ['shopping-cart/cart'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Salida', ['shopping-cart/cart','idp'=>$idp], ['class' => 'btn btn-success']) ?>
     </p>
     
 
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
          //   ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            'folio',
           
            // 'id_plantel_origen',
            // 'id_area_origen',
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'depto.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\almacen\models\AlDepartamentos::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
             ],
-           // 'responsable',
+         //   'responsabl2',
               [
               'attribute'=>'responsable',
               'value' => 'emp.nombre',
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'filter' =>false,
               'format' => 'raw', 'value' => function($data){
 
-
+                   if ($data->estado==1) {
                   return (Html::a('<center><span class="glyphicon glyphicon-print"></span> PDF</center>', [
                             '/almacen/inf-pdf/index',
                             'id' => $data->id,
@@ -85,6 +85,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'btn btn-success btn-sm',
                             'target' => '_blank',
                         ]));
+                }elseif ($data->estado==2) {
+                    return (Html::a('<center><span class="glyphicon glyphicon-print"></span> PDF</center>', [
+                            '/almacen/inf-pdf/index',
+                            'id' => $data->id,
+                        ], [
+                            'class' => 'btn btn-success btn-sm',
+                            'target' => '_blank',
+                        ]));
+                }
+                elseif ($data->estado==3) {
+                  return ('<center>'.Html::img('@web/images/checked.png').'</center>');
+                }
               
             }
               ],
@@ -94,32 +106,47 @@ $this->params['breadcrumbs'][] = $this->title;
               'format' => 'raw', 'value' => function($data){
 
 
-           
+            if ($data->estado==1) {
                   return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Modificar</center>', [
                             '/almacen/al-salidas/update',
                             'id' => $data->id,
+                            'idp'=>$data->id_periodo
                         ], [
                             'class' => 'btn btn-info btn-sm',
                            // 'target' => '_blank',
                         ]));
+                }elseif ($data->estado==2) {
+                  return ('<center>'.Html::img('@web/images/checked.png').'</center>');
+                }
+                elseif ($data->estado==3) {
+                  return ('<center>'.Html::img('@web/images/checked.png').'</center>');
+                }
              
               
             }
               ],
 
-               [ 'attribute' => 'ModificarItems',
+               [ 'attribute' => 'Autorización',
               'filter' =>false,
               'format' => 'raw', 'value' => function($data){
 
 
-           
+           if ($data->estado==1) {
                   return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Autorizar Solicitud</center>', [
                             '/almacen/al-salidas/items',
                             'id' => $data->id,
+                             'idp'=>$data->id_periodo
                         ], [
                             'class' => 'btn btn-primary btn-sm',
                            // 'target' => '_blank',
                         ]));
+
+                  }elseif ($data->estado==2) {
+                  return ('<center>'.Html::img('@web/images/checked.png').'</center>');
+                }
+                  elseif ($data->estado==3) {
+                  return ('<center>'.Html::img('@web/images/checked.png').'</center>');
+                }
              
               
             }
@@ -131,7 +158,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'format' => 'raw', 'value' => function($data){
 
 
-             if(Yii::$app->user->can('MenuSuper')) {
+         //    if(Yii::$app->user->can('MenuSuper')) {
 
                  /*return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Cancelar</center>', [
                             '/ventas/ordenes/cancela',
@@ -140,9 +167,33 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'btn btn-danger btn-sm',
                            // 'target' => '_blank',
                         ]));*/
+                        //echo $data->estado;
                         if ($data->estado==1) {
 
-                         return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Cancelar</center>', [
+                          return ('<center>'.Html::img('@web/images/alert.png').'</center>');
+
+                          }elseif ($data->estado==2) {
+                          return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Subir Docto</center>', [
+                            '/almacen/al-salidas/docto',
+                            'id' => $data->id,
+                            
+                        ], [
+                            'class' => 'btn btn-info btn-sm',
+                           // 'target' => '_blank',
+                        ]));
+                       }elseif ($data->estado==3) {
+                         # code...
+                     
+                          return (Html::a('<center><span class="glyphicon glyphicon-download"></span> RECIBO DE PAGO</center>', [
+                            '/almacen/al-salidas/pdf',
+                            'id' => $data->id,
+                        ], [
+                            'class' => 'btn btn-success btn-sm',
+                            'target' => '_blank',
+                        ]));
+                       }
+
+                    /*     return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Cancelar</center>', [
                             '/ventas/cancelaciones/create',
 
                             'id' => $data->id,
@@ -150,7 +201,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ], 
                         ['class' => 'btn btn-warning btn-sm', 'title' => 'Cancelar venta', 'data' => ['confirm' => Yii::t('app', 'Estas seguro de cancelar esta venta?'),'method' => 'post'],]));
 
-                       }elseif ($data->estado==2) {
+                       }elseif ($data->estado==3) {
                          # code...
                      
                           return (Html::a('<center><span class="glyphicon glyphicon-download"></span> RECIBO DE PAGO</center>', [
@@ -160,35 +211,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'btn btn-success btn-sm',
                             'target' => '_blank',
                         ]));
-                       }else{
-                         $var = "<button class='btn btn-danger waves-effect waves-light btn-sm m-b-5'>Cancelado</button>";
-                         return $var;
-                       }
+                       }*/
 
-            }else {
-              if ($data->estado==1) {
-                  return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Subir Docto</center>', [
-                            '/ventas/ordenes/docto',
-                            'id' => $data->id,
-                        ], [
-                            'class' => 'btn btn-info btn-sm',
-                           // 'target' => '_blank',
-                        ]));
-              }elseif ($data->estado==2) {
-              
-
-                  return (Html::a('<center><span class="glyphicon glyphicon-download"></span> RECIBO DE PAGO</center>', [
-                            '/ventas/ordenes/pdf',
-                            'id' => $data->id,
-                        ], [
-                            'class' => 'btn btn-success btn-sm',
-                            'target' => '_blank',
-                        ]));
-              }else{
-                         $var = "<button class='btn btn-danger waves-effect waves-light btn-sm m-b-5'>Cancelado</button>";
-                         return $var;
-                       }
-              }
+        //    }
            
                 
                 

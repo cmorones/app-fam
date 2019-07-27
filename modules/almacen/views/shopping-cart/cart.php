@@ -8,14 +8,11 @@ use yii\helpers\Url;
 $subtotal = 0;
 $cuenta =0;
 ?>
-<br>
-<br>
-<br>
-<br>
+
 <p>
 
 <?= Html::a('Regresar', ['/almacen/al-salidas'], ['class' => 'btn btn-info']) ?>
-        <?= Html::button('Agregar Articulo', ['value'=>Url::to(['/almacen/al-salida-detalle/create2']),'class' => 'btn btn-success','id'=>'modalButton']) ?>
+        <?= Html::button('Agregar Articulo', ['value'=>Url::to(['/almacen/al-salida-detalle/create2', 'idp'=>$idp]),'class' => 'btn btn-success','id'=>'modalButton']) ?>
 
            <?//= Html::a('Agregar Articulo', ['al-salida-detalle/create2'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -70,7 +67,7 @@ $cuenta =0;
 							</td>
 						
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href="javascript:void(0)" onclick="deleteItemAl(<?=$key ?>)"> <i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" href="javascript:void(0)" onclick="deleteItemAl(<?=$key?>,<?=$idp?>)"> <i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 
@@ -113,7 +110,7 @@ $cuenta ++;
                                                           
                                 </form>
 							
-							<?= Html::a('<i class="fa fa-shopping-cart"></i> Siguiente', ['al-salidas/create'], ['class' => 'btn btn-block btn-success']) ?>
+							<?= Html::a('<i class="fa fa-shopping-cart"></i> Siguiente', ['al-salidas/create', 'idp'=>$idp], ['class' => 'btn btn-block btn-success']) ?>
 
 						
 					</div>

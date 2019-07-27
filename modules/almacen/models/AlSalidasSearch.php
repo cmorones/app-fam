@@ -19,7 +19,7 @@ class AlSalidasSearch extends AlSalidas
     {
         return [
             [['id','area_destino', 'responsable', 'estado', 'created_by', 'updated_by','id_periodo'], 'integer'],
-            [['sfolio', 'fecha_solicitud', 'fecha_entrega', 'fecha_liberacion', 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto', 'created_at', 'updated_at'], 'safe'],
+            [['sfolio','responsabl2', 'fecha_solicitud', 'fecha_entrega', 'fecha_liberacion', 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -39,7 +39,7 @@ class AlSalidasSearch extends AlSalidas
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$idp)
     {
         $query = AlSalidas::find();
 
@@ -47,6 +47,8 @@ class AlSalidasSearch extends AlSalidas
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['folio'=>SORT_ASC]]
+
         ]);
 
         $this->load($params);
@@ -60,6 +62,7 @@ class AlSalidasSearch extends AlSalidas
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'id_periodo' => $idp,
             'area_destino' => $this->area_destino,
             'responsable' => $this->responsable,
             'fecha_solicitud' => $this->fecha_solicitud,
@@ -76,6 +79,7 @@ class AlSalidasSearch extends AlSalidas
             ->andFilterWhere(['like', 'autoriza', $this->autoriza])
             ->andFilterWhere(['like', 'entrega', $this->entrega])
             ->andFilterWhere(['like', 'recibe', $this->recibe])
+            ->andFilterWhere(['like', 'responsabl2', $this->responsabl2])
             ->andFilterWhere(['like', 'docto', $this->docto]);
 
         return $dataProvider;
@@ -89,6 +93,7 @@ class AlSalidasSearch extends AlSalidas
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['folio'=>SORT_ASC]]
         ]);
 
         $this->load($params);
@@ -121,7 +126,8 @@ class AlSalidasSearch extends AlSalidas
             ->andFilterWhere(['like', 'autoriza', $this->autoriza])
             ->andFilterWhere(['like', 'entrega', $this->entrega])
             ->andFilterWhere(['like', 'recibe', $this->recibe])
-            ->andFilterWhere(['like', 'docto', $this->docto]);
+            ->andFilterWhere(['like', 'docto', $this->docto])
+            ->orderBy(['folio'=>SORT_DESC]);
 
         return $dataProvider;
     }

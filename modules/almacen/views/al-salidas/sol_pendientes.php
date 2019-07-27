@@ -89,10 +89,14 @@ $this->params['breadcrumbs'][] = $this->title;
                   return (Html::img('@web/images/checked.png'));
              
               
-            }elseif($data->estado==1){
+            }elseif($data->estado==3){
+               return (Html::img('@web/images/checked.png'));
+            }
+            elseif($data->estado==1){
                   return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Modificar</center>', [
                             '/almacen/al-salidas/update',
                             'id' => $data->id,
+
                         ], [
                             'class' => 'btn btn-info btn-sm',
                            // 'target' => '_blank',
@@ -112,11 +116,14 @@ $this->params['breadcrumbs'][] = $this->title;
                   return (Html::img('@web/images/checked.png'));
              
               
+            }elseif($data->estado==3){
+               return (Html::img('@web/images/checked.png'));
             }elseif($data->estado==1){
            
                   return (Html::a('<center><span class="glyphicon glyphicon-share"></span> Modificar Items</center>', [
-                            '/almacen/al-salidas/items',
+                            '/almacen/al-salidas/items2',
                             'id' => $data->id,
+                            'idp' => 4,
                         ], [
                             'class' => 'btn btn-info btn-sm',
                            // 'target' => '_blank',

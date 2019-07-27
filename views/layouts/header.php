@@ -228,11 +228,11 @@ if(Yii::$app->user->can('MenuAlmacen')) {
                         </li>
 
                           <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Entradas de Almacen',['/almacen/al-entradas']) ?> 
+                            <?= Html::a('<i class="fa  md-add"></i> Entradas de Almacen',['/almacen/al-entradas/periodo']) ?> 
                         </li>
 
                          <li>
-                            <?= Html::a('<i class="fa  md-add"></i> Salidas de Almacen',['/almacen/al-salidas']) ?> 
+                            <?= Html::a('<i class="fa  md-add"></i> Salidas de Almacen',['/almacen/al-salidas/periodo']) ?> 
                         </li>
                                 
                                    

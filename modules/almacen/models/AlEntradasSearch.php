@@ -18,9 +18,9 @@ class AlEntradasSearch extends AlEntradas
     public function rules()
     {
         return [
-            [['id', 'id_articulo', 'tipo','cantidad', 'estado', 'created_by', 'updated_by'], 'integer'],
-            [['nota', 'fecha', 'observaciones', 'created_at', 'updated_at'], 'safe'],
-            [['precio'], 'number'],
+            [['id', 'id_periodo', 'folio','estado', 'created_by', 'updated_by'], 'integer'],
+            [['nota', 'fecha', 'area_solicitante', 'created_at', 'updated_at'], 'safe'],
+          //  [['precio'], 'number'],
         ];
     }
 
@@ -40,7 +40,7 @@ class AlEntradasSearch extends AlEntradas
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$idp)
     {
         $query = AlEntradas::find();
 
@@ -61,11 +61,9 @@ class AlEntradasSearch extends AlEntradas
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_articulo' => $this->id_articulo,
+            'id_periodo' => $idp,
             'fecha' => $this->fecha,
-            'precio' => $this->precio,
-            'cantidad' => $this->cantidad,
-            'tipo' => $this->tipo,
+            'folio' => $this->folio,
             'estado' => $this->estado,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
@@ -74,7 +72,7 @@ class AlEntradasSearch extends AlEntradas
         ]);
 
         $query->andFilterWhere(['like', 'nota', $this->nota])
-            ->andFilterWhere(['like', 'observaciones', $this->observaciones]);
+            ->andFilterWhere(['like', 'area_solicitante', $this->area_solicitante]);
 
         return $dataProvider;
     }

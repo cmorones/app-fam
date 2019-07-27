@@ -34,6 +34,7 @@ class AlSalidas extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $file;
     public static function tableName()
     {
         return 'al_salidas';
@@ -47,6 +48,7 @@ class AlSalidas extends \yii\db\ActiveRecord
         return [
             [['area_destino', 'responsable', 'estado', 'created_by', 'updated_by','id_periodo', 'folio'], 'integer'],
             [[ 'condiciones', 'autoriza', 'entrega', 'recibe', 'docto'], 'string'],
+            [['file'], 'file', 'on'=>'updoc'],
             [['fecha_solicitud', 'fecha_entrega', 'fecha_liberacion', 'created_at', 'updated_at'], 'safe'],
             [['condiciones','autoriza', 'entrega', 'recibe','fecha_solicitud', 'fecha_entrega', 'fecha_liberacion','area_destino', 'responsable','created_at', 'created_by'], 'required'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['created_by' => 'user_id']],
@@ -64,6 +66,7 @@ class AlSalidas extends \yii\db\ActiveRecord
             'folio' => 'Folio',
             'area_destino' => 'Area Solicitante',
             'responsable' => 'Responsable del Area',
+            'responsabl2' => 'Responsable',
             'fecha_solicitud' => 'Fecha Solicitud',
             'fecha_entrega' => 'Fecha Entrega',
             'fecha_liberacion' => 'Fecha Liberacion',
@@ -78,6 +81,7 @@ class AlSalidas extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
             'id_periodo' => 'Ejercicio',
+            'file' => 'Recibo',
         ];
     }
 

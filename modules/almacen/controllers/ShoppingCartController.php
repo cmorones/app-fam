@@ -51,7 +51,7 @@ class ShoppingCartController extends \yii\web\Controller
      
     }
 
-         public function actionAdd2($id, $quantity)
+         public function actionAdd2($id, $quantity,$idp)
     {
         
 
@@ -82,21 +82,63 @@ class ShoppingCartController extends \yii\web\Controller
 
              Yii::$app->session['al_cart'] = $cart;
             
-            return $this->renderAjax('cart',['cart'=>$cart]);
+            return $this->render('cart',['cart'=>$cart, 'idp'=>$idp]);
+
+     
+    }
+
+          public function actionAddent($id, $quantity, $idp)
+    {
+        
+
+        // $data = new Productos();
+          //      $dataProduct = $data->getInfoProductBy($id);
+
+                  # code...
+               if (isset(Yii::$app->session['al_ent'])) {
+                 $cart = Yii::$app->session['al_ent'];
+
+                        if (array_key_exists($id,$cart)) {
+
+                          if ($quantity) {
+                          
+
+                                  $cart[$id] = [
+                                'nombre'=> $cart[$id]['nombre'],
+                              //  'precio'=> $cart[$id]['precio'],
+                                'cantidad'=> $quantity,
+
+                            ];
+                        }else{
+                      unset($cart[$id]);
+                        }
+                    }
+                }
+                
+
+             Yii::$app->session['al_ent'] = $cart;
+            
+            return $this->render('ent',['cart'=>$cart, 'idp'=>$idp]);
 
      
     }
 
     
 
-    public function actionCart(){
+    public function actionCart($idp){
     	$cart =  Yii::$app->session['al_cart'];
-    	return $this->render('cart', ['cart'=>$cart]);
+    	return $this->render('cart', ['cart'=>$cart,'idp'=>$idp]);
     }
 
     public function actionCart2(){
         $cart =  Yii::$app->session['al_cart'];
         return $this->render('cart2', ['cart'=>$cart]);
     }
+
+    public function actionEntrada($idp){
+        $cart =  Yii::$app->session['al_ent'];
+        return $this->render('ent', ['cart'=>$cart,'idp'=>$idp]);
+    }
+
 
 }

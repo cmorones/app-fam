@@ -18,7 +18,7 @@ class AlInvProductosSearch extends AlInvProductos
     public function rules()
     {
         return [
-            [['id', 'id_producto', 'entradas', 'salidas', 'existencia', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'id_producto', 'entradas', 'salidas', 'existencia_min','existencia_max', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -63,7 +63,9 @@ class AlInvProductosSearch extends AlInvProductos
             'id_producto' => $this->id_producto,
             'entradas' => $this->entradas,
             'salidas' => $this->salidas,
-            'existencia' => $this->existencia,
+            
+            'existencia_max' => $this->existencia_max,
+            'existencia_min' => $this->existencia_min,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,

@@ -44,11 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'usuarios.user_login_id',
             ],
             // 'perfil',
-            [
+            /*[
               'attribute'=>'id_plantel',
               'value' => 'catPlanteles.nombre',
               'filter' => yii\helpers\ArrayHelper::map(app\modules\admin\models\CatPlanteles::find()->orderBy('nombre')->asArray()->all(),'id','nombre')
-            ],
+            ],*/
             // 'id_profesor',
             // 'id_periodo',
             // 'mail',
